@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import Connection.Register;
+import Connection.ConnectionEtudiant;
 
 @ManagedBean
 @SessionScoped
@@ -160,9 +160,9 @@ public class EtudiantMetier implements Serializable
     
     public void Register()
     {
-        Register r = new Register();
+        ConnectionEtudiant conn= new ConnectionEtudiant();
         //r.registerEtudiant(new EtudiantMetier(this.firstName,this.lastName,this.email,this.password,this.filiere,this.dateOfBirth,this.urlAvatar));
-        r.registerEtudiant(this);
+        conn.registerEtudiant(this);
         /*
         System.out.println("first name : "+this.firstName);
         System.out.println("last name : "+this.lastName);
@@ -173,6 +173,15 @@ public class EtudiantMetier implements Serializable
         System.out.println("password : "+this.password);
         */
     }
+    
+    public void Login()
+    {
+        ConnectionEtudiant conn = new ConnectionEtudiant();
+        
+        if(conn.loginEtudiant(this.email, this.password))
+            System.out.println("metier : logged in");
+    }
+    
     
     
     
