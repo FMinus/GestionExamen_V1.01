@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>register Etudiant</title>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"></link>
+        <script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
+    </h:head>
+    <h:body>
+        <h:form class = "pure-form pure-form-stacked">
+            
+                <legend>Create a new Student Account</legend>
+                <h:outputText value="First Name"/><h:inputText id="firstName" value="#{etudiantMetier.firstName}"></h:inputText>
+                <h:outputText value="Last Name"/><h:inputText id="lastName" value="#{etudiantMetier.lastName}"></h:inputText>
+                <h:outputText value="Email"/><h:inputText id="email" value="#{etudiantMetier.email}"></h:inputText>
+                <h:outputText value="Password"/><h:inputText id="password" value="#{etudiantMetier.password}"></h:inputText>
+                <h:outputText value="Filiere"/><h:inputText id="filiere" value="#{etudiantMetier.filiere}"></h:inputText>
+                
+                <h:outputText value="Date Of Birth"/><h:inputText value="#{etudiantMetier.dateOfBirth}">  
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>  
+                </h:inputText>
+                
+                <h:outputText value="urlAvatar"/><h:inputText id="urlAvatar" value="#{etudiantMetier.urlAvatar}"></h:inputText>
+                <h:commandButton action="#{etudiantMetier.Register}" value="Submit" />
+            
+        </h:form>
+    </h:body>
+    
+
+</html>
+
