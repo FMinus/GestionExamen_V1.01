@@ -6,20 +6,15 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       
+        
         <h3>JSF Login Logout</h3>
-        <h:outputText value="Username" />
-        <h:inputText id="username" value="#{login.user}"></h:inputText>
-        <h:message for="username"></h:message>
-        <br /><br />
+        <h:form class = "pure-form pure-form-stacked">           
             
-        <h:outputText value="Password" />
-        <h:inputSecret id="password" value="#{login.pwd}"></h:inputSecret>
-        <h:message for="password"></h:message>
-        <br /><br />
+            <h:outputText value="Email"/><h:inputText id="email" value="#{etudiantMetier.email}"></h:inputText>
+            <h:outputText value="Password"/><h:inputSecret id="password" value="#{etudiantMetier.password}"></h:inputSecret>          
+            <h:commandButton action="#{etudiantMetier.Login}" value="Submit" />
             
-        <h:commandButton action="#{login.validateUsernamePassword}"
-                         value="Login"></h:commandButton>
+        </h:form>
     </h:body>
 </html>
 

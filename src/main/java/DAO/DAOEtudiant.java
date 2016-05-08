@@ -6,6 +6,7 @@ import com.mongodb.MongoClient;
 import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 
 public class DAOEtudiant
 {
@@ -53,6 +54,32 @@ public class DAOEtudiant
            Datastore ds = morphia.createDatastore(mongoClient, dbName);
            ds.save(etudiant);
        }      
+   }
+   
+   public List<EtudiantEntity> loginEtudiant(String email,String password)
+   {
+       List<EtudiantEntity> etuList;
+       try (MongoClient mongoClient = new MongoClient(dbServer,port))
+       { 
+           Morphia morphia = new Morphia();
+           morphia.map(EtudiantEntity.class);
+           
+           Datastore ds = morphia.createDatastore(mongoClient, dbName);
+          
+           //etuList = ds.find(EtudiantEntity.class,"email:",email,"password:",password);
+           
+           Query<EtudiantEntity> query = ds.createQuery(EtudiantEntity.class);
+           
+           query.and
+            (
+                    query.criteria("email").equal(email),
+                    query.criteria("password").equal(password)
+            );
+           
+           etuList = query.asList();
+       }
+        
+        return etuList;
    }
   
     
