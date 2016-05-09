@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import Connection.ConnectionEtudiant;
+import ConnectionMongo.ConnectionEtudiant;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 

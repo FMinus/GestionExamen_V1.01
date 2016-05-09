@@ -33,7 +33,7 @@ public class loginFilter implements Filter
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         
-        Login session = (Login) req.getSession().getAttribute("Login");
+        Login session = (Login) req.getSession().getAttribute("login");
         
         String url = req.getRequestURI();
         
@@ -41,9 +41,14 @@ public class loginFilter implements Filter
         //if a request is for login and there's a session redirect to forum.xhtml
         //if a request is for logout remove the session then redirect to login.xhtml
         
+        //System.out.println("session attribute : "+session.isIsLoggedIn());
+        
+        //System.out.println("Requested URI is : "+url);
         
         if(session == null || !session.isIsLoggedIn())
         {
+            //System.out.println("Null session or isLoggedIn = false");
+            
             if(url.contains("Home.xhtml") || url.contains("Logout.xhtml"))
             {
                 res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
@@ -61,11 +66,12 @@ public class loginFilter implements Filter
             }
             else if(url.contains("Logout.xhtml") )
             {
-                req.getSession().removeAttribute("Login");
+                req.getSession().removeAttribute("login");
                 res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
             }
             else
             {
+                //System.out.println("loginfilter - logged in : session.isLoggedin = "+session.isIsLoggedIn());
                 chain.doFilter(request, response);
             }
                 

@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import Connection.ConnectionEtudiant;
+import ConnectionMongo.ConnectionEtudiant;
 import Metier.EtudiantMetier;
 import java.io.Serializable;
 import javax.annotation.ManagedBean;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Connection;
+package ConnectionMongo;
 
 import Metier.EtudiantMetier;
 import DAO.DAOEtudiant;
@@ -25,7 +25,7 @@ public class ConnectionEtudiant
         
         List<EtudiantEntity> listEtu = daoEtudiant.loginEtudiant(email, password);
         
-        if(listEtu.size()==0)
+        if(listEtu.isEmpty())
         {
             System.out.println("no such user");
             return false;

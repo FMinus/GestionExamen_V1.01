@@ -1,6 +1,6 @@
 package Controllers;
 
-import Connection.ConnectionEtudiant;
+import ConnectionMongo.ConnectionEtudiant;
 import java.io.Serializable;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
@@ -51,7 +51,8 @@ public class Login implements Serializable
         
         if(conn.loginEtudiant(this.email, this.password))
         {
-            System.out.println("metier : logged in");
+            isLoggedIn=true;
+            System.out.println("Login bean : logged in");
             return "Home.xhtml?faces-redirect=true";
         }
         else
@@ -87,5 +88,11 @@ public class Login implements Serializable
             return "Login.xhtml";
         }
             
+    }
+    
+    public String logout()
+    {
+        isLoggedIn = false;
+        return "Login.xhtml?faces-redirect=true";
     }
 }
