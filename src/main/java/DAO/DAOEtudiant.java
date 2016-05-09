@@ -56,9 +56,12 @@ public class DAOEtudiant
        }      
    }
    
-   public List<EtudiantEntity> loginEtudiant(String email,String password)
+   public EtudiantEntity loginEtudiant(String email,String password)
    {
-       List<EtudiantEntity> etuList;
+       //List<EtudiantEntity> etuList;
+       
+       EtudiantEntity etudiant;
+       
        try (MongoClient mongoClient = new MongoClient(dbServer,port))
        { 
            Morphia morphia = new Morphia();
@@ -68,7 +71,7 @@ public class DAOEtudiant
           
            //etuList = ds.find(EtudiantEntity.class,"email:",email,"password:",password);
            
-           Query<EtudiantEntity> query = ds.createQuery(EtudiantEntity.class);
+           Query<EtudiantEntity> query = ds.createQuery(EtudiantEntity.class).limit(1);
            
            query.and
             (
@@ -76,10 +79,11 @@ public class DAOEtudiant
                     query.criteria("password").equal(password)
             );
            
-           etuList = query.asList();
+           etudiant = (EtudiantEntity) query.get();
+           //etuList = query.asList();
        }
         
-        return etuList;
+        return etudiant;
    }
   
     

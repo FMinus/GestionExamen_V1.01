@@ -29,9 +29,9 @@ public class ConnectionProfesseur
     {
         DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
         
-        List<EtudiantEntity> listEtu = daoEtudiant.loginEtudiant(email, password);
+        EtudiantEntity etudiant = daoEtudiant.loginEtudiant(email, password);
         
-        if(listEtu.size()==0)
+        if(etudiant == null)
         {
             System.out.println("no such user");
             return false;

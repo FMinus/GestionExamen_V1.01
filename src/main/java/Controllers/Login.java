@@ -6,6 +6,7 @@ import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
 @SessionScoped
@@ -52,6 +53,14 @@ public class Login implements Serializable
         if(conn.loginEtudiant(this.email, this.password))
         {
             isLoggedIn=true;
+            //TODO
+            //retrieve the user's cridentials :       
+            
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+            
+            request.setAttribute("userEtudiant", conn.getListEtu());
+            
             System.out.println("Login bean : logged in");
             return "Home.xhtml?faces-redirect=true";
         }
@@ -62,7 +71,7 @@ public class Login implements Serializable
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Incorrect Username and Passowrd",
                             "Please enter correct username and Password"));
-            return "Login";
+            return "Login.xhtml";
         }
             
     }

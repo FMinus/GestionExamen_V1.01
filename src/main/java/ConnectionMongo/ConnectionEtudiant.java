@@ -12,6 +12,15 @@ import java.util.List;
 
 public class ConnectionEtudiant
 {
+    private EtudiantEntity etudiant;
+
+    public EtudiantEntity getListEtu()
+    {
+        return etudiant;
+    }
+    
+    
+    
     public void registerEtudiant(EtudiantMetier etudiant)
     {
         DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
@@ -23,9 +32,9 @@ public class ConnectionEtudiant
     {
         DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
         
-        List<EtudiantEntity> listEtu = daoEtudiant.loginEtudiant(email, password);
+        etudiant = daoEtudiant.loginEtudiant(email, password);
         
-        if(listEtu.isEmpty())
+        if(etudiant == null)
         {
             System.out.println("no such user");
             return false;
