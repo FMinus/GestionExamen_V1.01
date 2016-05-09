@@ -160,21 +160,7 @@ public class EtudiantMetier implements Serializable
         return new EtudiantEntity(this.firstName,this.lastName,this.email,this.password,this.filiere.toString(),this.dateOfBirth.toString(),this.urlAvatar);
     }
     
-    public void Register()
-    {
-        ConnectionEtudiant conn= new ConnectionEtudiant();
-        //r.registerEtudiant(new EtudiantMetier(this.firstName,this.lastName,this.email,this.password,this.filiere,this.dateOfBirth,this.urlAvatar));
-        conn.registerEtudiant(this);
-        /*
-        System.out.println("first name : "+this.firstName);
-        System.out.println("last name : "+this.lastName);
-        System.out.println(this.dateOfBirth);
-        System.out.println("filiere : "+this.filiere);
-        System.out.println("email : "+this.email);
-        System.out.println("avatar url : "+this.urlAvatar);
-        System.out.println("password : "+this.password);
-        */
-    }
+    
     
     
     

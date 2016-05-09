@@ -13,6 +13,17 @@ public class Login implements Serializable
 {
     private String email;
     private String password;
+    private boolean isLoggedIn = false;
+
+    public boolean isIsLoggedIn()
+    {
+        return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(boolean isLoggedIn)
+    {
+        this.isLoggedIn = isLoggedIn;
+    }
 
     public String getEmail()
     {
@@ -41,7 +52,7 @@ public class Login implements Serializable
         if(conn.loginEtudiant(this.email, this.password))
         {
             System.out.println("metier : logged in");
-            return "Home";
+            return "Home.xhtml?faces-redirect=true";
         }
         else
         {
@@ -64,7 +75,7 @@ public class Login implements Serializable
         if(conn.loginEtudiant(this.email, this.password))
         {
             System.out.println("metier : logged in");
-            return "Home";
+            return "Home.xhtml?faces-redirect=true";
         }
         else
         {
@@ -73,7 +84,7 @@ public class Login implements Serializable
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Incorrect Username and Passowrd",
                             "Please enter correct username and Password"));
-            return "Login";
+            return "Login.xhtml";
         }
             
     }

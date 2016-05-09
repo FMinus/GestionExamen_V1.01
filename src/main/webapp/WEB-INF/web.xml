@@ -6,7 +6,7 @@
     </context-param>
     <servlet>
         <servlet-name>TestConnection2</servlet-name>
-        <servlet-class>com.mycompany.gestionexamen_v1.TestConnection</servlet-class>
+        <servlet-class>TestServlet.TestConnection</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -27,7 +27,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -37,12 +37,23 @@
         <servlet-name>RegisterEtudiant</servlet-name>
         <url-pattern>/RegisterEtudiant</url-pattern>
     </servlet-mapping>
+    
+    <filter>
+        <filter-name>LogginFilter</filter-name>
+        <filter-class>LoginFilter.loginFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>LogginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        
+    </filter-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/Login.xhtml</welcome-file>
+        <welcome-file>Login.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
