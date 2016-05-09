@@ -10,4 +10,16 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     
+    <managed-bean>
+        <managed-bean-name>login</managed-bean-name>
+        <managed-bean-class>Controllers.Login</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>register</managed-bean-name>
+        <managed-bean-class>Controllers.Register</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
 </faces-config>

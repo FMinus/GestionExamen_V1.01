@@ -8,6 +8,8 @@ import java.util.Objects;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import Connection.ConnectionEtudiant;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -174,21 +176,7 @@ public class EtudiantMetier implements Serializable
         */
     }
     
-    public String Login()
-    {
-        ConnectionEtudiant conn = new ConnectionEtudiant();
-        
-        if(conn.loginEtudiant(this.email, this.password))
-        {
-            System.out.println("metier : logged in");
-            return "Home";
-        }
-        else
-        {
-            return "Erreur";
-        }
-            
-    }
+    
     
     
     

@@ -11,9 +11,9 @@
         <h3>JSF Login Logout</h3>
         <h:form class = "pure-form pure-form-stacked">           
             
-            <h:outputText value="Email"/><h:inputText id="email" value="#{etudiantMetier.email}"></h:inputText>
-            <h:outputText value="Password"/><h:inputSecret id="password" value="#{etudiantMetier.password}"></h:inputSecret>          
-            <h:commandButton id="loginBtn" action="#{etudiantMetier.Login}" value="Submit" />
+            <h:outputText value="Email"/><h:inputText id="email" value="#{login.email}"></h:inputText>
+            <h:outputText value="Password"/><h:inputSecret id="password" value="#{login.password}"></h:inputSecret>          
+            <h:commandButton id="loginBtn" action="#{login.loginEtudiant()}" value="Submit" />
             <h:commandLink action="RegisterEtudiant?faces-redirect=true" value="Register"/>
             
             <h:message for="loginBtn" style="color:red"/>

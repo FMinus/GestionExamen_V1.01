@@ -1,93 +1,80 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import Connection.ConnectionEtudiant;
+import java.io.Serializable;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Ayoub
- */
-public class Login extends HttpServlet
+@ManagedBean
+@SessionScoped
+public class Login implements Serializable
 {
+    private String email;
+    private String password;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    public String getEmail()
     {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter())
+        return email;
+    }
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+    
+    public String loginEtudiant()
+    {
+        ConnectionEtudiant conn = new ConnectionEtudiant();
+        
+        if(conn.loginEtudiant(this.email, this.password))
         {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login : </h1>");
-            out.println("");
-            out.println("</body>");
-            out.println("</html>");
+            System.out.println("metier : logged in");
+            return "Home";
         }
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Passowrd",
+                            "Please enter correct username and Password"));
+            return "Login";
+        }
+            
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    
+    public String loginProfesseur()
     {
-        processRequest(request, response);
+        //TODO 
+        
+        ConnectionEtudiant conn = new ConnectionEtudiant();
+        
+        if(conn.loginEtudiant(this.email, this.password))
+        {
+            System.out.println("metier : logged in");
+            return "Home";
+        }
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Passowrd",
+                            "Please enter correct username and Password"));
+            return "Login";
+        }
+            
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo()
-    {
-        return "Short description";
-    }// </editor-fold>
-
 }
