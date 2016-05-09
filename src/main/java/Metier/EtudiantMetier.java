@@ -174,12 +174,20 @@ public class EtudiantMetier implements Serializable
         */
     }
     
-    public void Login()
+    public String Login()
     {
         ConnectionEtudiant conn = new ConnectionEtudiant();
         
         if(conn.loginEtudiant(this.email, this.password))
+        {
             System.out.println("metier : logged in");
+            return "Home";
+        }
+        else
+        {
+            return "Erreur";
+        }
+            
     }
     
     

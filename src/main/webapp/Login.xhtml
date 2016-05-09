@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Facelet Title</title>
+         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"></link>
     </h:head>
     <h:body>
         
@@ -12,8 +13,10 @@
             
             <h:outputText value="Email"/><h:inputText id="email" value="#{etudiantMetier.email}"></h:inputText>
             <h:outputText value="Password"/><h:inputSecret id="password" value="#{etudiantMetier.password}"></h:inputSecret>          
-            <h:commandButton action="#{etudiantMetier.Login}" value="Submit" />
+            <h:commandButton id="loginBtn" action="#{etudiantMetier.Login}" value="Submit" />
+            <h:commandLink action="RegisterEtudiant?faces-redirect=true" value="Register"/>
             
+            <h:message for="loginBtn" style="color:red"/>
         </h:form>
     </h:body>
 </html>
