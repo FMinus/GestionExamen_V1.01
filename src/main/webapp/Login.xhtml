@@ -1,20 +1,41 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"></link>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"></link>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/css/loginStyle.css"/>
     </h:head>
     <h:body>
         
         <h3>JSF Login Logout</h3>
-        <h:form class = "pure-form pure-form-stacked">           
+        <h:form class="form-horizontal" role="form">           
             
-            <h:outputText value="Email"/><h:inputText id="email" value="#{login.email}"></h:inputText>
-            <h:outputText value="Password"/><h:inputSecret id="password" value="#{login.password}"></h:inputSecret>          
-            <h:commandButton id="loginBtn" action="#{login.loginEtudiant()}" value="Submit" />
-            <h:commandLink action="RegisterEtudiant?faces-redirect=true" value="Register"/>
+            <div class="form-group">
+                <h:outputText value="Email" class="control-label col-sm-2"/><h:inputText id="email" value="#{login.email}"></h:inputText>
+            </div>
+            
+            <div class="form-group">
+                <h:outputText value="Password" class="control-label col-sm-2"/><h:inputSecret id="password" value="#{login.password}"></h:inputSecret>          
+            </div>
+            
+            <div class="form-group">
+                <h:outputText value="Type Compte" class="control-label col-sm-2"/>
+                <h:selectOneMenu id="accountSelect" value="#{login.role}" >
+                    <f:selectItem itemValue="Etudiant" itemLabel="Etudiant" />
+                    <f:selectItem itemValue="Professeur" itemLabel="Professeur" /> 
+                    <f:selectItem itemValue="Admin" itemLabel="Admin" />                   
+                </h:selectOneMenu>
+            </div>
+            
+            <div class="form-group">
+                <h:outputText value="" class="control-label col-sm-2"/>
+                <h:commandButton id="loginBtn" action="#{login.loginEtudiant()}" value="Submit" class="btn btn-primary"/>
+                <h:commandButton action="Register?faces-redirect=true" value="Register" class="btn btn-primary"/>
+            </div>
             
             <h:message for="loginBtn" style="color:red"/>
         </h:form>

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <!--
+        <h:outputStylesheet library="css" name="resources/css/bootstrap.min.css"/>
+        <h:outputScript library="js" name="../js/bootstrap.min.js"/>
+        <h:outputScript library="js" name="../js/jquery-1.12.3.min.js"/>
+        -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <title>Home Template</title>
+    </h:head>
+    
+    <h:body>
+        
+        <div id="top" class="pure-menu custom-menu custom-menu-top">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <!--<a class="navbar-brand" href="#">--><img src="../../resources/images/logo.jpg" class="img-responsive" />
+                    </div>
+                    <ul class="nav navbar-nav">
+                      
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Modules</a></li>
+                        <li><h:form><h:inputText value="#{homeEtudiant.recherche}" id="inputRecherche"/><h:commandLink action="#{homeEtudiant.rechercheInfo()}" value="Recherche"/></h:form></li>
+                        <li>Avatar + <h:outputText value="#{homeEtudiant.etudiant.lastName}"/></li>
+                        <li><a href="#">Notifications</a></li>
+                        <li><a href="#">Logout : </a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <div id="content" class="center_content" style="position:static;">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        
+        <div id="bottom">
+            
+            
+            <div class="footer">
+                <div class="legal pure-g"><p>Copyright (c) 2016</p></div>
+            </div>
+        </div>
+        
+    </h:body>
+    
+</html>

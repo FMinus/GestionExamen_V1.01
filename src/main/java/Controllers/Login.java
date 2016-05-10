@@ -26,6 +26,7 @@ public class Login implements Serializable
     public void setRole(Role role)
     {
         this.role = role;
+        System.out.println(role);
     }
       
     public boolean isIsLoggedIn()
@@ -88,7 +89,7 @@ public class Login implements Serializable
                 System.out.println("Login Etudiant : "+conn.getEtudiant());
             
             System.out.println("Login bean : logged in");
-            return "Home.xhtml?faces-redirect=true";
+            return "Views/Etudiant/HomeEtudiant.xhtml?faces-redirect=true";
         }
         else
         {

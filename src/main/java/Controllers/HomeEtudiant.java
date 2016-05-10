@@ -26,6 +26,20 @@ public class HomeEtudiant implements Serializable
     @Inject
     EtudiantMetier etudiant;
     
+    private String recherche;
+
+    public String getRecherche()
+    {
+        return recherche;
+    }
+
+    public void setRecherche(String recherche)
+    {
+        this.recherche = recherche;
+    }
+    
+    
+    
     public HomeEtudiant()
     {
        
@@ -62,6 +76,11 @@ public class HomeEtudiant implements Serializable
         //   System.out.println("constructor Home Etudiant : "+etudiant.toString());
         
         return etudiant.toString();
+    }
+    
+    public String rechercheInfo()
+    {
+        return "";
     }
     
     

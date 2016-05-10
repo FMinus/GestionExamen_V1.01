@@ -7,11 +7,15 @@
     </h:head>
     <h:body>
        HOME:
-       <h:outputLink value="">Forum</h:outputLink>
-       <h:outputLink value="">Login</h:outputLink>
-       <h:outputLink value="">Logout</h:outputLink>
-       <h:outputLink value="">register</h:outputLink>
-       
+       <h:outputLink value="">Forum</h:outputLink><br/>
+       <h:outputLink value="">Login</h:outputLink><br/>
+       <h:outputLink value="">Logout</h:outputLink><br/>
+       <h:outputLink value="">register</h:outputLink><br/>
+        
+       <h:form enctype="multipart/form-data">
+           <h:inputFile value="#{uploadBean.file}"/>
+           <h:commandButton value="Upload" action="#{uploadBean.upload()}"/>
+       </h:form>
     </h:body>
 </html>
 

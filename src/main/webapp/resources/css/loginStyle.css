@@ -132,3 +132,8 @@ body {
   color: #333333;
   text-decoration: none;
 }
+
+.loginBtn
+{
+    padding-right: 50px;
+}

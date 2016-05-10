@@ -56,6 +56,11 @@ public class Register implements Serializable
     }
     
     
+    public void upload()
+    {
+        
+    }
+    
     
     
 }
