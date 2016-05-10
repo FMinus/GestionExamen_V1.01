@@ -10,7 +10,9 @@ import Metier.EtudiantMetier;
 import java.io.Serializable;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
 @SessionScoped
@@ -43,6 +45,14 @@ public class Register implements Serializable
         System.out.println("avatar url : "+this.urlAvatar);
         System.out.println("password : "+this.password);
         */
+    }
+    
+    public HttpServletRequest getHttpServletRequest()
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        
+        return request;
     }
     
     

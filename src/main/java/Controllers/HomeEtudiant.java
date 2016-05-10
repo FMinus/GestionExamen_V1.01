@@ -43,17 +43,23 @@ public class HomeEtudiant implements Serializable
         this.etudiant = etudiant;
     }
 
-    
-    
-    public String getInfoEtudiant()
+    public HttpServletRequest getHttpServletRequest()
     {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        
+        return request;
+    }
+    
+    public String getInfoEtudiant()
+    {
+        
+        HttpServletRequest request = getHttpServletRequest();
             
         etudiant = (EtudiantMetier) request.getSession().getAttribute("userEtudiant");
         
-        if(etudiant != null)
-            System.out.println("constructor Home Etudiant : "+etudiant.toString());
+        //if(etudiant != null)
+        //   System.out.println("constructor Home Etudiant : "+etudiant.toString());
         
         return etudiant.toString();
     }

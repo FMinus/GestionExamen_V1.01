@@ -1,6 +1,7 @@
 package Controllers;
 
 import ConnectionMongo.ConnectionEtudiant;
+import Enums.Role;
 import java.io.Serializable;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
@@ -15,7 +16,18 @@ public class Login implements Serializable
     private String email;
     private String password;
     private boolean isLoggedIn = false;
+    private Role role;
 
+    public Role getRole()
+    {
+        return role;
+    }
+
+    public void setRole(Role role)
+    {
+        this.role = role;
+    }
+      
     public boolean isIsLoggedIn()
     {
         return isLoggedIn;
@@ -46,6 +58,14 @@ public class Login implements Serializable
         this.password = password;
     }
     
+    public HttpServletRequest getHttpServletRequest()
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        
+        return request;
+    }
+    
     public String loginEtudiant()
     {
         ConnectionEtudiant conn = new ConnectionEtudiant();
@@ -53,11 +73,12 @@ public class Login implements Serializable
         if(conn.loginEtudiant(this.email, this.password))
         {
             isLoggedIn=true;
+            role=Role.Etudiant;
             //TODO
             //retrieve the user's cridentials :       
             
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+            
+            HttpServletRequest request = getHttpServletRequest();
             
             request.getSession().setAttribute("userEtudiant", conn.getEtudiant().toEtudiantMetier());
             

@@ -49,7 +49,7 @@ public class loginFilter implements Filter
         {
             //System.out.println("Null session or isLoggedIn = false");
             
-            if(url.contains("Home.xhtml") || url.contains("Logout.xhtml"))
+            if(url.contains("Etudiant") || url.contains("Professeur") || url.contains("Admin"))
             {
                 res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
             }
@@ -60,7 +60,7 @@ public class loginFilter implements Filter
         }
         else
         {
-            if(url.contains("RegisterEtudiant.xhtml") || url.contains("Login.xhtml"))
+            if(url.contains("Register") || url.contains("Login.xhtml") || !url.contains(session.getRole().name()))
             {
                 res.sendRedirect(req.getServletContext().getContextPath()+"/Home.xhtml");
             }

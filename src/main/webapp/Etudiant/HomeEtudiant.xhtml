@@ -11,12 +11,16 @@
             <h:commandLink value="Logout" action="#{login.logout()}"/>
         </h:form>
         
+        <!--
         <div ng-app="">
- 	<p>Name : <input type="text" ng-model="name"/></p>
- 	<h1>Hello {{name}}</h1>
-        
-        <h:outputText value="#{homeEtudiant.infoEtudiant}"/>
-</div>
+            <p>Name : <input type="text" ng-model="name"/></p>
+            Hello {{name}}
+            <input ng-model="#{homeEtudiant.etudiant.email}"/> 
+            <h1> Hello <span ng-bind="#{homeEtudiant.etudiant.email}"></span>!</h1>
+            <h:outputText value="#{homeEtudiant.infoEtudiant}"/>
+        </div>
+        -->
+    
     </h:body>
 </html>
 

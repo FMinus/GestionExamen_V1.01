@@ -8,6 +8,7 @@ package Entities;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.Transient;
 import org.mongodb.morphia.annotations.Version;
 
 
@@ -19,6 +20,7 @@ public abstract class BaseEntity
  
     @Version
     @Property("version")
+    @Transient
     private Long version;
  
     public BaseEntity() {
