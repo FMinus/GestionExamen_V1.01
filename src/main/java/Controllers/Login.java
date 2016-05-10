@@ -59,7 +59,12 @@ public class Login implements Serializable
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             
-            request.setAttribute("userEtudiant", conn.getListEtu());
+            request.getSession().setAttribute("userEtudiant", conn.getEtudiant().toEtudiantMetier());
+            
+            
+            
+            if(conn.getEtudiant() != null)
+                System.out.println("Login Etudiant : "+conn.getEtudiant());
             
             System.out.println("Login bean : logged in");
             return "Home.xhtml?faces-redirect=true";

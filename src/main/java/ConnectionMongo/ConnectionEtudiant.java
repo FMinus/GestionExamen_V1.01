@@ -14,10 +14,12 @@ public class ConnectionEtudiant
 {
     private EtudiantEntity etudiant;
 
-    public EtudiantEntity getListEtu()
+    public EtudiantEntity getEtudiant()
     {
         return etudiant;
     }
+
+    
     
     
     
@@ -42,6 +44,7 @@ public class ConnectionEtudiant
         else
         {
             System.out.println("logged in");
+            
             return true;
         }
             

@@ -17,20 +17,22 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-@Stateful
-@LocalBean
 @ManagedBean
 @SessionScoped
-public class HomeEtudiant
+public class HomeEtudiant implements Serializable
 {
-    public HomeEtudiant()
-    {
-        
-    }
+    
     
     @Inject
     EtudiantMetier etudiant;
-
+    
+    public HomeEtudiant()
+    {
+       
+        
+    }
+    
+    
     public EtudiantMetier getEtudiant()
     {
         return etudiant;
@@ -38,12 +40,23 @@ public class HomeEtudiant
 
     public void setEtudiant(EtudiantMetier etudiant)
     {
+        this.etudiant = etudiant;
+    }
+
+    
+    
+    public String getInfoEtudiant()
+    {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             
-        etudiant = (EtudiantMetier) request.getAttribute("userEtudiant");
+        etudiant = (EtudiantMetier) request.getSession().getAttribute("userEtudiant");
+        
+        if(etudiant != null)
+            System.out.println("constructor Home Etudiant : "+etudiant.toString());
+        
+        return etudiant.toString();
     }
-    
     
     
 }
