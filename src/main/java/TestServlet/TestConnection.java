@@ -36,8 +36,13 @@ import java.util.Set;
 import DAO.DAOEtudiant;
 import Enums.Filiere;
 import Metier.EtudiantMetier;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -56,7 +61,7 @@ public class TestConnection extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, UnsupportedEncodingException, NoSuchAlgorithmException
     {
         response.setContentType("text/html;charset=UTF-8");
         
@@ -64,7 +69,7 @@ public class TestConnection extends HttpServlet
         
         //List<EtudiantEntity> listEtu = dao.getAllEtudiants("lastName","test");
         
-        
+        /*
         Calendar cal = Calendar.getInstance();
         Date t = cal.getTime();
         
@@ -72,7 +77,15 @@ public class TestConnection extends HttpServlet
         EtudiantMetier etudiantMetier = new EtudiantMetier("ayoub","deqqaq","ayoub@gmail.com","pass",Filiere.GI,t,"none");
         
         EtudiantEntity etudiantEntity = etudiantMetier.toEtudiantEntity();
+        */
         
+        String test = "test";
+        
+        for(int i=0;i<10;i++)
+        {
+            System.out.println(hashGenerator(test));
+                    
+        }
         try (PrintWriter out = response.getWriter())
         {
             /* TODO output your page here. You may use following sample code. */
@@ -86,7 +99,7 @@ public class TestConnection extends HttpServlet
             //out.println("<h1>MongoDB Collections : " + database.getCollection("Address")+ "</h1>");
             //out.println("<h1>MongoDB Query : " + etu.toString() + "</h1>");
             //out.println("<h1>MongoDB Query : " + listEtu.get(0).toString() + "</h1>");
-            out.println("<h1>MongoDB Query : " + etudiantEntity.toString()+ "</h1>");
+            //out.println("<h1>MongoDB Query : " + etudiantEntity.toString()+ "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -103,9 +116,15 @@ public class TestConnection extends HttpServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, UnsupportedEncodingException
     {
-        processRequest(request, response);
+        try
+        {
+            processRequest(request, response);
+        } catch (NoSuchAlgorithmException ex)
+        {
+            Logger.getLogger(TestConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -118,9 +137,15 @@ public class TestConnection extends HttpServlet
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, UnsupportedEncodingException
     {
-        processRequest(request, response);
+        try
+        {
+            processRequest(request, response);
+        } catch (NoSuchAlgorithmException ex)
+        {
+            Logger.getLogger(TestConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -133,5 +158,15 @@ public class TestConnection extends HttpServlet
     {
         return "Short description";
     }// </editor-fold>
+    
+    public byte [] hashGenerator(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException
+    {
+        byte[] bytesOfMessage = message.getBytes("UTF-8");
+        
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] thedigest = md.digest(bytesOfMessage);
+        
+        return thedigest;
+    }
 
 }

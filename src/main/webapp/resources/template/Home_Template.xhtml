@@ -31,7 +31,7 @@
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Modules</a></li>
                         <li><h:form><h:inputText value="#{homeEtudiant.recherche}" id="inputRecherche"/><h:commandLink action="#{homeEtudiant.rechercheInfo()}" value="Recherche"/></h:form></li>
-                        <li>Avatar + <h:outputText value="#{homeEtudiant.etudiant.lastName}"/></li>
+                        <li><h:graphicImage value="#{homeEtudiant.AvatarGetter()}"/><h:outputText value="#{homeEtudiant.sessionEtudiant.email}"/></li>
                         <li><a href="#">Notifications</a></li>
                         <li><a href="#">Logout : </a></li>
                     </ul>

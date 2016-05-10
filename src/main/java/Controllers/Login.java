@@ -3,6 +3,10 @@ package Controllers;
 import ConnectionMongo.ConnectionEtudiant;
 import Enums.Role;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -67,11 +71,11 @@ public class Login implements Serializable
         return request;
     }
     
-    public String loginEtudiant()
+    public String loginEtudiant() throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
         ConnectionEtudiant conn = new ConnectionEtudiant();
         
-        if(conn.loginEtudiant(this.email, this.password))
+        if(conn.loginEtudiant(this.email,this.password))
         {
             isLoggedIn=true;
             role=Role.Etudiant;
@@ -130,5 +134,15 @@ public class Login implements Serializable
     {
         isLoggedIn = false;
         return "Login.xhtml?faces-redirect=true";
+    }
+    
+    public byte [] hashGenerator(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException
+    {
+        byte[] bytesOfMessage = message.getBytes("UTF-8");
+        
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] thedigest = md.digest(bytesOfMessage);
+        
+        return thedigest;
     }
 }

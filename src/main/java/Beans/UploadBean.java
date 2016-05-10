@@ -3,41 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers;
+package Beans;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
-import java.util.Scanner;
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
-import org.apache.commons.io.FileUtils;
+
 
 @ManagedBean
-@SessionScoped
-public class UploadBean
+@RequestScoped
+public class UploadBean implements Serializable
 {
     private Part file;
-    private String text;
     
-    private final int limit_max_size = 10240000;
-    private final String path_to = "D:\\Etude\\JavaEE\\WorkSpace\\GestionExamen_V1.01\\uploads";
-    private final String limit_type_file = "gif|jpg|png|jpeg";
+    
+   
     
     
     public Part getFile()
@@ -68,8 +58,7 @@ public class UploadBean
             
             while ((read = filecontent.read(bytes)) != -1) 
             {
-                out.write(bytes, 0, read);
-                System.out.println(bytes);
+                out.write(bytes, 0, read); 
             }
             
         }
@@ -77,13 +66,47 @@ public class UploadBean
         {
             e.printStackTrace();
         }
+        
+        
     }
     
-    public boolean validateImage()
+    public boolean validateImageExtention()
     {
         String image = file.getSubmittedFileName();   
         return (image.contains("png") || image.contains("jpg") || image.contains("png") || image.contains("gif"));          
     }
+    
+    public void upload(String fileName) throws IOException
+    {
+        OutputStream out = null;
+        InputStream filecontent = null;
+        
+        try
+        {
+            out = new FileOutputStream(new File("D:\\Etude\\JavaEE\\WorkSpace\\GestionExamen_V1.01\\uploads\\"+fileName));
+            
+            filecontent = file.getInputStream();
+            
+            int read = 0;
+            final byte[] bytes = new byte[1024];
+            
+            while ((read = filecontent.read(bytes)) != -1) 
+            {
+                out.write(bytes, 0, read);
+               
+            }
+            
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        
+    }
+    
+    
+    
     
         
     

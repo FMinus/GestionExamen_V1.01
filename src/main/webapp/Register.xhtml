@@ -24,20 +24,20 @@
             </ul>
             <div class="tab-content">
                 <div id="etudiant" class="tab-pane fade in active">
-                    <h:form class = "pure-form pure-form-stacked">
+                    <h:form class = "pure-form pure-form-stacked" enctype="multipart/form-data">
                         
                         <legend>Create a new Student Account</legend>
-                        <h:outputText value="First Name"/><h:inputText id="firstName" value="#{register.etudiant.firstName}"></h:inputText>
-                        <h:outputText value="Last Name"/><h:inputText id="lastName" value="#{register.etudiant.lastName}"></h:inputText>
-                        <h:outputText value="Email"/><h:inputText id="email" value="#{register.etudiant.email}"></h:inputText>
-                        <h:outputText value="Password"/><h:inputText id="password" value="#{register.etudiant.password}"></h:inputText>
-                        <h:outputText value="Filiere"/><h:inputText id="filiere" value="#{register.etudiant.filiere}"></h:inputText>
+                        <h:outputText value="First Name"/><h:inputText id="firstName" value="#{register.etudiant.firstName}"/>
+                        <h:outputText value="Last Name"/><h:inputText id="lastName" value="#{register.etudiant.lastName}"/>
+                        <h:outputText value="Email"/><h:inputText id="email" value="#{register.etudiant.email}"/>
+                        <h:outputText value="Password"/><h:inputText id="password" value="#{register.etudiant.password}"/>
+                        <h:outputText value="Filiere"/><h:inputText id="filiere" value="#{register.etudiant.filiere}"/>
                         
                         <h:outputText value="Date Of Birth"/><h:inputText value="#{register.etudiant.dateOfBirth}">  
                             <f:convertDateTime pattern="yyyy-MM-dd"/>  
                         </h:inputText>
                         
-                        <h:outputText value="urlAvatar"/><h:inputText id="urlAvatar" value="#{register.etudiant.urlAvatar}"></h:inputText>
+                        <h:outputText value="urlAvatar"/><h:inputFile value="#{register.uploadBean.file}"/>
                         <h:commandButton action="#{register.registerEtudiant()}" value="Submit" />
                         
                     </h:form>

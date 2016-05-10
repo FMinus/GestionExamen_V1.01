@@ -5,14 +5,20 @@
  */
 package Controllers;
 
+import Beans.UploadBean;
 import ConnectionMongo.ConnectionEtudiant;
 import Metier.EtudiantMetier;
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import java.security.*;
 
 @ManagedBean
 @SessionScoped
@@ -20,31 +26,54 @@ public class Register implements Serializable
 {
     @Inject 
     EtudiantMetier etudiant;
+    
+    @Inject
+    UploadBean uploadBean;
 
     public EtudiantMetier getEtudiant()
     {
         return etudiant;
     }
 
+    public UploadBean getUploadBean()
+    {
+        return uploadBean;
+    }
+
+    public void setUploadBean(UploadBean uploadBean)
+    {
+        this.uploadBean = uploadBean;
+    }
+    
     public void setEtudiant(EtudiantMetier etudiant)
     {
         this.etudiant = etudiant;
     }
     
-    public void registerEtudiant()
+    public void registerEtudiant() throws UnsupportedEncodingException, NoSuchAlgorithmException, IOException
     {
         ConnectionEtudiant conn= new ConnectionEtudiant();
         //r.registerEtudiant(new EtudiantMetier(this.firstName,this.lastName,this.email,this.password,this.filiere,this.dateOfBirth,this.urlAvatar));
+        System.out.println("Avatar Filename : "+uploadBean.getFile().getContentType());
+        String[] str = uploadBean.getFile().getContentType().split("/");
+        String avatarExtention = str[1];
+        
+        
+        
+        System.out.println("Avatar Extention : "+str[1]);
+        
+        
+        //etudiant.setPassword(hashGenerator(etudiant.getPassword()).toString());
+        
+        String hashedEmail = hashGenerator(etudiant.getEmail()).toString();      
+        uploadBean.upload(hashedEmail+"."+avatarExtention); 
+        etudiant.setUrlAvatar(hashedEmail+"."+avatarExtention);
+        
+        //System.out.println("Password : "+etudiant.getPassword());
+        //System.out.println("Avatar Name : "+etudiant.getUrlAvatar());
+        
         conn.registerEtudiant(etudiant);
-        /*
-        System.out.println("first name : "+this.firstName);
-        System.out.println("last name : "+this.lastName);
-        System.out.println(this.dateOfBirth);
-        System.out.println("filiere : "+this.filiere);
-        System.out.println("email : "+this.email);
-        System.out.println("avatar url : "+this.urlAvatar);
-        System.out.println("password : "+this.password);
-        */
+        
     }
     
     public HttpServletRequest getHttpServletRequest()
@@ -55,11 +84,18 @@ public class Register implements Serializable
         return request;
     }
     
-    
-    public void upload()
+    public byte [] hashGenerator(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
+        byte[] bytesOfMessage = message.getBytes("UTF-8");
         
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] thedigest = md.digest(bytesOfMessage);
+        
+        return thedigest;
     }
+    
+    
+    
     
     
     

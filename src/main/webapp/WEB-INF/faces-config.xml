@@ -28,7 +28,7 @@
     </managed-bean>
     <managed-bean>
         <managed-bean-name>uploadBean</managed-bean-name>
-        <managed-bean-class>Controllers.UploadBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>Beans.UploadBean</managed-bean-class>
+    
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 </faces-config>

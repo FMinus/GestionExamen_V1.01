@@ -27,6 +27,8 @@ public class HomeEtudiant implements Serializable
     EtudiantMetier etudiant;
     
     private String recherche;
+    
+    private final String avatarRoot = "D:/Etude/JavaEE/WorkSpace/GestionExamen_V1.01/uploads/";
 
     public String getRecherche()
     {
@@ -42,7 +44,9 @@ public class HomeEtudiant implements Serializable
     
     public HomeEtudiant()
     {
-       
+       HttpServletRequest request = getHttpServletRequest();
+            
+       etudiant = (EtudiantMetier) request.getSession().getAttribute("userEtudiant");
         
     }
     
@@ -78,9 +82,27 @@ public class HomeEtudiant implements Serializable
         return etudiant.toString();
     }
     
+    public EtudiantMetier getSessionEtudiant()
+    {
+        
+        HttpServletRequest request = getHttpServletRequest();
+            
+        etudiant = (EtudiantMetier) request.getSession().getAttribute("userEtudiant");
+        
+        //if(etudiant != null)
+        //   System.out.println("constructor Home Etudiant : "+etudiant.toString());
+        
+        return etudiant;
+    }
+    
     public String rechercheInfo()
     {
         return "";
+    }
+    
+    public String AvatarGetter()
+    {
+        return avatarRoot+getSessionEtudiant().getUrlAvatar();
     }
     
     
