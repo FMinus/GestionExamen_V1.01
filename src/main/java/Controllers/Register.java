@@ -7,7 +7,7 @@ package Controllers;
 
 import Beans.UploadBean;
 import ConnectionMongo.ConnectionEtudiant;
-import Metier.EtudiantMetier;
+import Metier.Etudiant;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -25,12 +25,12 @@ import java.security.*;
 public class Register implements Serializable
 {
     @Inject 
-    EtudiantMetier etudiant;
+    Etudiant etudiant;
     
     @Inject
     UploadBean uploadBean;
 
-    public EtudiantMetier getEtudiant()
+    public Etudiant getEtudiant()
     {
         return etudiant;
     }
@@ -45,7 +45,7 @@ public class Register implements Serializable
         this.uploadBean = uploadBean;
     }
     
-    public void setEtudiant(EtudiantMetier etudiant)
+    public void setEtudiant(Etudiant etudiant)
     {
         this.etudiant = etudiant;
     }
@@ -53,7 +53,7 @@ public class Register implements Serializable
     public void registerEtudiant() throws UnsupportedEncodingException, NoSuchAlgorithmException, IOException
     {
         ConnectionEtudiant conn= new ConnectionEtudiant();
-        //r.registerEtudiant(new EtudiantMetier(this.firstName,this.lastName,this.email,this.password,this.filiere,this.dateOfBirth,this.urlAvatar));
+        //r.registerEtudiant(new Etudiant(this.firstName,this.lastName,this.email,this.password,this.filiere,this.dateOfBirth,this.urlAvatar));
         System.out.println("Avatar Filename : "+uploadBean.getFile().getContentType());
         String[] str = uploadBean.getFile().getContentType().split("/");
         String avatarExtention = str[1];

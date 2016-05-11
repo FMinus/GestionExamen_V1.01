@@ -4,7 +4,7 @@ import Enums.Filiere;
 import java.io.Serializable;
 import java.util.Date;
 import org.mongodb.morphia.annotations.Entity;
-import Metier.EtudiantMetier;
+import Metier.Etudiant;
 import java.util.Calendar;
 
 @Entity
@@ -111,11 +111,11 @@ public class EtudiantEntity extends BaseEntity
     }
 
     
-    public EtudiantMetier toEtudiantMetier()
+    public Etudiant toEtudiant()
     {
         Calendar cal = Calendar.getInstance();
         Date t = cal.getTime();
-        return new EtudiantMetier(this.firstName,this.lastName,this.email,this.password,Filiere.valueOf(this.filiere),t,this.urlAvatar);
+        return new Etudiant(this.firstName,this.lastName,this.email,this.password,Filiere.valueOf(this.filiere),t,this.urlAvatar);
     }
     
     

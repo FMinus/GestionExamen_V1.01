@@ -5,7 +5,7 @@
  */
 package ConnectionMongo;
 
-import Metier.EtudiantMetier;
+import Metier.Etudiant;
 import DAO.DAOEtudiant;
 import Entities.EtudiantEntity;
 import java.util.List;
@@ -19,11 +19,16 @@ public class ConnectionEtudiant
         return etudiant;
     }
 
+    public void setEtudiant(EtudiantEntity etudiant)
+    {
+        this.etudiant = etudiant;
+    }
+
     
     
     
     
-    public void registerEtudiant(EtudiantMetier etudiant)
+    public void registerEtudiant(Etudiant etudiant)
     {
         DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
         
@@ -38,12 +43,12 @@ public class ConnectionEtudiant
         
         if(etudiant == null)
         {
-            System.out.println("no such user");
+            System.out.println("ConnectionEtudiant : no such user");
             return false;
         }
         else
         {
-            System.out.println("logged in");
+            System.out.println("ConnectionEtudiant : logged in");
             
             return true;
         }

@@ -24,11 +24,7 @@ public class Login implements Serializable
     private Role role;
     
       
-      public void init()
-      {
-          this.email="ensa@mail.com";
-        
-      }
+    
     
     
     public Role getRole()
@@ -80,6 +76,34 @@ public class Login implements Serializable
         return request;
     }
     
+    public String login() throws UnsupportedEncodingException, NoSuchAlgorithmException
+    {
+        if(this.getRole() != null)
+        {
+            switch (this.getRole())
+            {
+                case Etudiant:
+                {
+                    //log as Etudiant 
+                    
+                    return loginEtudiant();                   
+                }                  
+                case Professeur:
+                {
+                    //log Professeur
+                    break;
+                }                  
+                default:
+                {
+                    //log as Admin
+                    
+                    break;
+                }        
+            }
+        }
+        return "Login.xhtml?faces-redirect=true"; 
+    }
+    
     public String loginEtudiant() throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
         ConnectionEtudiant conn = new ConnectionEtudiant();
@@ -92,16 +116,23 @@ public class Login implements Serializable
             //retrieve the user's cridentials :       
             
             
-            HttpServletRequest request = getHttpServletRequest();
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             
-            request.getSession().setAttribute("userEtudiant", conn.getEtudiant().toEtudiantMetier());
+            request.getSession().setAttribute("currentUser", conn.getEtudiant().toEtudiant());
+            request.getSession().setAttribute("loogedAs",this);
             
             
             
             if(conn.getEtudiant() != null)
-                System.out.println("Login Etudiant : "+conn.getEtudiant());
+            {
+                //System.out.println("Login Etudiant : "+conn.getEtudiant());
+                //System.out.println("Converted Bean : "+conn.getEtudiant().toEtudiant());
+            }
+                
             
             System.out.println("Login bean : logged in");
+            
             return "Views/Etudiant/HomeEtudiant.xhtml?faces-redirect=true";
         }
         else
@@ -142,6 +173,10 @@ public class Login implements Serializable
     public String logout()
     {
         isLoggedIn = false;
+        
+        HttpServletRequest request = getHttpServletRequest();       
+        request.getSession().removeAttribute("currentUser");
+        
         return "Login.xhtml?faces-redirect=true";
     }
     

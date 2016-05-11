@@ -5,7 +5,7 @@
 */
 package Controllers;
 
-import Metier.EtudiantMetier;
+import Metier.Etudiant;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -19,20 +19,15 @@ public class SessionLoginListener implements HttpSessionListener
 {
     private static int totalActiveSessions;
     
-    @Inject EtudiantMetier etudiant;
+    //@Inject Etudiant etudiant;
       
     
     
     @Override
     public void sessionCreated(HttpSessionEvent se)
     {
-        totalActiveSessions++;
-        //System.out.println("Session Created : "+totalActiveSessions);
-        
-        HttpSession session = se.getSession();
-        
-        //fired every time the session gets created : new user 
-        //reloading does not create a new session 
+        //HttpSession session = se.getSession();
+       
     }
     
     @Override

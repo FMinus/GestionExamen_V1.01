@@ -5,44 +5,26 @@
  */
 package TestServlet;
 
+import Controllers.Login;
 import com.mongodb.DB;
 
 
 
-import com.mongodb.MongoException;
-import com.mongodb.WriteConcern;
+
 import com.mongodb.DB;
-import com.mongodb.Mongo;
-import com.mongodb.*;
-import com.mongodb.DBCollection;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import com.mongodb.DBCursor;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Morphia;
-import Entities.*;
-import java.rmi.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
-import DAO.DAOEtudiant;
-import Enums.Filiere;
-import Metier.EtudiantMetier;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 
 /**
  *
@@ -50,7 +32,7 @@ import java.util.logging.Logger;
  */
 public class TestConnection extends HttpServlet
 {
-    DB db;
+    @Inject Login log;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -59,6 +41,8 @@ public class TestConnection extends HttpServlet
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.io.UnsupportedEncodingException
+     * @throws java.security.NoSuchAlgorithmException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, UnsupportedEncodingException, NoSuchAlgorithmException
@@ -73,19 +57,18 @@ public class TestConnection extends HttpServlet
         Calendar cal = Calendar.getInstance();
         Date t = cal.getTime();
         
-         //public EtudiantMetier(String firstName, String lastName, String email, String password, Filiere filiere, Date dateOfBirth, String urlAvatar)
-        EtudiantMetier etudiantMetier = new EtudiantMetier("ayoub","deqqaq","ayoub@gmail.com","pass",Filiere.GI,t,"none");
+         //public Etudiant(String firstName, String lastName, String email, String password, Filiere filiere, Date dateOfBirth, String urlAvatar)
+        Etudiant etudiantMetier = new Etudiant("ayoub","deqqaq","ayoub@gmail.com","pass",Filiere.GI,t,"none");
         
         EtudiantEntity etudiantEntity = etudiantMetier.toEtudiantEntity();
         */
         
-        String test = "test";
+        log.setEmail("ensa@mail.com");
+        log.setPassword("ayoub");
         
-        for(int i=0;i<10;i++)
-        {
-            System.out.println(hashGenerator(test));
-                    
-        }
+        System.out.println(log.loginEtudiant());
+        
+        
         try (PrintWriter out = response.getWriter())
         {
             /* TODO output your page here. You may use following sample code. */
@@ -159,14 +142,6 @@ public class TestConnection extends HttpServlet
         return "Short description";
     }// </editor-fold>
     
-    public byte [] hashGenerator(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException
-    {
-        byte[] bytesOfMessage = message.getBytes("UTF-8");
-        
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] thedigest = md.digest(bytesOfMessage);
-        
-        return thedigest;
-    }
+   
 
 }

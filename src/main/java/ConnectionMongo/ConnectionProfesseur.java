@@ -7,7 +7,7 @@ package ConnectionMongo;
 
 import DAO.DAOEtudiant;
 import Entities.EtudiantEntity;
-import Metier.EtudiantMetier;
+import Metier.Etudiant;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ public class ConnectionProfesseur
 {
     //TODO
     
-    public void registerProfesseur(EtudiantMetier etudiant)
+    public void registerProfesseur(Etudiant etudiant)
     {
         DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
         

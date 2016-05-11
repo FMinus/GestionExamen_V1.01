@@ -26,7 +26,7 @@ public class UploadBean implements Serializable
 {
     private Part file;
     
-    
+    String path = "D:\\Etude\\JavaEE\\WorkSpace\\GestionExamen_V1.01\\src\\main\\webapp\\resources\\images\\avatars";
    
     
     
@@ -49,7 +49,7 @@ public class UploadBean implements Serializable
         
         try
         {
-            out = new FileOutputStream(new File("D:\\Etude\\JavaEE\\WorkSpace\\GestionExamen_V1.01\\uploads\\"+file.getSubmittedFileName()));
+            out = new FileOutputStream(new File(path+file.getSubmittedFileName()));
             
             filecontent = file.getInputStream();
             
@@ -83,7 +83,7 @@ public class UploadBean implements Serializable
         
         try
         {
-            out = new FileOutputStream(new File("D:\\Etude\\JavaEE\\WorkSpace\\GestionExamen_V1.01\\uploads\\"+fileName));
+            out = new FileOutputStream(new File(path+fileName));
             
             filecontent = file.getInputStream();
             

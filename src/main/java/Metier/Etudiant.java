@@ -7,13 +7,10 @@ import java.util.Date;
 import java.util.Objects;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import ConnectionMongo.ConnectionEtudiant;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
-public class EtudiantMetier implements Serializable
+public class Etudiant implements Serializable
 {
     
     private String firstName;
@@ -24,7 +21,7 @@ public class EtudiantMetier implements Serializable
     private Date dateOfBirth;
     private String urlAvatar;
     
-    public EtudiantMetier(String firstName, String lastName, String email, String password, Filiere filiere, Date dateOfBirth, String urlAvatar)
+    public Etudiant(String firstName, String lastName, String email, String password, Filiere filiere, Date dateOfBirth, String urlAvatar)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,7 +32,7 @@ public class EtudiantMetier implements Serializable
         this.urlAvatar = urlAvatar;
     }
     
-    public EtudiantMetier()
+    public Etudiant()
     {
         super();
     }
@@ -138,7 +135,7 @@ public class EtudiantMetier implements Serializable
         {
             return false;
         }
-        final EtudiantMetier other = (EtudiantMetier) obj;
+        final Etudiant other = (Etudiant) obj;
         if ( ! Objects.equals(this.firstName, other.firstName))
         {
             return false;
