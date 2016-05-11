@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-3 col-lg-3 " align="center"> <h:graphicImage value="#{homeEtudiant.avatarGetter()}" class="img-circle img-responsive"/></div>
+                                        <div class="col-md-3 col-lg-3 " align="center"> <h:graphicImage value="#{homeEtudiant.avatarSessionGetter()}" class="img-circle img-responsive"/></div>
                                         
                                         
                                         <div class=" col-md-9 col-lg-9 "> 
@@ -39,15 +39,15 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>Nom Complet</td>
-                                                        <td><h:outputText value="#{homeEtudiant.sessionEtudiant.lastName}"/> <h:outputText value="#{homeEtudiant.sessionEtudiant.firstName}"/></td>
+                                                        <td><h:outputText value="#{homeEtudiant.etudiant.lastName}" style="padding-right: 6px"/> <h:outputText value="#{homeEtudiant.etudiant.firstName}"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Filiére</td>
-                                                        <td><h:outputText value="#{homeEtudiant.sessionEtudiant.filiere}"/></td>
+                                                        <td><h:outputText value="#{homeEtudiant.etudiant.filiere}"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Date de Naissance</td>
-                                                        <td><h:outputText value="#{homeEtudiant.sessionEtudiant.dateOfBirth}"/></td>
+                                                        <td><h:outputText value="#{homeEtudiant.etudiant.dateOfBirth}"/></td>
                                                     </tr>
                                                     
                                                     <tr>
@@ -58,7 +58,7 @@
                                                         
                                                         <tr>
                                                             <td>Email</td>
-                                                            <td><h:outputText value="#{homeEtudiant.sessionEtudiant.email}"/></td>
+                                                            <td><h:outputText value="#{homeEtudiant.etudiant.email}"/></td>
                                                         </tr>
                                                         
                                                         
