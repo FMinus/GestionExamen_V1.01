@@ -100,9 +100,16 @@ public class HomeEtudiant implements Serializable
         return "";
     }
     
-    public String AvatarGetter()
+    public String avatarGetter()
     {
-        return avatarRoot+getSessionEtudiant().getUrlAvatar();
+        if(getSessionEtudiant().getUrlAvatar()==null)
+            return "/resources/images/avatars/nophoto.png";
+        else
+        {
+            System.out.println("/resources/images/avatars/"+getSessionEtudiant().getUrlAvatar());
+            return "/resources/images/avatars/"+getSessionEtudiant().getUrlAvatar();
+        }
+            
     }
     
     

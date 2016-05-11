@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import javax.annotation.ManagedBean;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -17,11 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class Login implements Serializable
 {
-    private String email;
-    private String password;
+    private String email="ensa@mail.com";
+    private String password="ayoub";
     private boolean isLoggedIn = false;
     private Role role;
-
+    
+      
+      public void init()
+      {
+          this.email="ensa@mail.com";
+        
+      }
+    
+    
     public Role getRole()
     {
         return role;

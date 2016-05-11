@@ -15,28 +15,91 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/resources/css/pure-min.css" />
         <title>Home Template</title>
     </h:head>
     
     <h:body>
         
-        <div id="top" class="pure-menu custom-menu custom-menu-top">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
+        <div id="top">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <!--<a class="navbar-brand" href="#">--><img src="../../resources/images/logo.jpg" class="img-responsive" />
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Accueil</a>
                     </div>
-                    <ul class="nav navbar-nav">
-                      
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Modules</a></li>
-                        <li><h:form><h:inputText value="#{homeEtudiant.recherche}" id="inputRecherche"/><h:commandLink action="#{homeEtudiant.rechercheInfo()}" value="Recherche"/></h:form></li>
-                        <li><h:graphicImage value="#{homeEtudiant.AvatarGetter()}"/><h:outputText value="#{homeEtudiant.sessionEtudiant.email}"/></li>
-                        <li><a href="#">Notifications</a></li>
-                        <li><a href="#">Logout : </a></li>
-                    </ul>
-                </div>
+                    
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/GestionExamen_V1.01/Views/Etudiant/Profile.xhtml">Profile</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h:outputText value="#{homeEtudiant.sessionEtudiant.email}"/> <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><h:link value="Logout" onclick="#{login.logout()}"/></li>
+                                </ul>
+                            </li>
+                            <li><h:graphicImage value="#{homeEtudiant.avatarGetter()}" class="img-responsive" width="50" height="50"/></li>
+                        </ul>
+                        
+                        <form class="navbar-form" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control pull-right" style="width: 300px; margin-right: 35px; border: 1px solid black; background-color: #e5e5e5;" placeholder="Search"/>
+                                    <span class="input-group-btn">
+                                        <button type="reset" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-remove">
+                                                <span class="sr-only">Close</span>
+                                            </span>
+                                        </button>
+                                        <button type="submit" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-search">
+                                                <span class="sr-only">Search</span>
+                                            </span>
+                                        </button>
+                                    </span>
+                            </div>
+                        </form>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
             </nav>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="alert alert-info">
+                        <strong>Alerts Dont Work on Bootsnipp!</strong> So when you hit enter or submit this form your result will show up in the green box below!
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+            
         </div>
         
         <div id="content" class="center_content" style="position:static;">
@@ -46,7 +109,7 @@
         <div id="bottom">
             
             
-            <div class="footer">
+            <div class="navbar navbar-default navbar-fixed-bottom">
                 <div class="legal pure-g"><p>Copyright (c) 2016</p></div>
             </div>
         </div>
