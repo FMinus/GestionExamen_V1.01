@@ -22,10 +22,7 @@ public class Login implements Serializable
     private String password="ayoub";
     private boolean isLoggedIn = false;
     private Role role;
-    
-      
-    
-    
+
     
     public Role getRole()
     {
@@ -35,13 +32,15 @@ public class Login implements Serializable
     public void setRole(Role role)
     {
         this.role = role;
-        System.out.println(role);
+        //System.out.println(role);
     }
-      
+
     public boolean isIsLoggedIn()
     {
         return isLoggedIn;
     }
+      
+    
 
     public void setIsLoggedIn(boolean isLoggedIn)
     {
@@ -110,8 +109,9 @@ public class Login implements Serializable
         
         if(conn.loginEtudiant(this.email,this.password))
         {
-            isLoggedIn=true;
+            
             role=Role.Etudiant;
+            isLoggedIn=true;
             //TODO
             //retrieve the user's cridentials :       
             
@@ -120,15 +120,11 @@ public class Login implements Serializable
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
             
             request.getSession().setAttribute("currentUser", conn.getEtudiant().toEtudiant());
-            request.getSession().setAttribute("loogedAs",this);
+            request.getSession().setAttribute("loggedAs",this);
             
             
             
-            if(conn.getEtudiant() != null)
-            {
-                //System.out.println("Login Etudiant : "+conn.getEtudiant());
-                //System.out.println("Converted Bean : "+conn.getEtudiant().toEtudiant());
-            }
+           
                 
             
             System.out.println("Login bean : logged in");
@@ -176,6 +172,7 @@ public class Login implements Serializable
         
         HttpServletRequest request = getHttpServletRequest();       
         request.getSession().removeAttribute("currentUser");
+        request.getSession().removeAttribute("loggedAs");
         
         return "Login.xhtml?faces-redirect=true";
     }

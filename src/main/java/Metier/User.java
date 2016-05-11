@@ -1,9 +1,14 @@
 package Metier;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.SessionScoped;
 
-public class User
+@ManagedBean
+@SessionScoped
+public class User implements Serializable
 {
     private String firstName;
     private String lastName;

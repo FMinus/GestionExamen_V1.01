@@ -14,11 +14,11 @@ public class EtudiantEntity extends BaseEntity
     private String lastName;
     private String email;
     private String password;
-    private String filiere;
-    private String dateOfBirth;
+    private Filiere filiere;
+    private Date dateOfBirth;
     private String urlAvatar;
     
-    public EtudiantEntity(String firstName, String lastName, String email, String password, String filiere, String dateOfBirth, String urlAvatar)
+    public EtudiantEntity(String firstName, String lastName, String email, String password, Filiere filiere, Date dateOfBirth, String urlAvatar)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,12 +54,12 @@ public class EtudiantEntity extends BaseEntity
         return password;
     }
 
-    public String getFiliere()
+    public Filiere getFiliere()
     {
         return filiere;
     }
 
-    public String getDateOfBirth()
+    public Date getDateOfBirth()
     {
         return dateOfBirth;
     }
@@ -89,12 +89,12 @@ public class EtudiantEntity extends BaseEntity
         this.password = password;
     }
 
-    public void setFiliere(String filiere)
+    public void setFiliere(Filiere filiere)
     {
         this.filiere = filiere;
     }
 
-    public void setDateOfBirth(String dateOfBirth)
+    public void setDateOfBirth(Date dateOfBirth)
     {
         this.dateOfBirth = dateOfBirth;
     }
@@ -112,10 +112,8 @@ public class EtudiantEntity extends BaseEntity
 
     
     public Etudiant toEtudiant()
-    {
-        Calendar cal = Calendar.getInstance();
-        Date t = cal.getTime();
-        return new Etudiant(this.firstName,this.lastName,this.email,this.password,Filiere.valueOf(this.filiere),t,this.urlAvatar);
+    {  
+        return new Etudiant(this.firstName,this.lastName,this.filiere,this.email,this.dateOfBirth,this.password,this.urlAvatar);
     }
     
     

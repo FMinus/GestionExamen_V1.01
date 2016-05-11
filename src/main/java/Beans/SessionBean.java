@@ -22,6 +22,13 @@ public class SessionBean
         return session.getAttribute("currentUser");
         
       }
+      
+      public static Object getIsLoggedIn() 
+      {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false); 
+        return session.getAttribute("loggedAs");
+        
+      }
 }
 
 

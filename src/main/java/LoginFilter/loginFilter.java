@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package LoginFilter;
+import Beans.SessionBean;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,6 +15,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Controllers.Login;
+import javax.faces.context.FacesContext;
+import javax.faces.view.facelets.Facelet;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Ayoub
@@ -33,7 +37,11 @@ public class loginFilter implements Filter
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         
-        Login session = (Login) req.getSession().getAttribute("login");
+        Login session = (Login) req.getSession().getAttribute("loggedAs");
+        //Login session = (Login) FacesContext.getCurrentInstance().getExternalContext().getSession(false).g
+        
+        //HttpSession httpSession = SessionBean.getSession();
+        //Login session = (Login) SessionBean.getSession().getAttribute("loggedAs");
         
         String url = req.getRequestURI();
         
@@ -45,12 +53,22 @@ public class loginFilter implements Filter
         
         //System.out.println("Requested URI is : "+url);
         
+        
         if(session == null || !session.isIsLoggedIn())
         {
             //System.out.println("Null session or isLoggedIn = false");
+            if(session!=null)
+            {
+                 //System.out.println("session is not null "+session.isIsLoggedIn());
+                 System.out.println("session is not null "+session.getRole());
+                 System.out.println("session is not null "+session.getEmail());
+                 System.out.println("session is not null "+session.getPassword());
+            }
+               
             
             if(url.contains("Etudiant") || url.contains("Professeur") || url.contains("Admin"))
             {
+                System.out.println("Filter : contains");
                 res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
             }
             else
@@ -66,7 +84,9 @@ public class loginFilter implements Filter
             }
             else if(url.contains("Logout.xhtml") )
             {
-                req.getSession().removeAttribute("login");
+                req.getSession().removeAttribute("currentUser");
+                req.getSession().removeAttribute("loogedAs");
+                
                 res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
             }
             else
