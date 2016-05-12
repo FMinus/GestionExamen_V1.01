@@ -54,6 +54,11 @@ public class HomeEtudiant implements Serializable
        
     }
     
+    public String toProfile()
+    {
+        return "/GestionExamen_V1.01/Views/Etudiant/Profile.xhtml";
+    }
+    
     
     
     public HomeEtudiant()

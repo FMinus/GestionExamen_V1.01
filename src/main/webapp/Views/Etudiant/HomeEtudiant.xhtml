@@ -33,6 +33,12 @@
                 test<br/>
                 
                 <h:outputText value="#{homeEtudiant.etudiant.toString()}"/><br/>
+                <h:outputText value="#{login.currentLoginInfo()}"/><br/>
+                
+                <h:form>
+                    <h:commandLink action="#{homeEtudiant.toProfile()}" value="Profile"/>
+                </h:form>
+                
                 
                 
                 test<br/>
