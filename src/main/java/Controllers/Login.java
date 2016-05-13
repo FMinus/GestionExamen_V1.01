@@ -44,11 +44,11 @@ public class Login implements Serializable
     }
     
     
-     @PostConstruct
+    @PostConstruct
     public void onLoad()
     {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false); 
-        user = (CurrentUser) session.getAttribute("loggedAs");
+        user =(CurrentUser) session.getAttribute("loggedAs");
          
     }
     

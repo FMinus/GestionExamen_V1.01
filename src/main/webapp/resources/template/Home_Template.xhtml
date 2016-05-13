@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/resources/css/pure-min.css" />
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"/>
         <title>Home Template</title>
     </h:head>
     
@@ -32,7 +32,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/GestionExamen_V1.01/Views/Etudiant/HomeEtudiant.xhtml">Accueil</a>
+                        <h:outputLink class="navbar-brand" value="#{nav.redirectToWelcome()}">Accueil</h:outputLink>
                     </div>
                     
                     <!-- Collect the nav links, forms, and other content for toggling -->

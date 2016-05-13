@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import javax.annotation.ManagedBean;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 
 /**

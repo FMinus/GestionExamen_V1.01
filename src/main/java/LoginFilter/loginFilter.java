@@ -16,7 +16,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Controllers.Login;
-import java.util.logging.Logger;
+import Metier.Etudiant;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.facelets.Facelet;
 import javax.inject.Inject;
@@ -27,32 +28,82 @@ import javax.servlet.http.HttpSession;
  */
 public class loginFilter implements Filter
 {
+    @Inject CurrentUser user;
     
-   
+    @Inject CurrentUser temp;
+    
     @Override
     public void init(FilterConfig filterConfig) throws ServletException
     {
+      
    
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {
-        
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         
-        CurrentUser session = (CurrentUser) req.getSession().getAttribute("loggedAs");
-       
+        //CurrentUser session = (CurrentUser) req.getSession().getAttribute("loggedAs");
+        //Etudiant etudiant = (Etudiant) req.getSession().getAttribute("currentUser");
         
-        if(session!=null)
-            System.out.println(session);
+         HttpSession session = req.getSession(false);
+         
+         if(session == null)
+             System.out.println("null session");
+         
+         
+         temp = (session != null) ? (CurrentUser) session.getAttribute("loggedAs") : null;
+         
+         if(temp!=null)
+             user = temp;
+         
+         String url = req.getRequestURI();
+        /*
+        if(user != null)
+            System.out.println("user is "+user);
+        else
+            System.out.println("Fuck you it's now null");
+        */
+        
+        if(url.contains("resources"))
+                chain.doFilter(request, response);
+        
+        if(session == null || !user.isIsLoggedIn())
+        {
+            System.out.println("back to login "+url);
+            
+            if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin"))
+            {       
+                res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
+            }
+            
+            if(url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
+            {
+                chain.doFilter(request, response);
+            }        
+        }
+        else
+        {
+            if(!url.contains(user.getRole().toString()) || url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
+            {
+                res.sendRedirect(req.getServletContext().getContextPath()+"\\Views\\"+user.getRole().toString()+"\\Home"+user.getRole().toString()+".xhtml");
+                       
+            }
+            
+            
+        }
+
+
+        //if(session!=null)
+        //    System.out.println(session);
         //Login session = (Login) FacesContext.getCurrentInstance().getExternalContext().getSession(false).g
         
         //HttpSession httpSession = SessionBean.getSession();
         //Login session = (Login) SessionBean.getSession().getAttribute("loggedAs");
         
-        String url = req.getRequestURI();
+        //
         
         //if request is for forum or logout and there's no session redirect to login.xhtml
         //if a request is for login and there's a session redirect to forum.xhtml
@@ -61,8 +112,11 @@ public class loginFilter implements Filter
         //System.out.println("session attribute : "+session.isIsLoggedIn());
         
         //System.out.println("Requested URI is : "+url);
+       
+              
         
         
+        /*
         if(session == null || !session.isIsLoggedIn())
         {
             //System.out.println("Null session or isLoggedIn = false");
@@ -82,8 +136,7 @@ public class loginFilter implements Filter
             if(url.contains("Etudiant") || url.contains("Professeur") || url.contains("Admin"))
             {
                 System.out.println("Filter : contains");
-                //res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
-                chain.doFilter(request, response);
+                res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
             }
             else
             {
@@ -113,13 +166,12 @@ public class loginFilter implements Filter
             
         }
         
+        */
         
-        
-        
+        chain.doFilter(request, response);
         
         
     }
-    private static final Logger LOG = Logger.getLogger(loginFilter.class.getName());
 
     @Override
     public void destroy()

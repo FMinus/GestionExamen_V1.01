@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.security.*;
+import java.util.Arrays;
 
 @ManagedBean
 @SessionScoped
@@ -65,7 +66,7 @@ public class Register implements Serializable
         
         //etudiant.setPassword(hashGenerator(etudiant.getPassword()).toString());
         
-        String hashedEmail = hashGenerator(etudiant.getEmail()).toString();      
+        String hashedEmail = Arrays.toString(hashGenerator(etudiant.getEmail()));      
         uploadBean.upload(hashedEmail+"."+avatarExtention); 
         etudiant.setUrlAvatar(hashedEmail+"."+avatarExtention);
         

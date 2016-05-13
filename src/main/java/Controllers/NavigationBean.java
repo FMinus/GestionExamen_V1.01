@@ -5,25 +5,57 @@
  */
 package Controllers;
 
+import Beans.CurrentUser;
 import Enums.Role;
 import java.io.Serializable;
 import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
 public class NavigationBean implements Serializable
 {
-    Role role;
+    @Inject CurrentUser user;
+
+    public CurrentUser getUser()
+    {
+        return user;
+    }
+
+    public void setUser(CurrentUser user)
+    {
+        this.user = user;
+    }
+    
+    @PostConstruct
+    public void onLoad()
+    {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false); 
+        user =(CurrentUser) session.getAttribute("loggedAs");       
+    }
+    
+    public String getRole()
+    {
+        return user.getRole().toString();
+    }
      
     public String redirectToLogin() 
     {
-        return "/Login.xhtml?faces-redirect=true";
+        return "/GestionExamen_V1.01//Login.xhtml?faces-redirect=true";
     }
     
     public String redirectToWelcome() 
     {
-        return "/Views/Home"+role.name()+".xhtml?faces-redirect=true";
+        return "/GestionExamen_V1.01/Views/"+getRole()+"/Home"+getRole()+".xhtml?faces-redirect=true";
+    }
+    
+    public String toProfile()
+    {
+        return "/GestionExamen_V1.01/Views/"+getRole()+"/Profile";
     }
 
      
