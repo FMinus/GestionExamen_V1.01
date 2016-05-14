@@ -66,7 +66,7 @@ public class Register implements Serializable
         
         //etudiant.setPassword(hashGenerator(etudiant.getPassword()).toString());
         
-        String hashedEmail = Arrays.toString(hashGenerator(etudiant.getEmail()));      
+        String hashedEmail = hashGenerator(etudiant.getEmail()).toString();
         uploadBean.upload(hashedEmail+"."+avatarExtention); 
         etudiant.setUrlAvatar(hashedEmail+"."+avatarExtention);
         

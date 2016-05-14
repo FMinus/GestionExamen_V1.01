@@ -5,7 +5,9 @@
  */
 package TestServlet;
 
+import ConnectionMongo.ConnectionEtudiant;
 import Controllers.Login;
+import Metier.Etudiant;
 import com.mongodb.DB;
 
 
@@ -22,9 +24,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -62,11 +68,16 @@ public class TestConnection extends HttpServlet
         
         EtudiantEntity etudiantEntity = etudiantMetier.toEtudiantEntity();
         */
+        /*
+        List<Etudiant> etudiantList = new ArrayList<>();
         
-        log.setEmail("ensa@mail.com");
-        log.setPassword("ayoub");
+        ConnectionEtudiant conn = new ConnectionEtudiant();
         
-        System.out.println(log.loginEtudiant());
+        etudiantList = conn.getAllEtudiants();
+        
+        System.out.println(etudiantList);
+        */
+        
         
         
         try (PrintWriter out = response.getWriter())

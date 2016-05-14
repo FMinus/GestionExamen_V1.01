@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./../../resources/template/Home_Template.xhtml">
+            
+            <ui:define name="content">
+                
+                <div class="container">
+                    <table class="table  table-hover">
+                        <tr>
+                            <th class="order-table-header">firstName</th>
+                            <th class="order-table-header">lastName</th>
+                            <th class="order-table-header">Email</th>
+                            <th class="order-table-header">filiere</th>
+                        </tr>
+                        <tbody>
+                            <ui:repeat var="o" value="#{homeEtudiant.getEtudiantList()}" varStatus="status">
+                                <h:panelGroup rendered="#{status.even}">
+                                    <tr>
+                                        <td class="order-table-even-row">#{o.firstName}</td>
+                                        <td class="order-table-even-row">#{o.lastName}</td>
+                                        <td class="order-table-even-row">#{o.email}</td>
+                                        <td class="order-table-even-row">#{o.filiere}</td>
+                                    </tr>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{status.odd}">
+                                    <tr>
+                                        <td class="order-table-odd-row">#{o.firstName}</td>
+                                        <td class="order-table-odd-row">#{o.lastName}</td>
+                                        <td class="order-table-odd-row">#{o.email}</td>
+                                        <td class="order-table-odd-row">#{o.filiere}</td>
+                                    </tr>
+                                </h:panelGroup>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

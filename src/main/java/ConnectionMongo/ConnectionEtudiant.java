@@ -8,6 +8,7 @@ package ConnectionMongo;
 import Metier.Etudiant;
 import DAO.DAOEtudiant;
 import Entities.EtudiantEntity;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConnectionEtudiant
@@ -54,5 +55,23 @@ public class ConnectionEtudiant
         }
             
     }
+     
+    public List<Etudiant> getAllEtudiants()
+    {
+        DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);    
+        
+        List<EtudiantEntity> etudiantList;
+        
+        etudiantList = daoEtudiant.getAllEtudiants("lastname" , "ayoub");
+        
+        List<Etudiant> list = new ArrayList<>();
+        
+        for(EtudiantEntity etu : etudiantList)
+        {
+            list.add(etu.toEtudiant());
+        }
+        return list;
+    }
+    
     
 }

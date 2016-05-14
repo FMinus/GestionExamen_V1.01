@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+          
+          
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name = "value"/>
+        <cc:attribute name = "showOn"/>
+        <cc:attribute name = "dateFormat"/>
+        <cc:attribute name = "buttonImageOnly"/>     
+    </cc:interface>
+        
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:inputText id="input" value="#{cc.attrs.value}" rendered="false"/>
+        
+        
+        <h:outputScript library="scripts" name="#{resource['resources/js:jquery-1.12.3.min.js']}" />
+       
+      
+        <h:inputText styleClass="date" value="#{cc.attrs.value}">
+            <f:convertDateTime pattern="MM/dd/yyyy"/>
+        </h:inputText>
+            
+    </cc:implementation>
+</html>

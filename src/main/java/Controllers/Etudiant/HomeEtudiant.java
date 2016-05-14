@@ -6,8 +6,11 @@
 package Controllers.Etudiant;
 
 import Beans.SessionBean;
+import ConnectionMongo.ConnectionEtudiant;
 import Metier.Etudiant;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -104,6 +107,18 @@ public class HomeEtudiant implements Serializable
             return "/resources/images/avatars/nophoto.png";
         else
             return "/resources/images/avatars/"+etudiant.getUrlAvatar();
+    }
+    
+    public static List<Etudiant> getEtudiantList()
+    {
+        List<Etudiant> etudiantList = new ArrayList<>();
+        
+        ConnectionEtudiant conn = new ConnectionEtudiant();
+        
+        etudiantList = conn.getAllEtudiants();
+        
+        System.out.println(etudiantList);
+        return etudiantList;
     }
     
     

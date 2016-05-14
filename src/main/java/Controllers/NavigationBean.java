@@ -50,12 +50,25 @@ public class NavigationBean implements Serializable
     
     public String redirectToWelcome() 
     {
-        return "/GestionExamen_V1.01/Views/"+getRole()+"/Home"+getRole()+".xhtml?faces-redirect=true";
+        return "/GestionExamen_V1.01/Views/"+getRole()+"/Home"+getRole()+".xhtml";
     }
     
     public String toProfile()
     {
         return "/GestionExamen_V1.01/Views/"+getRole()+"/Profile";
+    }
+    
+    public boolean hasMods()
+    {
+        if(user.getRole()==Role.Etudiant)
+            return true;
+        else
+            return false;
+    }
+    
+    public String toUsers()
+    {
+        return "/GestionExamen_V1.01/Views/"+getRole()+"/Users.xhtml";
     }
 
      

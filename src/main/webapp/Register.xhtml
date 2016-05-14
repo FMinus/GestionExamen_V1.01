@@ -2,13 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    
     <h:head>
         <title>register Etudiant</title>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"/>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        
+        <h:outputStylesheet library="css" name="pure-min.css"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputScript library="js" name="bootstrap.min.js"/>  
     </h:head>
     
     <h:body>
@@ -20,26 +23,53 @@
                 <li class="active"><a data-toggle="pill" href="#etudiant">Etudiant</a></li>
                 <li><a data-toggle="pill" href="#professeur">Professeur</a></li>
                 <li><a data-toggle="pill" href="#admin">Admin</a></li>
-               
+                
             </ul>
             <div class="tab-content">
                 <div id="etudiant" class="tab-pane fade in active">
                     <h:form class = "pure-form pure-form-stacked" enctype="multipart/form-data">
                         
-                        <legend>Create a new Student Account</legend>
-                        <h:outputText value="First Name"/><h:inputText id="firstName" value="#{register.etudiant.firstName}"/>
-                        <h:outputText value="Last Name"/><h:inputText id="lastName" value="#{register.etudiant.lastName}"/>
-                        <h:outputText value="Email"/><h:inputText id="email" value="#{register.etudiant.email}"/>
-                        <h:outputText value="Password"/><h:inputText id="password" value="#{register.etudiant.password}"/>
-                        <h:outputText value="Filiere"/><h:inputText id="filiere" value="#{register.etudiant.filiere}"/>
-                        
-                        <h:outputText value="Date Of Birth"/><h:inputText value="#{register.etudiant.dateOfBirth}">  
-                            <f:convertDateTime pattern="yyyy-MM-dd"/>  
-                        </h:inputText>
-                        
-                        <h:outputText value="urlAvatar"/><h:inputFile value="#{register.uploadBean.file}"/>
-                        <h:commandButton action="#{register.registerEtudiant()}" value="Submit" />
-                        
+                           <fieldset>
+                            
+                            <div class="pure-control-group">
+                                <h:outputText value="First Name"/><h:inputText id="firstName" value="#{register.etudiant.firstName}"/>
+                            </div>
+                            
+                            <div class="pure-control-group">
+                                <h:outputText value="Last Name"/><h:inputText id="lastName" value="#{register.etudiant.lastName}"/>
+                            </div>
+                            
+                            <div class="pure-control-group">
+                                <h:outputText value="Email"/><h:inputText id="email" value="#{register.etudiant.email}"/>
+                            </div>
+                            
+                            <div class="pure-control-group">
+                                <h:outputText value="Password"/><h:inputText id="password" value="#{register.etudiant.password}"/>
+                            </div>
+                            
+                            <div class="pure-control-group">
+                                <h:outputText value="Filiere"/>         
+                                <h:selectOneMenu id="accountSelect" value="#{register.etudiant.filiere}" >
+                                    <f:selectItem itemValue="GI" itemLabel="GI"/>
+                                    <f:selectItem itemValue="GE" itemLabel="GE"/> 
+                                    <f:selectItem itemValue="GRT" itemLabel="GRT"/>                   
+                                    <f:selectItem itemValue="CP" itemLabel="CP"/>                   
+                                    <f:selectItem itemValue="GPEE" itemLabel="GPEE"/>                   
+                                </h:selectOneMenu>
+                            </div>
+                            
+                            <div class="pure-controls">
+                                
+                                <p:outputLabel for="button" value="Date de Naissance" />
+                                <p:calendar id="button" value="#{register.etudiant.dateOfBirth}" showOn="button" pattern="dd-MM-yyyy"/>
+                            </div>
+                            
+                            <div class="pure-control-group">
+                                <h:outputText value="urlAvatar"/><h:inputFile value="#{register.uploadBean.file}"/>
+                                <h:commandButton action="#{register.registerEtudiant()}" value="Submit" />
+                            </div>
+                            
+                        </fieldset>
                     </h:form>
                     
                 </div>
@@ -49,9 +79,9 @@
                 </div>
                 <div id="admin" class="tab-pane fade">
                     <legend>Create a new Admin Account</legend>
-                  
+                    
                 </div>
-               
+                
             </div>
         </div>
     </h:body>

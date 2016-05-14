@@ -16,6 +16,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"/>
+        
+        
         <title>Home Template</title>
     </h:head>
     
@@ -38,8 +40,11 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="/GestionExamen_V1.01/Views/Etudiant/Profile.xhtml">Profile</a></li>
-                            <li><a href="#">Link</a></li>
+                            <li class="active"><a href="/GestionExamen_V1.01/Views/Etudiant/Profile.xhtml">Profile</a></li>                            
+                            <li><h:outputLink class="navbar-brand" value="#{nav.toUsers()}">Users</h:outputLink></li>
+                            
+                            
+                            <ui:fragment rendered="#{nav.hasMods()}">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -52,6 +57,8 @@
                                     <li><a href="#">One more separated link</a></li>
                                 </ul>
                             </li>
+                            </ui:fragment>
+                            
                         </ul>
                         
                         <ul class="nav navbar-nav navbar-right">
@@ -66,7 +73,7 @@
                                     <li><h:link value="Logout" onclick="#{login.logout()}"/></li>
                                 </ul>
                             </li>
-                            <li><h:graphicImage value="#{homeEtudiant.avatarSessionGetter()}" class="img-responsive" width="50" height="50"/></li>
+                            <li><h:graphicImage value="#{homeEtudiant.avatarSessionGetter()}" class="img-responsive img-circle" width="50" height="50"/></li>
                         </ul>
                         
                         <form class="navbar-form" role="search">
