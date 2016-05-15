@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h:head>
         <title>Home</title>
@@ -10,26 +11,11 @@
     
     <h:body>
         
-        
-        <!--
-        <div ng-app="">
-            <p>Name : <input type="text" ng-model="name"/></p>
-            Hello {{name}}
-            <input ng-model="#{homeEtudiant.etudiant.email}"/> 
-            <h1> Hello <span ng-bind="#{homeEtudiant.etudiant.email}"></span>!</h1>
-            <h:outputText value="#{homeEtudiant.infoEtudiant}"/>
-        </div>
-        -->
-        
-        <ui:composition template="../../resources/template/Home_Template.xhtml">
-            
+        <ui:composition template="../../resources/template/Home_Template.xhtml">       
             <ui:define name="content">
                 
-                
-                
-                
-                test<br/>
-                test<br/>
+                test<br/>               
+                test<br/>              
                 test<br/>
                 
                 <h:outputText value="#{homeEtudiant.etudiant.toString()}"/><br/>
@@ -38,9 +24,7 @@
                 <h:form>
                     <h:commandLink action="#{nav.toProfile()}" value="Profile"/>
                 </h:form>
-                
-                
-                
+                                                               
                 
                 <div class="container">
                     <table class="table  table-hover">
@@ -60,6 +44,7 @@
                                         <td class="order-table-even-row">#{o.filiere}</td>
                                     </tr>
                                 </h:panelGroup>
+                            
                                 <h:panelGroup rendered="#{status.odd}">
                                     <tr>
                                         <td class="order-table-odd-row">#{o.firstName}</td>
@@ -72,6 +57,14 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <f:verbatim>
+                    
+                    <applet code="Applets.TestApplet.class" width="200" height="200">
+                        
+                    </applet>
+                    
+                </f:verbatim>
                 
                 
                 test<br/>

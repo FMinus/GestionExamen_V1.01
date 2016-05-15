@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -33,7 +34,11 @@
                                         <td class="order-table-even-row">#{o.dateOfBirth.toLocaleString()}</td>
                                         <td class="order-table-even-row">#{o.filiere}</td>
                                         <td class="order-table-even-row"><h:graphicImage value="#{homeEtudiant.userAvatarGetter(o)}" class="img-responsive img-circle" width="50" height="50" alt=""/></td>
-                                        <td class="order-table-even-row"><h:commandButton value="Message" class="btn btn-info" /></td>
+                                        <td class="order-table-even-row">
+                                            <h:commandButton value="Message" class="btn btn-info" action="#{messagingBean.someAction()}">
+                                                <f:setPropertyActionListener target="#{messagingBean.etudiant}" value="#{o.toEtudiant()}" />
+                                            </h:commandButton>
+                                        </td>
                                     </tr>
                                
                             </ui:repeat>
