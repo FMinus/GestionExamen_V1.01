@@ -60,4 +60,8 @@ public class EtudiantDAO extends BasicDAO<EtudiantEntity, String>
     }
     
     
+    public void registerEtudiant(EtudiantEntity t) 
+    {
+        ds.save(t);
+    }
 }

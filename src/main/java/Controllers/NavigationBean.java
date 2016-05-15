@@ -55,7 +55,7 @@ public class NavigationBean implements Serializable
     
     public String toProfile()
     {
-        return "/GestionExamen_V1.01/Views/"+getRole()+"/Profile";
+        return "/GestionExamen_V1.01/Views/"+getRole()+"/Profile.xhtml";
     }
     
     public boolean hasMods()

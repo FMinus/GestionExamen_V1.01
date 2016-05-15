@@ -104,6 +104,20 @@ public class HomeEtudiant implements Serializable
         
     }
     
+     public String userAvatarGetter(EtudiantEntity e)
+    {
+        if(e== null || e.getUrlAvatar() == null)
+            return "/resources/images/avatars/nophoto.png";
+        else
+            return "/resources/images/avatars/"+e.getUrlAvatar();
+        
+    }
+     
+    public String getNoAva()
+    {
+        return "/resources/images/avatars/nophoto.png";  
+    }
+    
     public String avatarSessionGetter()
     {
           
@@ -115,7 +129,7 @@ public class HomeEtudiant implements Serializable
     
     public static List<EtudiantEntity> getEtudiantList()
     {
-        MongoConnectionManager mongo = MongoConnectionManager.getInstance();
+       MongoConnectionManager mongo = MongoConnectionManager.getInstance();
        
        Datastore ds = mongo.getDatastore();
        

@@ -26,12 +26,13 @@ public class ServiceMorphia
     private final String serverIp = "localhost";
     private final int serverPort = 27017;
     private final String databaseName = "GestionExamen";
+    MongoClient client;
     
     public ServiceMorphia() 
     {
           try 
           {
-            MongoClient client=new MongoClient(serverIp , serverPort);         
+            client=new MongoClient(serverIp , serverPort);         
             this.morphia=new Morphia();          
             this.datastore=morphia.createDatastore(client, databaseName);   
             morphia.mapPackage("Entities");

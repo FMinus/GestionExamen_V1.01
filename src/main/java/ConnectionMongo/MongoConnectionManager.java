@@ -23,28 +23,20 @@ public final class MongoConnectionManager
     private MongoConnectionManager()
     {
         morphia = new Morphia();
-        try 
+        try
         {
             mongoClient = new MongoClient();
             
-        } 
-        catch (Exception e) 
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
         datastore = morphia.createDatastore(mongoClient, DB_NAME);
     }
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        super.finalize(); //To change body of generated methods, choose Tools | Templates.
-        mongoClient.close();
-    }
     
     
-    
-    public static MongoConnectionManager getInstance() 
+    public static MongoConnectionManager getInstance()
     {
         return INSTANCE;
     }
@@ -53,7 +45,8 @@ public final class MongoConnectionManager
         return morphia;
     }
     
-    public void setMorphia(Morphia morphia) {
+    public void setMorphia(Morphia morphia)
+    {
         this.morphia = morphia;
     }
     
@@ -61,19 +54,21 @@ public final class MongoConnectionManager
         return datastore;
     }
     
-    public void setDatastore(Datastore datastore) {
+    public void setDatastore(Datastore datastore)
+    {
         this.datastore = datastore;
     }
     
-    public MongoClient getMongoClient() {
+    public MongoClient getMongoClient()
+    {
         return mongoClient;
     }
     
-    public void setMongoClient(MongoClient mongoClient) 
+    public void setMongoClient(MongoClient mongoClient)
     {
         this.mongoClient = mongoClient;
     }
-
+    
     public static String getDB_NAME()
     {
         return DB_NAME;

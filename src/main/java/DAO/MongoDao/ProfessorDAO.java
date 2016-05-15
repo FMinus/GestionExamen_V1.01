@@ -5,22 +5,13 @@
  */
 package DAO.MongoDao;
 
-import DAO.MongoDao.IDAO;
 import Entities.ProfessorEntity;
-import ConnectionMongo.ServiceMorphia;
-import com.mongodb.DBCollection;
-import com.mongodb.WriteConcern;
-import com.mongodb.WriteResult;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.QueryResults;
-import org.mongodb.morphia.query.UpdateOperations;
-import org.mongodb.morphia.query.UpdateResults;
 
 /**
  *

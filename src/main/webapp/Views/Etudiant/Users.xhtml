@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -17,26 +18,24 @@
                             <th class="order-table-header">firstName</th>
                             <th class="order-table-header">lastName</th>
                             <th class="order-table-header">Email</th>
+                            <th class="order-table-header">Date de Naissance</th>
                             <th class="order-table-header">filiere</th>
+                            <th class="order-table-header">Avatar</th>
+                            <th class="order-table-header">Action</th>
                         </tr>
                         <tbody>
                             <ui:repeat var="o" value="#{homeEtudiant.getEtudiantList()}" varStatus="status">
-                                <h:panelGroup rendered="#{status.even}">
+                               
                                     <tr>
                                         <td class="order-table-even-row">#{o.firstName}</td>
                                         <td class="order-table-even-row">#{o.lastame}</td>
                                         <td class="order-table-even-row">#{o.email}</td>
+                                        <td class="order-table-even-row">#{o.dateOfBirth.toLocaleString()}</td>
                                         <td class="order-table-even-row">#{o.filiere}</td>
+                                        <td class="order-table-even-row"><h:graphicImage value="#{homeEtudiant.userAvatarGetter(o)}" class="img-responsive img-circle" width="50" height="50" alt=""/></td>
+                                        <td class="order-table-even-row"><h:commandButton value="Message" class="btn btn-info" /></td>
                                     </tr>
-                                </h:panelGroup>
-                                <h:panelGroup rendered="#{status.odd}">
-                                    <tr>
-                                        <td class="order-table-odd-row">#{o.firstName}</td>
-                                        <td class="order-table-odd-row">#{o.lastame}</td>
-                                        <td class="order-table-odd-row">#{o.email}</td>
-                                        <td class="order-table-odd-row">#{o.filiere}</td>
-                                    </tr>
-                                </h:panelGroup>
+                               
                             </ui:repeat>
                         </tbody>
                     </table>

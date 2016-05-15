@@ -40,23 +40,25 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="/GestionExamen_V1.01/Views/Etudiant/Profile.xhtml">Profile</a></li>                            
+                           
+                            <li class="active"><h:outputLink class="navbar-brand" value="#{nav.toProfile()}" style="font-weight:bold;">Profile</h:outputLink></li>                            
+                            
                             <li><h:outputLink class="navbar-brand" value="#{nav.toUsers()}">Users</h:outputLink></li>
                             
                             
                             <ui:fragment rendered="#{nav.hasMods()}">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
                             </ui:fragment>
                             
                         </ul>
@@ -79,18 +81,18 @@
                         <form class="navbar-form" role="search">
                             <div class="input-group">
                                 <input type="text" class="form-control pull-right" style="width: 300px; margin-right: 35px; border: 1px solid black; background-color: #e5e5e5;" placeholder="Search"/>
-                                    <span class="input-group-btn">
-                                        <button type="reset" class="btn btn-default">
-                                            <span class="glyphicon glyphicon-remove">
-                                                <span class="sr-only">Close</span>
-                                            </span>
-                                        </button>
-                                        <button type="submit" class="btn btn-default">
-                                            <span class="glyphicon glyphicon-search">
-                                                <span class="sr-only">Search</span>
-                                            </span>
-                                        </button>
-                                    </span>
+                                <span class="input-group-btn">
+                                    <button type="reset" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-remove">
+                                            <span class="sr-only">Close</span>
+                                        </span>
+                                    </button>
+                                    <button type="submit" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-search">
+                                            <span class="sr-only">Search</span>
+                                        </span>
+                                    </button>
+                                </span>
                             </div>
                         </form>
                     </div><!-- /.navbar-collapse -->

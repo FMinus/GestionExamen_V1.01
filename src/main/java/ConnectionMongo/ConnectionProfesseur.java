@@ -18,31 +18,7 @@ public class ConnectionProfesseur
 {
     //TODO
     
-    public void registerProfesseur(Etudiant etudiant)
-    {
-        DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
-        
-        daoEtudiant.insertEtudiant(etudiant.toEtudiantEntity());
-    }
     
-     public boolean loginEtudiant(String email,String password)
-    {
-        DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
-        
-        EtudiantEntity etudiant = daoEtudiant.loginEtudiant(email, password);
-        
-        if(etudiant == null)
-        {
-            System.out.println("no such user");
-            return false;
-        }
-        else
-        {
-            System.out.println("logged in");
-            return true;
-        }
-            
-    }
     
     
 }

@@ -6,7 +6,7 @@
 package ConnectionMongo;
 
 import Metier.Etudiant;
-import DAO.DAOEtudiant;
+
 import DAO.MongoDao.EtudiantDAO;
 import Entities.EtudiantEntity;
 import java.util.ArrayList;
@@ -30,30 +30,17 @@ public class ConnectionEtudiant
     
     public void registerEtudiant(Etudiant etudiant)
     {
-        DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
+        MongoConnectionManager mongo = MongoConnectionManager.getInstance();
+        Datastore ds = mongo.getDatastore();
+        EtudiantDAO daoEtudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
         
-        daoEtudiant.insertEtudiant(etudiant.toEtudiantEntity());
+        daoEtudiantDAO.save(etudiant.toEtudiantEntity());
+      
+       
     }
     
      public boolean loginEtudiant(String email,String password)
     {
-        /*
-        DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
-        
-        etudiant = daoEtudiant.loginEtudiant(email, password);
-        
-        if(etudiant == null)
-        {
-            System.out.println("ConnectionEtudiant : no such user");
-            return false;
-        }
-        else
-        {
-            System.out.println("ConnectionEtudiant : logged in");
-            
-            return true;
-        }
-        */
         MongoConnectionManager mongo = MongoConnectionManager.getInstance();
         Datastore ds = mongo.getDatastore();
         EtudiantDAO daoEtudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
@@ -70,27 +57,11 @@ public class ConnectionEtudiant
         {
             System.out.println("ConnectionEtudiant : logged in");
             return true;
-        }
-            
+        }     
             
     }
      
-    public List<Etudiant> getAllEtudiants()
-    {
-        DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);    
-        
-        List<EtudiantEntity> etudiantList;
-        
-        etudiantList = daoEtudiant.getAllEtudiants("lastname" , "ayoub");
-        
-        List<Etudiant> list = new ArrayList<>();
-        
-        for(EtudiantEntity etu : etudiantList)
-        {
-            list.add(etu.toEtudiant());
-        }
-        return list;
-    }
+    
     
     
 }
