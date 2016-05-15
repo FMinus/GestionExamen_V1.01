@@ -13,7 +13,6 @@ import java.util.List;
 import javax.persistence.Enumerated;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
 /**
@@ -21,13 +20,12 @@ import org.mongodb.morphia.annotations.Reference;
  * @author AbdelMajid
  */
 @Entity("filiere")
-public class FiliereEntity 
+public class FiliereEntity extends BaseEntity
 {
-    @Id
-    private ObjectId id;
     
     @Enumerated
     private Filiere filiere;
+    
     @Reference
     List<ModuleEntity> listModule=new ArrayList<>();
 

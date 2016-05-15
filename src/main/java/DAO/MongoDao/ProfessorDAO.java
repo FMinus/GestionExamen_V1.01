@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.IDAO.DAO;
+package DAO.MongoDao;
 
-import DAO.IDAO.IDAO;
+import DAO.MongoDao.IDAO;
 import Entities.ProfessorEntity;
-import Controllers.Morphia.ServiceMorphia;
+import ConnectionMongo.ServiceMorphia;
 import com.mongodb.DBCollection;
 import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
@@ -28,41 +28,47 @@ import org.mongodb.morphia.query.UpdateResults;
  */
 public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements IDAO<ProfessorEntity>{
 
-    public ProfessorDAO(Class<ProfessorEntity> entityClass, Datastore ds) {
+    public ProfessorDAO(Class<ProfessorEntity> entityClass, Datastore ds) 
+    {
         super(entityClass, ds);
     }
+    
     @Override
-    public ProfessorEntity getByName(String champ, String name) {
+    public ProfessorEntity getByName(String champ, String name) 
+    {
         
         Query<ProfessorEntity> query=createQuery().field(champ).equal(name);
         return query.get();
     }
 
     @Override
-    public List<ProfessorEntity> getList() {
+    public List<ProfessorEntity> getList() 
+    {
         Query<ProfessorEntity> query=createQuery();
        return query.asList();
     }
 
     @Override
-    public List<ProfessorEntity> getXSupA(float note) {
-        
-       return new ArrayList<>();
-       
+    public List<ProfessorEntity> getXSupA(float note) 
+    {       
+       return new ArrayList<>();      
     }
 
     @Override
-    public void deleteBy(String champ, String name) {
+    public void deleteBy(String champ, String name) 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateXby(String champ, String name) {
+    public void updateXby(String champ, String name) 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void addX(ProfessorEntity t) {
+    public void addX(ProfessorEntity t) 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

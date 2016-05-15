@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.Morphia;
+package ConnectionMongo;
 
 import com.mongodb.*;
 import java.net.UnknownHostException;
@@ -18,16 +18,29 @@ import org.mongodb.morphia.*;
  * @author AbdelMajid
  */
 @Singleton
-public class ServiceMorphia {
+public class ServiceMorphia 
+{
+    
     private Morphia morphia;
     private Datastore datastore;
-
-    public ServiceMorphia() {
-        
-            MongoClient client=new MongoClient("localhost" , 27017);
-            this.morphia=new Morphia();
-            String DBname="G_ETUD";
-            this.datastore=morphia.createDatastore(client, DBname);
+    private final String serverIp = "localhost";
+    private final int serverPort = 27017;
+    private final String databaseName = "GestionExamen";
+    
+    public ServiceMorphia() 
+    {
+          try 
+          {
+            MongoClient client=new MongoClient(serverIp , serverPort);         
+            this.morphia=new Morphia();          
+            this.datastore=morphia.createDatastore(client, databaseName);   
+            morphia.mapPackage("Entities");
+            
+          }
+          catch(Exception e)
+          {
+              throw new RuntimeException("Error initializing mongo db", e);
+          }
         
     }
 

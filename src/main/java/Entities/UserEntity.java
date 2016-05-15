@@ -5,7 +5,6 @@
  */
 package Entities;
 
-import Enums.Filiere;
 import java.util.Date;
 
 /**
@@ -100,5 +99,13 @@ public class UserEntity extends BaseEntity
     {
         this.urlAvatar = urlAvatar;
     }
+
+    @Override
+    public String toString()
+    {
+        return "UserEntity{" + "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", dateOfBirth=" + dateOfBirth + ", urlAvatar=" + urlAvatar + '}';
+    }
+    
+    
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.IDAO;
+package DAO.MongoDao;
 
 import Entities.UserEntity;
 import java.util.List;
@@ -13,16 +13,16 @@ import org.mongodb.morphia.dao.*;
 /**
  *
  * @author AbdelMajid
+ * @param <T>
  */
-public interface IDAO<T> extends DAO<T,ObjectId>{
+
+public interface IDAO<T> extends DAO<T,ObjectId>
+{
     public T getByName(String champ ,String name);
     public List<T> getList();
     public List<T> getXSupA(float note);
     public void deleteBy(String champ,String name);
     public void updateXby(String champ,String name);
     public void addX(T t);
-    
-    
-    
     
 }

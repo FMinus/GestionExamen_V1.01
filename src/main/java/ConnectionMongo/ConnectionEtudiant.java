@@ -7,9 +7,11 @@ package ConnectionMongo;
 
 import Metier.Etudiant;
 import DAO.DAOEtudiant;
+import DAO.MongoDao.EtudiantDAO;
 import Entities.EtudiantEntity;
 import java.util.ArrayList;
 import java.util.List;
+import org.mongodb.morphia.Datastore;
 
 public class ConnectionEtudiant
 {
@@ -26,9 +28,6 @@ public class ConnectionEtudiant
     }
 
     
-    
-    
-    
     public void registerEtudiant(Etudiant etudiant)
     {
         DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
@@ -38,6 +37,7 @@ public class ConnectionEtudiant
     
      public boolean loginEtudiant(String email,String password)
     {
+        /*
         DAOEtudiant daoEtudiant = new DAOEtudiant("localhost","GestionExamen",27017);
         
         etudiant = daoEtudiant.loginEtudiant(email, password);
@@ -53,6 +53,25 @@ public class ConnectionEtudiant
             
             return true;
         }
+        */
+        MongoConnectionManager mongo = MongoConnectionManager.getInstance();
+        Datastore ds = mongo.getDatastore();
+        EtudiantDAO daoEtudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
+        
+        etudiant = daoEtudiantDAO.loginEtudiant(email, password);
+         
+        if(etudiant == null)
+        {
+            
+            System.out.println("ConnectionEtudiant : no such user");
+            return false;
+        }         
+        else
+        {
+            System.out.println("ConnectionEtudiant : logged in");
+            return true;
+        }
+            
             
     }
      

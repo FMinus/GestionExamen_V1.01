@@ -7,6 +7,9 @@ package Controllers.Etudiant;
 
 import Beans.SessionBean;
 import ConnectionMongo.ConnectionEtudiant;
+import ConnectionMongo.MongoConnectionManager;
+import DAO.MongoDao.EtudiantDAO;
+import Entities.EtudiantEntity;
 import Metier.Etudiant;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import org.mongodb.morphia.Datastore;
 
 @ManagedBean
 @SessionScoped
@@ -109,16 +113,18 @@ public class HomeEtudiant implements Serializable
             return "/resources/images/avatars/"+etudiant.getUrlAvatar();
     }
     
-    public static List<Etudiant> getEtudiantList()
+    public static List<EtudiantEntity> getEtudiantList()
     {
-        List<Etudiant> etudiantList = new ArrayList<>();
-        
-        ConnectionEtudiant conn = new ConnectionEtudiant();
-        
-        etudiantList = conn.getAllEtudiants();
-        
-        System.out.println(etudiantList);
-        return etudiantList;
+        MongoConnectionManager mongo = MongoConnectionManager.getInstance();
+       
+       Datastore ds = mongo.getDatastore();
+       
+       
+       EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
+       
+       List<EtudiantEntity> etu = etudiantDAO.findAllEtudiants();
+       
+       return etu;
     }
     
     

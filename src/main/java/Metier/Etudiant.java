@@ -4,7 +4,6 @@ import Entities.EtudiantEntity;
 import Enums.Filiere;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 

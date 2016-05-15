@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Entities;
-import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.*;
 
@@ -14,15 +12,17 @@ import org.mongodb.morphia.annotations.*;
  * @author AbdelMajid
  */
 @Entity(value = "resultat" ,noClassnameStored = true)
-public class ResultatEntity {
-    @Id
-    private ObjectId id;
+public class ResultatEntity extends BaseEntity
+{
+    
     @Reference 
     public ExamenEntity exam;    
+    
     public  int note;
     
 
-    public ResultatEntity() {
+    public ResultatEntity() 
+    {
     }
 
     public ExamenEntity getExam() {

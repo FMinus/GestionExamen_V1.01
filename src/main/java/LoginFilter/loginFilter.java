@@ -5,7 +5,6 @@
  */
 package LoginFilter;
 import Beans.CurrentUser;
-import Beans.SessionBean;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,11 +14,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Controllers.Login;
-import Metier.Etudiant;
-import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
-import javax.faces.view.facelets.Facelet;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 /**
