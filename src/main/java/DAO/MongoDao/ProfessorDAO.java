@@ -60,7 +60,20 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
     @Override
     public void addX(ProfessorEntity t) 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ds.save(t);
+    }
+    
+    public ProfessorEntity loginProfessor(String email,String password)
+    {
+        Query<ProfessorEntity> query = createQuery();
+        
+        query.and
+        (
+            query.criteria("email").equal(email),
+            query.criteria("password").equal(password)
+        );
+        
+       return (ProfessorEntity) query.get();
     }
 
     

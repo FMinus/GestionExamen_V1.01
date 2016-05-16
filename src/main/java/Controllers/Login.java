@@ -1,14 +1,13 @@
 package Controllers;
 
 import Beans.CurrentUser;
-import Beans.SessionBean;
 import ConnectionMongo.ConnectionEtudiant;
+import ConnectionMongo.ConnectionProfesseur;
 import Enums.Role;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 
@@ -139,7 +138,7 @@ public class Login implements Serializable
                 case Professeur:
                 {
                     //log Professeur
-                    break;
+                   return loginProfesseur();
                 }                  
                 default:
                 {
@@ -203,16 +202,33 @@ public class Login implements Serializable
             
     }
     
-    public String loginProfesseur()
+    public String loginProfesseur() throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
-        //TODO 
+         
+        FacesContext context = FacesContext.getCurrentInstance();
+        ConnectionProfesseur conn = new ConnectionProfesseur();
         
-        ConnectionEtudiant conn = new ConnectionEtudiant();
-        
-        if(conn.loginEtudiant(this.email, this.password))
+        if(conn.loginProf(this.email,this.password))
         {
-            System.out.println("metier : logged in");
-            return "Home.xhtml?faces-redirect=true";
+            
+            role=Role.Professeur;
+            this.isLoggedIn=true;           
+           
+            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+            
+            //request.getSession().setAttribute("currentUser", conn.getEtudiant().toEtudiant());
+            
+            user = this.toCurrentUser();
+            
+            request.getSession().setAttribute("loggedAs",user);
+            
+            context.getExternalContext().getSessionMap().put("currentUser", conn.getProf());
+            //context.getExternalContext().getSessionMap().put("loggedAs", new Login("test",this.password,true,Role.Etudiant));
+            
+                        
+            System.out.println("Login bean : logged in");
+            
+            return "Views/Professeur/HomeProfesseur.xhtml?faces-redirect=true";
         }
         else
         {
