@@ -8,6 +8,9 @@ package TestServlet;
 import ConnectionMongo.MongoConnectionManager;
 import DAO.MongoDao.EtudiantDAO;
 import Entities.*;
+import Enums.FiliereEnum;
+import Metier.Etudiant;
+import Metier.User;
 import java.util.List;
 
 import org.mongodb.morphia.Datastore;
@@ -17,7 +20,7 @@ public class App  {
     {
        //ServiceMorphia morphia=new ServiceMorphia();
        //Datastore dt=morphia.getDatastore();
-        
+       
        MongoConnectionManager mongo = MongoConnectionManager.getInstance();
        
        Datastore ds = mongo.getDatastore();
@@ -26,11 +29,9 @@ public class App  {
        EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
        
        List<EtudiantEntity> etu = etudiantDAO.findAllEtudiants();
-      
-       
-      
-      
+     
         
+      
                 
     }
     

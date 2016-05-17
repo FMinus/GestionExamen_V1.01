@@ -7,7 +7,7 @@ package Entities;
 
 
 
-import Enums.Filiere;
+import Enums.FiliereEnum;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Enumerated;
@@ -24,12 +24,18 @@ public class FiliereEntity extends BaseEntity
 {
     
     @Enumerated
-    private Filiere filiere;
+    private FiliereEnum filiere;
     
     @Reference
     List<ModuleEntity> listModule=new ArrayList<>();
 
-    public FiliereEntity(Filiere filiere) 
+    public FiliereEntity()
+    {
+    }
+    
+    
+
+    public FiliereEntity(FiliereEnum filiere) 
     {
         this.filiere = filiere;
     }
@@ -38,15 +44,17 @@ public class FiliereEntity extends BaseEntity
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(ObjectId id) 
+    {
         this.id = id;
     }
 
-    public Filiere getFiliere() {
+    public FiliereEnum getFiliere() 
+    {
         return filiere;
     }
 
-    public void setFiliere(Filiere filiere) {
+    public void setFiliere(FiliereEnum filiere) {
         this.filiere = filiere;
     }
 

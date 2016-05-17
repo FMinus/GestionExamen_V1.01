@@ -32,7 +32,8 @@ public class loginFilter implements Filter
       
    
     }
-
+    
+    @SuppressWarnings(value = "")
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {
@@ -41,7 +42,9 @@ public class loginFilter implements Filter
         
         //CurrentUser session = (CurrentUser) req.getSession().getAttribute("loggedAs");
         //Etudiant etudiant = (Etudiant) req.getSession().getAttribute("currentUser");
-        
+         
+        try
+        {
          HttpSession session = req.getSession(false);
          
          
@@ -70,6 +73,7 @@ public class loginFilter implements Filter
             if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin"))
             {       
                 res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
+                
             }
             
             if(url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
@@ -82,13 +86,20 @@ public class loginFilter implements Filter
             if(!url.contains(user.getRole().toString()) || url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
             {
                 res.sendRedirect(req.getServletContext().getContextPath()+"\\Views\\"+user.getRole().toString()+"\\Home"+user.getRole().toString()+".xhtml");
+               
                        
             }
             
             
         }
+        }
+        catch(Exception e)
+        {
+            
+        }
 
         chain.doFilter(request, response);
+        
         
         
     }

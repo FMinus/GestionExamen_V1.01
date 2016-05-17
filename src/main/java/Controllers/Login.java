@@ -51,8 +51,6 @@ public class Login implements Serializable
          
     }
     
-
-    
     public Role getRole()
     {
         return role;
@@ -61,7 +59,7 @@ public class Login implements Serializable
     public void setRole(Role role)
     {
         this.role = role;
-        //System.out.println(role);
+        
     }
 
     public boolean isIsLoggedIn()
@@ -222,7 +220,7 @@ public class Login implements Serializable
             
             request.getSession().setAttribute("loggedAs",user);
             
-            context.getExternalContext().getSessionMap().put("currentUser", conn.getProf());
+            context.getExternalContext().getSessionMap().put("currentUser", conn.getProf().toProfessor());
             //context.getExternalContext().getSessionMap().put("loggedAs", new Login("test",this.password,true,Role.Etudiant));
             
                         
@@ -258,8 +256,7 @@ public class Login implements Serializable
         byte[] bytesOfMessage = message.getBytes("UTF-8");
         
         MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] thedigest = md.digest(bytesOfMessage);
-        
+        byte[] thedigest = md.digest(bytesOfMessage);    
         return thedigest;
     }
 

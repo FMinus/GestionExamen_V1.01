@@ -1,7 +1,7 @@
 package Metier;
 
 import Entities.EtudiantEntity;
-import Enums.Filiere;
+import Enums.FiliereEnum;
 import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.ManagedBean;
@@ -11,25 +11,25 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class Etudiant extends User implements Serializable
 {
-    private Filiere filiere;
+    private FiliereEnum filiere;
     
     public Etudiant()
     {
         super();
     }
     
-    public Etudiant(String firstName, String lastName,Filiere filiere , String email, Date dateOfBirth, String password ,String urlAvatar )
+    public Etudiant(String firstName, String lastName,FiliereEnum filiere , String email, Date dateOfBirth, String password ,String urlAvatar )
     {
         super(firstName, lastName, dateOfBirth, email, urlAvatar, password);
         this.filiere = filiere;
     }
   
-    public Filiere getFiliere()
+    public FiliereEnum getFiliere()
     {
         return filiere;
     }
     
-    public void setFiliere(Filiere filiere)
+    public void setFiliere(FiliereEnum filiere)
     {
         this.filiere = filiere;
     }
@@ -38,6 +38,9 @@ public class Etudiant extends User implements Serializable
     {
         return new EtudiantEntity(getFirstName(),getLastName(),getEmail(),getPassword(),getFiliere(),getDateOfBirth(),getUrlAvatar());
     }
+
+    
+    
     
     
 }

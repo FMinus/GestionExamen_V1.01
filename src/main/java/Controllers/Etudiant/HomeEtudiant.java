@@ -5,18 +5,24 @@
 */
 package Controllers.Etudiant;
 
+import Beans.CurrentUser;
 import Beans.SessionBean;
 import ConnectionMongo.ConnectionEtudiant;
 import ConnectionMongo.MongoConnectionManager;
+import Controllers.Login;
 import DAO.MongoDao.EtudiantDAO;
 import Entities.EtudiantEntity;
+import Enums.Role;
 import Metier.Etudiant;
+import Metier.Professor;
+import Metier.User;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.mongodb.morphia.Datastore;
 
@@ -25,22 +31,25 @@ import org.mongodb.morphia.Datastore;
 public class HomeEtudiant implements Serializable
 {
     
-    @Inject Etudiant etudiant;
+    User user;
     
-    public Etudiant getEtudiant()
+    @Inject 
+    CurrentUser currentUser;
+    
+    
+    
+    public User getUser()
     {
-        return etudiant;
+        return user;
     }
     
-    public void setEtudiant(Etudiant etudiant)
+    public void setUser(User user)
     {
-        this.etudiant = etudiant;
+        this.user = user;
     }
     
     
     private String recherche;
-    
-    
     
     public String getRecherche()
     {
@@ -57,8 +66,14 @@ public class HomeEtudiant implements Serializable
     @PostConstruct
     public void onLoad()
     {
-        etudiant = (Etudiant) SessionBean.getCurrentUser();
-       
+        currentUser = (CurrentUser) SessionBean.getIsLoggedIn();
+        
+        if(currentUser.getRole()==Role.Etudiant)
+            user = (Etudiant) SessionBean.getCurrentUser();
+        else if(currentUser.getRole()==Role.Professeur)
+            user = (Professor) SessionBean.getCurrentUser();
+            
+        
     }
     
     public String toProfile()
@@ -66,26 +81,17 @@ public class HomeEtudiant implements Serializable
         return "/GestionExamen_V1.01/Views/Etudiant/Profile.xhtml";
     }
     
-    
-    
     public HomeEtudiant()
     {
-        //HttpServletRequest request = getHttpServletRequest();
-        
-        //etudiant = (Etudiant) request.getSession().getAttribute("currentUser");
         
     }
-
-   
-    
-    
     
     public String getInfoEtudiant()
     {
-        if(etudiant!=null)
-            System.out.println(" HomeEtudiant :  "+etudiant);
+        if(user!=null)
+            System.out.println(" HomeEtudiant :  "+user);
         
-        return etudiant == null ? etudiant.toString() : "-------------------- bean resolve fail! ------------------";
+        return user == null ? user.toString() : "-------------------- bean resolve fail! ------------------";
     }
     
     
@@ -97,14 +103,14 @@ public class HomeEtudiant implements Serializable
     
     public String avatarGetter()
     {
-        if(this.etudiant== null || !this.etudiant.getUrlAvatar().contains("jpg") || !this.etudiant.getUrlAvatar().contains("png") || !this.etudiant.getUrlAvatar().contains("jpeg") || !this.etudiant.getUrlAvatar().contains("gif"))
+        if(this.user== null || !this.user.getUrlAvatar().contains("jpg") || !this.user.getUrlAvatar().contains("png") || !this.user.getUrlAvatar().contains("jpeg") || !this.user.getUrlAvatar().contains("gif"))
             return "/resources/images/avatars/nophoto.png";
         else
-            return "/resources/images/avatars/"+etudiant.getUrlAvatar();
+            return "/resources/images/avatars/"+user.getUrlAvatar();
         
     }
     
-     public String userAvatarGetter(EtudiantEntity e)
+    public String userAvatarGetter(EtudiantEntity e)
     {
         if(e== null || e.getUrlAvatar() == null)
             return "/resources/images/avatars/nophoto.png";
@@ -112,33 +118,30 @@ public class HomeEtudiant implements Serializable
             return "/resources/images/avatars/"+e.getUrlAvatar();
         
     }
-     
+    
     public String getNoAva()
     {
-        return "/resources/images/avatars/nophoto.png";  
+        return "/resources/images/avatars/nophoto.png";
     }
     
     public String avatarSessionGetter()
     {
-          
-        if(this.etudiant== null)
+        
+        if(this.user== null)
             return "/resources/images/avatars/nophoto.png";
         else
-            return "/resources/images/avatars/"+etudiant.getUrlAvatar();
+            return "/resources/images/avatars/"+user.getUrlAvatar();
     }
     
     public static List<EtudiantEntity> getEtudiantList()
     {
-       MongoConnectionManager mongo = MongoConnectionManager.getInstance();
-       
-       Datastore ds = mongo.getDatastore();
-       
-       
-       EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
-       
-       List<EtudiantEntity> etu = etudiantDAO.findAllEtudiants();
-       
-       return etu;
+        MongoConnectionManager mongo = MongoConnectionManager.getInstance();
+        Datastore ds = mongo.getDatastore();
+        
+        EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
+        List<EtudiantEntity> etu = etudiantDAO.findAllEtudiants();
+        
+        return etu;
     }
     
     

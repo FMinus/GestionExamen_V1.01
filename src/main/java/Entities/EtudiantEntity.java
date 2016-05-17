@@ -1,6 +1,6 @@
 package Entities;
 
-import Enums.Filiere;
+import Enums.FiliereEnum;
 import java.util.Date;
 import org.mongodb.morphia.annotations.Entity;
 import Metier.Etudiant;
@@ -9,25 +9,25 @@ import Metier.Etudiant;
 public class EtudiantEntity extends UserEntity
 {
     
-    private Filiere filiere;
+    private FiliereEnum filiere;
     
     public EtudiantEntity()
     {     
     }
 
-    public EtudiantEntity(String firstName , String lastName , String email, String password , Filiere filiere,Date dateOfBirth,String urlAvatar)
+    public EtudiantEntity(String firstName , String lastName , String email, String password , FiliereEnum filiere,Date dateOfBirth,String urlAvatar)
     {
         //public UserEntity(String firstName, String lastName, String email, String password, Date dateOfBirth, String urlAvatar)
         super(firstName,lastName,email,password,dateOfBirth,urlAvatar);
         this.filiere = filiere;
     }
     
-    public Filiere getFiliere()
+    public FiliereEnum getFiliere()
     {
         return filiere;
     }
     
-    public void setFiliere(Filiere filiere)
+    public void setFiliere(FiliereEnum filiere)
     {
         this.filiere = filiere;
     }

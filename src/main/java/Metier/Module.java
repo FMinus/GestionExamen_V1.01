@@ -3,31 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities;
+package Metier;
 
-import Metier.Module;
 import java.util.ArrayList;
 import java.util.List;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.*;
 
 /**
  *
- * @author AbdelMajid
+ * @author Ayoub
  */
-@Entity(value="module",noClassnameStored = true)
-public class ModuleEntity extends BaseEntity{
-    
-   
+public class Module
+{
     private String ModuleName;
     
-    @Reference
-    public List<ExamenEntity> examens=new ArrayList<>();
+   
+    public List<Examen> examens=new ArrayList<>();
     
-    @Reference
-    public ProfessorEntity profOwner; 
+   
+    public Professor profOwner; 
 
-    public ModuleEntity() 
+    public Module() 
     {
         
     }
@@ -42,23 +37,17 @@ public class ModuleEntity extends BaseEntity{
     }
     
 
-    public ModuleEntity(String name,ProfessorEntity p) 
+    public Module(String name,Professor p) 
     {
         this.ModuleName=name;
         this.profOwner=p;
     }
 
-    public ModuleEntity(String ModuleName) 
+    public Module(String ModuleName) 
     {
         this.ModuleName = ModuleName;
     }
     
-    public Module toModule()
-    {
-        return new Module(this.ModuleName,this.profOwner.toProfessor());
-    }
-    
 
-    
     
 }

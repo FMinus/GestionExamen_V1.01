@@ -5,7 +5,7 @@
  */
 package Beans;
 
-import Enums.Filiere;
+import Enums.FiliereEnum;
 import Metier.Etudiant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +22,10 @@ public class RandomStuff
     private static ArrayList<Etudiant> etudiantList = etudiantList =
                 new ArrayList<Etudiant>(
                         Arrays.asList
-                (
-                        new Etudiant("ayoub","deqqaq",Filiere.GI,"ayoub@mail",null,"Test","None"),
-                        new Etudiant("rajad","majid",Filiere.GI,"majid@mail",null,"tiesto","None"),
-                        new Etudiant("jacob","deqqaq",Filiere.GI,"ayoub@mail",null,"Testo","None"),
-                        new Etudiant("jamal","deqqaq",Filiere.GI,"ayoub@mail",null,"Testaa","None")
+                (new Etudiant("ayoub","deqqaq",FiliereEnum.GI,"ayoub@mail",null,"Test","None"),
+                        new Etudiant("rajad","majid",FiliereEnum.GI,"majid@mail",null,"tiesto","None"),
+                        new Etudiant("jacob","deqqaq",FiliereEnum.GI,"ayoub@mail",null,"Testo","None"),
+                        new Etudiant("jamal","deqqaq",FiliereEnum.GI,"ayoub@mail",null,"Testaa","None")
                 ));;
 		
     

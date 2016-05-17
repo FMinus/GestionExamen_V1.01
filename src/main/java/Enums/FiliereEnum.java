@@ -1,6 +1,6 @@
 package Enums;
 
-public enum Filiere
+public enum FiliereEnum
 {
     CP1,
     CP2,
