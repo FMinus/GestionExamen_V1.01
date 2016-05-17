@@ -39,16 +39,10 @@ public class loginFilter implements Filter
     {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        
-        //CurrentUser session = (CurrentUser) req.getSession().getAttribute("loggedAs");
-        //Etudiant etudiant = (Etudiant) req.getSession().getAttribute("currentUser");
-        
+           
         try
         {
             HttpSession session = req.getSession(false);
-            
-            
-            
             
             temp = (session != null) ? (CurrentUser) session.getAttribute("loggedAs") : null;
             
@@ -56,15 +50,13 @@ public class loginFilter implements Filter
                 user = temp;
             
             String url = req.getRequestURI();
-            /*
-            if(user != null)
-            System.out.println("user is "+user);
-            else
-            System.out.println("Fuck you it's now null");
-            */
-            
+           
             if(url.contains("resource") || url.contains("jsf"))
+            {
                 chain.doFilter(request, response);
+                return;
+            }
+                
             
             if(session == null || !user.isIsLoggedIn())
             {
@@ -72,25 +64,37 @@ public class loginFilter implements Filter
                 if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin") || url.contains("/Common"))
                 {
                     res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
+                    return;
                     
                 }
                 
                 if(url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
                 {
                     chain.doFilter(request, response);
-                }
+                    return;
+                }                
             }
             else
             {
                 if(!url.contains(user.getRole().toString()) || url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
                 {
-                    res.sendRedirect(req.getServletContext().getContextPath()+"\\Views\\"+user.getRole().toString()+"\\Home"+user.getRole().toString()+".xhtml");                                       
+                    res.sendRedirect(req.getServletContext().getContextPath()+"\\Views\\"+user.getRole().toString()+"\\Home"+user.getRole().toString()+".xhtml");
+                    return;
                 }
                 
-                
+                if(url.contains("/Logout.xhtml"))
+                {
+                    session.removeAttribute("loggedAs");
+                    session.removeAttribute("currentUser");
+                    temp=null;
+                    user=null;
+                    session = null;
+                    res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
+                    return;
+                }                
             }
         }
-        catch(Exception e)
+        catch(IOException | ServletException e)
         {
             
         }

@@ -41,6 +41,7 @@ public class Login implements Serializable
     
     public Login()
     {
+        
     }
     
     
@@ -145,6 +146,7 @@ public class Login implements Serializable
         return "Login.xhtml?faces-redirect=true";
     }
     
+     
     public String loginEtudiant() throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -248,8 +250,10 @@ public class Login implements Serializable
         request.getSession().removeAttribute("currentUser");
         request.getSession().removeAttribute("loggedAs");
         
-        return "Login.xhtml?faces-redirect=true";
+        return "Logout.xhtml?faces-redirect=true";
     }
+    
+    
     
     public byte [] hashGenerator(String message) throws UnsupportedEncodingException, NoSuchAlgorithmException
     {

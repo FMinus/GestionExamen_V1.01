@@ -37,7 +37,6 @@ public class ProfessorEntity extends UserEntity
     
     public Professor toProfessor()
     {
-        //public Professor(String firstName, String lastName, Date dateOfBirth, String email, String urlAvatar, String password,List<Module> modules)
         List<Module> listModule = new ArrayList<>();
         for(ModuleEntity mod : this.getModules())
         {

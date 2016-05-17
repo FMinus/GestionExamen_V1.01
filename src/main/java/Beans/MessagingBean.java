@@ -22,8 +22,7 @@ public class MessagingBean implements Serializable
     public void attrListener(ActionEvent event)
     {
 	etudiant = (Etudiant) event.getComponent().getAttributes().get("action");
-        
-        
+           
     }
 
     public Etudiant getEtudiant()

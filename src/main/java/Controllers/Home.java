@@ -7,27 +7,22 @@ package Controllers;
 
 import Beans.CurrentUser;
 import Beans.SessionBean;
-import ConnectionMongo.ConnectionEtudiant;
 import ConnectionMongo.MongoConnectionManager;
-import Controllers.Login;
 import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
 import DAO.MongoDao.ProfessorDAO;
 import Entities.AdminEntity;
 import Entities.EtudiantEntity;
 import Entities.ProfessorEntity;
-import Enums.Role;
 import Metier.Admin;
 import Metier.Etudiant;
 import Metier.Professor;
 import Metier.User;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.mongodb.morphia.Datastore;
 
@@ -41,7 +36,27 @@ public class Home implements Serializable
     @Inject 
     CurrentUser currentUser;
     
-    
+    @PostConstruct
+    public void onLoad()
+    {
+        currentUser = (CurrentUser) SessionBean.getIsLoggedIn();
+        
+        if(null!=currentUser.getRole())
+            switch (currentUser.getRole())
+        {
+            case Etudiant:
+                user = (Etudiant) SessionBean.getCurrentUser();
+                break;
+            case Professeur:
+                user = (Professor) SessionBean.getCurrentUser();
+                break;
+            default:
+                user = (Admin) SessionBean.getCurrentUser();
+                break;
+        }
+            
+        
+    }
     
     public User getUser()
     {
@@ -68,27 +83,7 @@ public class Home implements Serializable
     
     
     
-    @PostConstruct
-    public void onLoad()
-    {
-        currentUser = (CurrentUser) SessionBean.getIsLoggedIn();
-        
-        if(null!=currentUser.getRole())
-            switch (currentUser.getRole())
-        {
-            case Etudiant:
-                user = (Etudiant) SessionBean.getCurrentUser();
-                break;
-            case Professeur:
-                user = (Professor) SessionBean.getCurrentUser();
-                break;
-            default:
-                user = (Admin) SessionBean.getCurrentUser();
-                break;
-        }
-            
-        
-    }
+    
     
       
     public Home()

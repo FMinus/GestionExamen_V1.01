@@ -50,4 +50,9 @@
         <managed-bean-class>Beans.MessagingBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>    
+        <managed-bean-name>editEtudiant</managed-bean-name>
+        <managed-bean-class>Controllers.Etudiant.EditEtudiant</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>
