@@ -33,7 +33,11 @@ public class FiliereEntity extends BaseEntity
     {
     }
     
-    
+    public FiliereEntity(FiliereEnum filiere,List<ModuleEntity> listModule) 
+    {
+        this.filiere = filiere;
+        this.listModule = listModule;
+    }
 
     public FiliereEntity(FiliereEnum filiere) 
     {

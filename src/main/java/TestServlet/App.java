@@ -6,7 +6,9 @@
 package TestServlet;
 
 import ConnectionMongo.MongoConnectionManager;
+import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
+import DAO.MongoDao.FiliereDAO;
 import Entities.*;
 import Enums.FiliereEnum;
 import Metier.Etudiant;
@@ -20,20 +22,25 @@ public class App  {
     {
        //ServiceMorphia morphia=new ServiceMorphia();
        //Datastore dt=morphia.getDatastore();
-       
-       MongoConnectionManager mongo = MongoConnectionManager.getInstance();
-       
+       /*
+       MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
        Datastore ds = mongo.getDatastore();
        
        
-       EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
+       AdminDAO admindao = new AdminDAO(AdminEntity.class, ds);
        
-       List<EtudiantEntity> etu = etudiantDAO.findAllEtudiants();
-     
+       AdminEntity admin = new AdminEntity("jalil", "messaf", "admin@mail.com", "admin", null, "[B@71844c48.png");
+       
+       admindao.save(admin);
+       */
+        
+        
         
       
                 
     }
+    
+    
     
     
 }

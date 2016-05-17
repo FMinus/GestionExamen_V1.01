@@ -1,6 +1,7 @@
 package Controllers;
 
 import Beans.CurrentUser;
+import ConnectionMongo.ConnectionAdmin;
 import ConnectionMongo.ConnectionEtudiant;
 import ConnectionMongo.ConnectionProfesseur;
 import Enums.Role;
@@ -28,7 +29,7 @@ public class Login implements Serializable
     private Role role;
     
     @Inject
-    CurrentUser user;
+            CurrentUser user;
     
     public Login(String email, String password, boolean isLoggedIn, Role role)
     {
@@ -37,7 +38,7 @@ public class Login implements Serializable
         this.isLoggedIn = isLoggedIn;
         this.role = role;
     }
-
+    
     public Login()
     {
     }
@@ -46,49 +47,49 @@ public class Login implements Serializable
     @PostConstruct
     public void onLoad()
     {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false); 
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         user =(CurrentUser) session.getAttribute("loggedAs");
-         
+        
     }
     
     public Role getRole()
     {
         return role;
     }
-
+    
     public void setRole(Role role)
     {
         this.role = role;
         
     }
-
+    
     public boolean isIsLoggedIn()
     {
         return isLoggedIn;
     }
-      
     
-
+    
+    
     public void setIsLoggedIn(boolean isLoggedIn)
     {
         this.isLoggedIn = isLoggedIn;
     }
-
+    
     public String getEmail()
     {
         return email;
     }
-
+    
     public String getPassword()
     {
         return password;
     }
-
+    
     public void setEmail(String email)
     {
         this.email = email;
     }
-
+    
     public void setPassword(String password)
     {
         this.password = password;
@@ -129,61 +130,39 @@ public class Login implements Serializable
             {
                 case Etudiant:
                 {
-                    //log as Etudiant 
+                    //log as Etudiant
                     
-                    return loginEtudiant();                   
-                }                  
+                    return loginEtudiant();
+                }
                 case Professeur:
                 {
                     //log Professeur
-                   return loginProfesseur();
-                }                  
+                    return loginProfesseur();
+                }
                 default:
                 {
-                    //log as Admin
-                    
-                    break;
-                }        
+                   return loginAdmin();
+                }
             }
         }
-        return "Login.xhtml?faces-redirect=true"; 
+        return "Login.xhtml?faces-redirect=true";
     }
     
     public String loginEtudiant() throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
-         
         FacesContext context = FacesContext.getCurrentInstance();
-        
         ConnectionEtudiant conn = new ConnectionEtudiant();
-        
         if(conn.loginEtudiant(this.email,this.password))
         {
-            
             role=Role.Etudiant;
             this.isLoggedIn=true;
             
-            //TODO
-            //retrieve the user's cridentials :       
-            
-            
-           
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-            
-            //request.getSession().setAttribute("currentUser", conn.getEtudiant().toEtudiant());
-            
             user = this.toCurrentUser();
             
             request.getSession().setAttribute("loggedAs",user);
             
             context.getExternalContext().getSessionMap().put("currentUser", conn.getEtudiant().toEtudiant());
-            //context.getExternalContext().getSessionMap().put("loggedAs", new Login("test",this.password,true,Role.Etudiant));
-            
-            
-            
-            
-           
-                
-            
             System.out.println("Login bean : logged in");
             
             return "Views/Etudiant/HomeEtudiant.xhtml?faces-redirect=true";
@@ -197,33 +176,24 @@ public class Login implements Serializable
                             "Please enter correct username and Password"));
             return "Login.xhtml";
         }
-            
     }
     
     public String loginProfesseur() throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
-         
         FacesContext context = FacesContext.getCurrentInstance();
         ConnectionProfesseur conn = new ConnectionProfesseur();
-        
         if(conn.loginProf(this.email,this.password))
         {
             
             role=Role.Professeur;
-            this.isLoggedIn=true;           
-           
+            this.isLoggedIn=true;
+            
             HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-            
-            //request.getSession().setAttribute("currentUser", conn.getEtudiant().toEtudiant());
-            
             user = this.toCurrentUser();
             
             request.getSession().setAttribute("loggedAs",user);
-            
             context.getExternalContext().getSessionMap().put("currentUser", conn.getProf().toProfessor());
-            //context.getExternalContext().getSessionMap().put("loggedAs", new Login("test",this.password,true,Role.Etudiant));
             
-                        
             System.out.println("Login bean : logged in");
             
             return "Views/Professeur/HomeProfesseur.xhtml?faces-redirect=true";
@@ -237,14 +207,47 @@ public class Login implements Serializable
                             "Please enter correct username and Password"));
             return "Login.xhtml";
         }
+    }
+    
+    public String loginAdmin() throws UnsupportedEncodingException, NoSuchAlgorithmException
+    {
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        ConnectionAdmin conn = new ConnectionAdmin();
+        
+        if(conn.loginAdmin(this.email,this.password))
+        {
             
+            role=Role.Admin;
+            this.isLoggedIn=true;
+            
+            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+            
+            user = this.toCurrentUser();
+            
+            request.getSession().setAttribute("loggedAs",user);
+            context.getExternalContext().getSessionMap().put("currentUser", conn.getAdmin().toAdmin());
+            
+            System.out.println("Login bean : logged in");
+            
+            return "Views/Admin/HomeAdmin.xhtml?faces-redirect=true";
+        }
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Passowrd",
+                            "Please enter correct username and Password"));
+            return "Login.xhtml";
+        }
     }
     
     public String logout()
     {
         isLoggedIn = false;
         
-        HttpServletRequest request = getHttpServletRequest();       
+        HttpServletRequest request = getHttpServletRequest();
         request.getSession().removeAttribute("currentUser");
         request.getSession().removeAttribute("loggedAs");
         
@@ -256,10 +259,10 @@ public class Login implements Serializable
         byte[] bytesOfMessage = message.getBytes("UTF-8");
         
         MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] thedigest = md.digest(bytesOfMessage);    
+        byte[] thedigest = md.digest(bytesOfMessage);
         return thedigest;
     }
-
+    
     @Override
     public String toString()
     {

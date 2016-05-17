@@ -33,10 +33,10 @@ public class AdminDAO extends BasicDAO<AdminEntity, String>
     {
         Query<AdminEntity> query = createQuery();   
         query.and
-                (
-                        query.criteria("email").equal(email),
-                        query.criteria("password").equal(password)
-                );
+        (
+            query.criteria("email").equal(email),
+            query.criteria("password").equal(password)
+        );
         
         return (AdminEntity) query.get();
     }

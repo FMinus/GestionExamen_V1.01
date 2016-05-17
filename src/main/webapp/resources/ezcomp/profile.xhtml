@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+          
+    <!-- INTERFACE -->
+    <cc:interface>
+        <composite:attribute name="user"/>
+    </cc:interface>
+        
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+                    <table>
+                        <th>
+                            <A href="edit.html" style="padding-right: 10px;">Edit Profile</A>
+                        </th>
+                        <th>
+                            <A href="logout.html" >Logout</A>
+                        </th>
+                    </table>
+                        
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                    
+                    
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Votre Profile</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 " align="center"> <h:graphicImage value="#{home.avatarSessionGetter()}" class="img-rounded img-responsive"/></div>
+                                    
+                                    
+                                <div class=" col-md-9 col-lg-9 "> 
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Nom Complet</td>
+                                                <td><h:outputText value="#{cc.attrs.user.lastName}" style="padding-right: 6px"/> <h:outputText value="#{cc.attrs.user.firstName}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <ui:fragment rendered="#{!nav.hasMods()}">
+                                                    <td>Filiére</td>
+                                                    <td><h:outputText value="#{cc.attrs.user.filiere}"/></td>
+                                                </ui:fragment>
+                                            </tr>
+                                            <tr>
+                                                <td>Date de Naissance</td>
+                                                <td><h:outputText value="#{cc.attrs.user.dateOfBirth}"/></td>
+                                            </tr>
+                                                
+                                            <tr>
+                                                 
+                                                <tr>
+                                                    <td>Email</td>
+                                                    <td><h:outputText value="#{cc.attrs.user.email}"/></td>
+                                                </tr>
+                                                    
+                                                    
+                                            </tr>
+                                                
+                                        </tbody>
+                                    </table>
+                                        
+                                    <a href="#" class="btn btn-primary" style="padding-left: 20px;">Mes Notes</a>
+                                        
+                                    <a href="#" class="btn btn-primary">Mes Exams</a>
+                                        
+                                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                            <span class="pull-right">
+                                <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            </span>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </cc:implementation>
+</html>

@@ -60,7 +60,7 @@ public class NavigationBean implements Serializable
     
     public boolean hasMods()
     {
-        if(user.getRole()==Role.Etudiant)
+        if(user.getRole()!=Role.Etudiant)
             return true;
         else
             return false;

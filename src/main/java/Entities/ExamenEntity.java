@@ -22,7 +22,7 @@ public class ExamenEntity extends BaseEntity
     private Date date;
     
     @Reference
-    private ModuleEntity modules;
+    private ModuleEntity module;
     
     public ExamenEntity() 
     {        
@@ -35,9 +35,21 @@ public class ExamenEntity extends BaseEntity
     {
         this.date = date;
     }
+
+    public ModuleEntity getModule()
+    {
+        return module;
+    }
+
+    public void setModule(ModuleEntity module)
+    {
+        this.module = module;
+    }
+    
+    
     public ExamenEntity(Date t,ModuleEntity m) 
     {
-        this.modules=m;
+        this.module=m;
         this.date=t;
     }
    

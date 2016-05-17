@@ -17,7 +17,9 @@ import org.mongodb.morphia.query.Query;
  *
  * @author AbdelMajid
  */
-public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements IDAO<ProfessorEntity>{
+public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements IDAO<ProfessorEntity>
+{
+    
 
     public ProfessorDAO(Class<ProfessorEntity> entityClass, Datastore ds) 
     {
@@ -32,8 +34,8 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         return query.get();
     }
 
-    @Override
-    public List<ProfessorEntity> getList() 
+   
+    public List<ProfessorEntity> FindAllProfs() 
     {
         Query<ProfessorEntity> query=createQuery();
        return query.asList();
@@ -74,6 +76,13 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         );
         
        return (ProfessorEntity) query.get();
+    }
+
+    @Override
+    public List<ProfessorEntity> getList()
+    {
+       Query<ProfessorEntity> query=createQuery();
+       return query.asList();
     }
 
     

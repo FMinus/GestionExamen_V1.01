@@ -3,16 +3,21 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package Controllers.Etudiant;
+package Controllers;
 
 import Beans.CurrentUser;
 import Beans.SessionBean;
 import ConnectionMongo.ConnectionEtudiant;
 import ConnectionMongo.MongoConnectionManager;
 import Controllers.Login;
+import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
+import DAO.MongoDao.ProfessorDAO;
+import Entities.AdminEntity;
 import Entities.EtudiantEntity;
+import Entities.ProfessorEntity;
 import Enums.Role;
+import Metier.Admin;
 import Metier.Etudiant;
 import Metier.Professor;
 import Metier.User;
@@ -28,7 +33,7 @@ import org.mongodb.morphia.Datastore;
 
 @ManagedBean
 @SessionScoped
-public class HomeEtudiant implements Serializable
+public class Home implements Serializable
 {
     
     User user;
@@ -68,10 +73,19 @@ public class HomeEtudiant implements Serializable
     {
         currentUser = (CurrentUser) SessionBean.getIsLoggedIn();
         
-        if(currentUser.getRole()==Role.Etudiant)
-            user = (Etudiant) SessionBean.getCurrentUser();
-        else if(currentUser.getRole()==Role.Professeur)
-            user = (Professor) SessionBean.getCurrentUser();
+        if(null!=currentUser.getRole())
+            switch (currentUser.getRole())
+        {
+            case Etudiant:
+                user = (Etudiant) SessionBean.getCurrentUser();
+                break;
+            case Professeur:
+                user = (Professor) SessionBean.getCurrentUser();
+                break;
+            default:
+                user = (Admin) SessionBean.getCurrentUser();
+                break;
+        }
             
         
     }
@@ -81,7 +95,7 @@ public class HomeEtudiant implements Serializable
         return "/GestionExamen_V1.01/Views/Etudiant/Profile.xhtml";
     }
     
-    public HomeEtudiant()
+    public Home()
     {
         
     }
@@ -110,7 +124,7 @@ public class HomeEtudiant implements Serializable
         
     }
     
-    public String userAvatarGetter(EtudiantEntity e)
+    public String userAvatarGetter(User e)
     {
         if(e== null || e.getUrlAvatar() == null)
             return "/resources/images/avatars/nophoto.png";
@@ -142,6 +156,28 @@ public class HomeEtudiant implements Serializable
         List<EtudiantEntity> etu = etudiantDAO.findAllEtudiants();
         
         return etu;
+    }
+    
+    public static List<ProfessorEntity> getProfessorList()
+    {
+        MongoConnectionManager mongo = MongoConnectionManager.getInstance();
+        Datastore ds = mongo.getDatastore();
+        
+        ProfessorDAO etudiantDAO = new ProfessorDAO(ProfessorEntity.class, ds);
+        List<ProfessorEntity> prof = etudiantDAO.FindAllProfs();
+        
+        return prof;
+    }
+    
+    public static List<AdminEntity> getAdminList()
+    {
+        MongoConnectionManager mongo = MongoConnectionManager.getInstance();
+        Datastore ds = mongo.getDatastore();
+        
+        AdminDAO etudiantDAO = new AdminDAO(AdminEntity.class, ds);
+        List<AdminEntity> admins = etudiantDAO.findAllAdmins();
+        
+        return admins;
     }
     
     

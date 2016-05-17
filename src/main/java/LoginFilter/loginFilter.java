@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package LoginFilter;
 import Beans.CurrentUser;
 import java.io.IOException;
@@ -29,8 +29,8 @@ public class loginFilter implements Filter
     @Override
     public void init(FilterConfig filterConfig) throws ServletException
     {
-      
-   
+        
+        
     }
     
     @SuppressWarnings(value = "")
@@ -42,72 +42,69 @@ public class loginFilter implements Filter
         
         //CurrentUser session = (CurrentUser) req.getSession().getAttribute("loggedAs");
         //Etudiant etudiant = (Etudiant) req.getSession().getAttribute("currentUser");
-         
+        
         try
         {
-         HttpSession session = req.getSession(false);
-         
-         
-         
-         
-         temp = (session != null) ? (CurrentUser) session.getAttribute("loggedAs") : null;
-         
-         if(temp!=null)
-             user = temp;
-         
-         String url = req.getRequestURI();
-        /*
-        if(user != null)
-            System.out.println("user is "+user);
-        else
-            System.out.println("Fuck you it's now null");
-        */
-        
-        if(url.contains("resources"))
-                chain.doFilter(request, response);
-        
-        if(session == null || !user.isIsLoggedIn())
-        {
-            //System.out.println("back to login "+url);
+            HttpSession session = req.getSession(false);
             
-            if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin"))
-            {       
-                res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
+            
+            
+            
+            temp = (session != null) ? (CurrentUser) session.getAttribute("loggedAs") : null;
+            
+            if(temp!=null)
+                user = temp;
+            
+            String url = req.getRequestURI();
+            /*
+            if(user != null)
+            System.out.println("user is "+user);
+            else
+            System.out.println("Fuck you it's now null");
+            */
+            
+            if(url.contains("resource") || url.contains("jsf"))
+                chain.doFilter(request, response);
+            
+            if(session == null || !user.isIsLoggedIn())
+            {
+                //System.out.println("back to login "+url);                
+                if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin"))
+                {
+                    res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
+                    
+                }
+                
+                if(url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
+                {
+                    chain.doFilter(request, response);
+                }
+            }
+            else
+            {
+                if(!url.contains(user.getRole().toString()) || url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
+                {
+                    res.sendRedirect(req.getServletContext().getContextPath()+"\\Views\\"+user.getRole().toString()+"\\Home"+user.getRole().toString()+".xhtml");                                       
+                }
+                
                 
             }
-            
-            if(url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
-            {
-                chain.doFilter(request, response);
-            }        
-        }
-        else
-        {
-            if(!url.contains(user.getRole().toString()) || url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
-            {
-                res.sendRedirect(req.getServletContext().getContextPath()+"\\Views\\"+user.getRole().toString()+"\\Home"+user.getRole().toString()+".xhtml");
-               
-                       
-            }
-            
-            
-        }
         }
         catch(Exception e)
         {
             
         }
-
+        
         chain.doFilter(request, response);
         
         
         
     }
-
+    
     @Override
     public void destroy()
     {
-       //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
     }
     
 }
