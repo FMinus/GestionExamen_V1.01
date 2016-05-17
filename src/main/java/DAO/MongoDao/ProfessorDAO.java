@@ -52,6 +52,11 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void deleteByEmail(String email) 
+    {
+        ds.delete(createQuery().field("email").equal(email).getClass());
+    }
 
     @Override
     public void updateXby(String champ, String name) 

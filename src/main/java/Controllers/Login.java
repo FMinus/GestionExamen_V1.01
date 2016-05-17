@@ -129,14 +129,11 @@ public class Login implements Serializable
             switch (this.getRole())
             {
                 case Etudiant:
-                {
-                    //log as Etudiant
-                    
+                {                  
                     return loginEtudiant();
                 }
                 case Professeur:
                 {
-                    //log Professeur
                     return loginProfesseur();
                 }
                 default:

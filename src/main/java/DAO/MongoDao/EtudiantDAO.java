@@ -7,6 +7,7 @@ package DAO.MongoDao;
 
 import DAO.MongoDao.IDAO;
 import Entities.EtudiantEntity;
+import Entities.ModuleEntity;
 import Entities.ProfessorEntity;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -64,4 +65,11 @@ public class EtudiantDAO extends BasicDAO<EtudiantEntity, String>
     {
         ds.save(t);
     }
+    
+    /*
+    public List<ModuleEntity> getModules(Etu)
+    {
+        
+    }
+*/
 }

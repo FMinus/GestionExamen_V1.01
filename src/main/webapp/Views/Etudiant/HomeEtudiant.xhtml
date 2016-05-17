@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ez="http://xmlns.jcp.org/jsf/composite/ezcomp">
     
     <h:head>
         <title>Home</title>
@@ -26,37 +27,7 @@
                 </h:form>
                                                                
                 
-                <div class="container">
-                    <table class="table  table-hover">
-                        <tr>
-                            <th class="order-table-header">firstName</th>
-                            <th class="order-table-header">lastName</th>
-                            <th class="order-table-header">Email</th>
-                            <th class="order-table-header">filiere</th>
-                        </tr>
-                        <tbody>
-                            <ui:repeat var="o" value="#{randomStuff.getEtudiantList()}" varStatus="status">
-                                <h:panelGroup rendered="#{status.even}">
-                                    <tr>
-                                        <td class="order-table-even-row">#{o.firstName}</td>
-                                        <td class="order-table-even-row">#{o.lastName}</td>
-                                        <td class="order-table-even-row">#{o.email}</td>
-                                        <td class="order-table-even-row">#{o.filiere}</td>
-                                    </tr>
-                                </h:panelGroup>
-                            
-                                <h:panelGroup rendered="#{status.odd}">
-                                    <tr>
-                                        <td class="order-table-odd-row">#{o.firstName}</td>
-                                        <td class="order-table-odd-row">#{o.lastName}</td>
-                                        <td class="order-table-odd-row">#{o.email}</td>
-                                        <td class="order-table-odd-row">#{o.filiere}</td>
-                                    </tr>
-                                </h:panelGroup>
-                            </ui:repeat>
-                        </tbody>
-                    </table>
-                </div>
+                <ez:RandomTable/>
                 
                 <f:verbatim>
                     
