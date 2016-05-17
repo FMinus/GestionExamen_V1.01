@@ -59,8 +59,6 @@ public class Register implements Serializable
         String[] str = uploadBean.getFile().getContentType().split("/");
         String avatarExtention = str[1];
         
-        
-        
         System.out.println("Avatar Extention : "+str[1]);
         
         

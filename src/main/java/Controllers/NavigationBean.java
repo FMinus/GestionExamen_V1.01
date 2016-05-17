@@ -70,6 +70,11 @@ public class NavigationBean implements Serializable
     {
         return "/GestionExamen_V1.01/Views/"+getRole()+"/Users.xhtml";
     }
+    
+    public String toEditProfile()
+    {
+        return "/GestionExamen_V1.01/Views/"+getRole()+"/editProfile.xhtml";
+    }
 
      
 

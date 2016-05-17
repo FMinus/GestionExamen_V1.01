@@ -69,7 +69,7 @@ public class loginFilter implements Filter
             if(session == null || !user.isIsLoggedIn())
             {
                 //System.out.println("back to login "+url);                
-                if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin"))
+                if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin") || url.contains("/Common"))
                 {
                     res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
                     
