@@ -35,8 +35,6 @@ public class MessagingBean implements Serializable
         this.etudiant = etudiant;
     }
     
-    
-    
     public void someAction()
     {
         System.out.println("Test Action : ");

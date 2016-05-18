@@ -81,15 +81,8 @@ public class Home implements Serializable
         this.recherche = recherche;
     }
     
-    
-    
-    
-    
-      
     public Home()
-    {
-        
-    }
+    {}
     
     public String getInfoEtudiant()
     {

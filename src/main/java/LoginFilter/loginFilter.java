@@ -56,6 +56,8 @@ public class loginFilter implements Filter
                 chain.doFilter(request, response);
                 return;
             }
+            
+            
                 
             
             if(session == null || !user.isIsLoggedIn())
@@ -86,9 +88,9 @@ public class loginFilter implements Filter
                 {
                     session.removeAttribute("loggedAs");
                     session.removeAttribute("currentUser");
-                    temp=null;
+                    //temp=null;
                     user=null;
-                    session = null;
+                    //session = null;
                     res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
                     return;
                 }                

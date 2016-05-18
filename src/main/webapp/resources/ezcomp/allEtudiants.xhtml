@@ -35,7 +35,7 @@
                             <td class="order-table-even-row"><h:graphicImage value="#{home.userAvatarGetter(o.toEtudiant())}" class="img-responsive img-circle" width="50" height="50" alt=""/></td>
                             <td class="order-table-even-row">
                                 <h:form>
-                                    <h:commandButton value="Message" class="btn btn-info" action="#{messagingBean.someAction()}">
+                                    <h:commandButton value="Message" class="btn btn-toolbar" action="#{messagingBean.someAction()}">
                                         <f:setPropertyActionListener target="#{messagingBean.etudiant}" value="#{o.toEtudiant()}" />
                                     </h:commandButton>
                                 </h:form>

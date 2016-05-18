@@ -21,11 +21,11 @@
             
             <ui:define name="content">
                 
-                <ez:editProfile firstNameValue="#{home.user.firstName}"/>
+                <ez:editProfile firstNameValue="#{editEtudiant.currentUser.email}"/>
                 
                 
-                <!--    ######################################################       -->
-                
+                <!--       ######################################################       -->
+                <h:outputText value="#{editEtudiant.currentUser.email}"/>
             </ui:define>
             
         </ui:composition>
