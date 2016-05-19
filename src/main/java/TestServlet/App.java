@@ -6,6 +6,7 @@
 package TestServlet;
 
 import ConnectionMongo.MongoConnectionManager;
+import DAO.MongoDao.EtudiantDAO;
 import DAO.MongoDao.FiliereDAO;
 import DAO.MongoDao.ModuleDAO;
 import DAO.MongoDao.ProfessorDAO;
@@ -97,11 +98,28 @@ public class App  {
        
        ProfessorDAO profDao = new ProfessorDAO(ProfessorEntity.class, ds);
        ModuleDAO moduledao = new ModuleDAO(ModuleEntity.class, ds);
+        EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
        
        FiliereDAO filieredao = new FiliereDAO(FiliereEntity.class, ds);
-       List<ModuleEntity> list = filieredao.getList(FiliereEnum.GI);
        
-        System.out.println("modules : "+list);
+       //List<ModuleEntity> list = filieredao.getList(FiliereEnum.GI);
+       
+       //System.out.println("modules : "+list);
+       
+       ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
+       
+       
+       //ModuleEntity m = new ModuleEntity("Sport", p);
+       
+       //profDao.addModuleTo(p, m);
+       
+       //p = profDao.getByEmail("testProf@mail.com");
+       
+        System.out.println("after update module : "+p.getModules());
+           
+       
+       //EtudiantEntity e = etudiantDAO.findByEmail("ensa@mail.com");
+       //System.out.println("etudiant : "+e);
                
                 
     }

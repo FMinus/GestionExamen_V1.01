@@ -35,6 +35,11 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         Query<ProfessorEntity> query=createQuery().field(champ).equal(name);
         return query.get();
     }
+    
+    public ProfessorEntity getByEmail(String email) 
+    {       
+        return createQuery().field("email").equal(email).get();
+    }
 
    
     public List<ProfessorEntity> FindAllProfs() 
@@ -113,6 +118,16 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         Query<ProfessorEntity> query=createQuery().field("modules").equal(modules);    
         UpdateOperations<ProfessorEntity> ops = ds.createUpdateOperations(entityClazz).set("modules", modules);           
         ds.update(query, ops);       
+    }
+    
+    public void addModuleTo(ProfessorEntity p,ModuleEntity m)
+    {
+        Query<ProfessorEntity> query=createQuery().field("email").equal(p.getEmail());       
+        List<ModuleEntity> temp = query.get().getModules();
+        temp.add(m);
+         
+        UpdateOperations<ProfessorEntity> ops = ds.createUpdateOperations(entityClazz).set("modules", temp);
+        ds.update(query, ops);        
     }
 
     
