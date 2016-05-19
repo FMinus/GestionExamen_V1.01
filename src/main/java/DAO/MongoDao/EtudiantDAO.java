@@ -56,8 +56,7 @@ public class EtudiantDAO extends BasicDAO<EtudiantEntity, String> implements Upd
     
     public boolean emailExist(String email)
     {
-        Query<EtudiantEntity> query=createQuery().field("email").equal(email);
-        
+        Query<EtudiantEntity> query=createQuery().field("email").equal(email);    
         return query.get() != null;
     }
     

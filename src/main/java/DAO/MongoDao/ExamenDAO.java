@@ -14,10 +14,7 @@ import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 
-/**
- *
- * @author Ayoub
- */
+
 public class ExamenDAO extends BasicDAO<ExamenEntity, String>
 {
     

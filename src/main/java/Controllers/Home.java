@@ -192,6 +192,18 @@ public class Home implements Serializable
        List<ModuleEntity> list = filieredao.getList(FiliereEnum.GI);
        return list;
     }
+    
+    public List<ModuleEntity> getModulesProf()
+    {       
+       MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
+       Datastore ds = mongo.getDatastore();
+       
+       ProfessorDAO professorDAO = new ProfessorDAO(ProfessorEntity.class, ds);
+       
+       //TODO : change back to : user.getEmail()
+       List<ModuleEntity> list = professorDAO.getListModuleByEmail("testProf@mail.com");
+       return list;
+    }
             
     
     

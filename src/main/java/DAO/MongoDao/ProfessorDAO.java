@@ -120,6 +120,11 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         ds.update(query, ops);       
     }
     
+    public List<ModuleEntity> getListModuleByEmail(String email) 
+    {
+        return createQuery().field("email").equal(email).get().getModules();
+    }
+    
     public void addModuleTo(ProfessorEntity p,ModuleEntity m)
     {
         Query<ProfessorEntity> query=createQuery().field("email").equal(p.getEmail());       
@@ -130,7 +135,11 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         ds.update(query, ops);        
     }
 
-    
+    public boolean emailExist(String email)
+    {
+        Query<ProfessorEntity> query=createQuery().field("email").equal(email);    
+        return query.get() != null;
+    }
 
    
     

@@ -43,8 +43,7 @@ public class AdminDAO extends BasicDAO<AdminEntity, String>
     
     public boolean emailExist(String email)
     {
-        Query<AdminEntity> query=createQuery().field("email").equal(email);
-        
+        Query<AdminEntity> query=createQuery().field("email").equal(email);       
         return query.get() != null;
     }
     
