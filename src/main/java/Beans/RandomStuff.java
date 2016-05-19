@@ -7,17 +7,15 @@ package Beans;
 
 import Enums.FiliereEnum;
 import Metier.Etudiant;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
 
 @ManagedBean
 @SessionScoped
-public class RandomStuff
+public class RandomStuff implements Serializable
 {
     private static ArrayList<Etudiant> etudiantList = etudiantList =
                 new ArrayList<Etudiant>(

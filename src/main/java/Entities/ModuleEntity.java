@@ -26,11 +26,31 @@ public class ModuleEntity extends BaseEntity{
     
     @Reference
     public ProfessorEntity profOwner; 
-
+     
     public ModuleEntity() 
+    {}      
+
+    public List<ExamenEntity> getExamens()
     {
-        
+        return examens;
     }
+
+    public void setExamens(List<ExamenEntity> examens)
+    {
+        this.examens = examens;
+    }
+
+    public ProfessorEntity getProfOwner()
+    {
+        return profOwner;
+    }
+
+    public void setProfOwner(ProfessorEntity profOwner)
+    {
+        this.profOwner = profOwner;
+    }
+    
+    
 
     public String getModuleName() {
         return ModuleName;
@@ -57,6 +77,14 @@ public class ModuleEntity extends BaseEntity{
     {
         return new Module(this.ModuleName,this.profOwner.toProfessor());
     }
+
+    @Override
+    public String toString()
+    {
+        return "Module{" + "ModuleName=" + ModuleName;
+    }
+    
+    
     
 
     

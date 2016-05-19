@@ -8,17 +8,23 @@ package Controllers;
 import Beans.CurrentUser;
 import Beans.SessionBean;
 import ConnectionMongo.MongoConnectionManager;
+import Controllers.Etudiant.OpEtudiant;
 import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
+import DAO.MongoDao.FiliereDAO;
 import DAO.MongoDao.ProfessorDAO;
 import Entities.AdminEntity;
 import Entities.EtudiantEntity;
+import Entities.FiliereEntity;
+import Entities.ModuleEntity;
 import Entities.ProfessorEntity;
+import Enums.FiliereEnum;
 import Metier.Admin;
 import Metier.Etudiant;
 import Metier.Professor;
 import Metier.User;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -53,8 +59,7 @@ public class Home implements Serializable
             default:
                 user = (Admin) SessionBean.getCurrentUser();
                 break;
-        }
-            
+        }       
         
     }
     
@@ -163,6 +168,31 @@ public class Home implements Serializable
         
         return admins;
     }
+    
+    public void editEtudiant()
+    {
+        OpEtudiant.editEtudiant((Etudiant) user);
+    }
+    
+    public void editProfessor()
+    {
+        OpEtudiant.editEtudiant((Etudiant) user);
+    }
+    
+    public List<ModuleEntity> getModules()
+    {
+        /*
+        List<ModuleEntity> listModules = new ArrayList<>();
+        OpEtudiant.getModules(FiliereEnum.GI);
+        return listModules;
+        */
+       MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
+       Datastore ds = mongo.getDatastore();
+       FiliereDAO filieredao = new FiliereDAO(FiliereEntity.class, ds);
+       List<ModuleEntity> list = filieredao.getList(FiliereEnum.GI);
+       return list;
+    }
+            
     
     
 }

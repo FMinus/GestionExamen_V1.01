@@ -12,6 +12,7 @@ import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 /**
  *
@@ -42,5 +43,12 @@ public class ModuleDAO extends BasicDAO<ModuleEntity, Object>
     {
         return createQuery()
     }
-*/
+    */
+    
+    public void updateProfessor(ProfessorEntity prof) 
+    {
+        Query<ModuleEntity> query=createQuery().field("profOwner").equal(prof);    
+        UpdateOperations<ModuleEntity> ops = ds.createUpdateOperations(entityClazz).set("profOwner", prof);           
+        ds.update(query, ops);       
+    }
 }

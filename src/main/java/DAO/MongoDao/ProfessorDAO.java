@@ -5,6 +5,7 @@
  */
 package DAO.MongoDao;
 
+import Entities.ModuleEntity;
 import Entities.ProfessorEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 /**
  *
@@ -88,6 +90,29 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
     {
        Query<ProfessorEntity> query=createQuery();
        return query.asList();
+    }
+    
+    public void updateProfessor(ProfessorEntity prof) 
+    {
+        Query<ProfessorEntity> query=createQuery().field("email").equal(prof.getEmail());
+        
+        UpdateOperations<ProfessorEntity> ops = 
+                ds.createUpdateOperations(entityClazz)
+                        .set("firstName", prof.getFirstName())
+                        .set("lastName", prof.getLastame())
+                        .set("email", prof.getEmail())
+                        .set("password", prof.getPassword())                
+                        .set("dateOfBirth", prof.getDateOfBirth())
+                ;
+        
+        ds.update(query, ops);   
+    }
+    
+    public void updateListModule(List<ModuleEntity> modules) 
+    {
+        Query<ProfessorEntity> query=createQuery().field("modules").equal(modules);    
+        UpdateOperations<ProfessorEntity> ops = ds.createUpdateOperations(entityClazz).set("modules", modules);           
+        ds.update(query, ops);       
     }
 
     

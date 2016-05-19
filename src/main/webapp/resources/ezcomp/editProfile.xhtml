@@ -11,6 +11,13 @@
     <!-- INTERFACE -->
     <cc:interface>
          <composite:attribute name="firstNameValue"/>
+         <composite:attribute name="lastNameValue"/>
+         <composite:attribute name="emailValue"/>
+         <composite:attribute name="passwordValue"/>
+         <composite:attribute name="filiereValue"/>
+         <composite:attribute name="dateOfBirthValue"/>
+         
+         <composite:attribute name="editAction()"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
@@ -31,7 +38,7 @@
 
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Profile de : #{editEtudiant.currentUser.email}</h3>
+                            <h3 class="panel-title">Profile de : #{cc.attrs.user.email}</h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -52,23 +59,23 @@
 
                                                 <tr>
                                                     <td><h:outputText value="Last Name"/></td>
-                                                    <td><h:inputText id="lastName" value="#{register.etudiant.lastName}"/></td>
+                                                    <td><h:inputText id="lastName" value="#{cc.attrs.lastNameValue}"/></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><h:outputText value="Email"/></td>
-                                                    <td><h:inputText id="email" value="#{register.etudiant.email}"/></td>
+                                                    <td><h:inputText id="email" value="#{cc.attrs.emailValue}"/></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><h:outputText value="Password"/></td>
-                                                    <td><h:inputText id="password" value="#{register.etudiant.password}"/></td>
+                                                    <td><h:inputText id="password" value="#{cc.attrs.passwordValue}"/></td>
                                                 </tr>
 
                                                 <tr>
                                                     <ui:fragment rendered="#{!nav.hasMods()}">
                                                         <td><h:outputText value="Filiere"/></td>
-                                                        <td><h:selectOneMenu id="accountSelect" value="#{register.etudiant.filiere}" >
+                                                        <td><h:selectOneMenu id="accountSelect" value="#{cc.attrs.filiereValue}" >
                                                                 <f:selectItem itemValue="GI" itemLabel="GI"/>
                                                                 <f:selectItem itemValue="GE" itemLabel="GE"/> 
                                                                 <f:selectItem itemValue="GRT" itemLabel="GRT"/>                   
@@ -81,7 +88,7 @@
 
                                                 <tr>
                                                     <td><p:outputLabel for="button" value="Date de Naissance" /></td>
-                                                    <td><p:calendar id="button" value="#{register.etudiant.dateOfBirth}" showOn="button" pattern="dd-MM-yyyy"/></td>
+                                                    <td><p:calendar id="button" value="#{cc.attrs.dateOfBirthValue}" showOn="button" pattern="dd-MM-yyyy"/></td>
                                                 </tr>
 
 
@@ -93,7 +100,7 @@
                                             <h:outputText value="urlAvatar"/>
                                             <h:inputFile value="#{register.uploadBean.file}"/>
                                             
-                                            <h:commandButton action="#{register.registerEtudiant()}" value="Submit" class="btn btn-primary"/>
+                                            <h:commandButton action="#{cc.attrs.editAction()}" value="Submit" class="btn btn-primary"/>
                                         </div>
                                     </h:form>
                                 </div>

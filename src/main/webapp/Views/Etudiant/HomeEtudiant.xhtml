@@ -2,72 +2,76 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ez="http://xmlns.jcp.org/jsf/composite/ezcomp">
+      xmlns:ez="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
     <h:head>
         <title>Home</title>
     </h:head>
     
-    <h:body>
+    
+    
+    <ui:composition template="./../../resources/template/Home_Template.xhtml">
         
-        <ui:composition template="../../resources/template/Home_Template.xhtml">       
-            <ui:define name="content">
-                
-                test<br/>               
-                test<br/>              
-                test<br/>
-                
-                <h:outputText value="#{home.user.toString()}"/><br/>
-                <h:outputText value="#{login.currentLoginInfo()}"/><br/>
-                
-                <h:form>
-                    <h:commandLink action="#{nav.toProfile()}" value="Profile"/>
-                </h:form>
-                                                               
-                
-                <ez:RandomTable/>
-                
-                <f:verbatim>
-                    
-                    <applet code="" width="200" height="200">
-                        
-                    </applet>
-                    
-                </f:verbatim>
-                
-                
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/> 
-                test<br/>
-                test<br/>
-                test<br/> 
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                test<br/>
-                
-            </ui:define>
-        </ui:composition>
-    </h:body>
+        <ui:define name="content">
+            
+            
+            
+            
+            test<br/>               
+            test<br/>              
+            test<br/>
+            
+            <h:outputText value="#{home.user.toString()}"/><br/>
+            <h:outputText value="#{login.currentLoginInfo()}"/><br/>
+            
+            <!--<ez:RandomTable/>-->
+            
+            <!-- <ez:ListModule/> -->
+            
+            <f:verbatim>
+                <applet code="" width="200" height="200"></applet>                                                  
+            </f:verbatim>
+            
+            
+            <!-- <ez:ScrollableModules/> -->
+            
+            
+            <!-- <ez:accordionPanelModule/> -->
+            
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/> 
+            test<br/>
+            test<br/>
+            test<br/> 
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            test<br/>
+            
+        </ui:define>
+    </ui:composition>
+    
+    
 </html>
 

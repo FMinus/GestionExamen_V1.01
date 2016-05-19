@@ -5,6 +5,8 @@
  */
 package Metier;
 
+import Entities.ModuleEntity;
+import Entities.ProfessorEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +42,20 @@ public class Professor extends User implements Serializable
     {
         super(firstName, lastName, dateOfBirth, email, urlAvatar, password);
         this.modules=modules;
+    }
+    
+    public ProfessorEntity toProfessorEntity()
+    {
+        /*
+        List<ModuleEntity> listModules;
+        
+        for(Module m : this.getModules())
+        {
+            listModules.add(m.to)
+        }
+        */
+        
+        return new ProfessorEntity();
     }
 
     
