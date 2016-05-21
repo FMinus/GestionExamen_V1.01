@@ -40,11 +40,15 @@ public class EtudiantDAO extends BasicDAO<EtudiantEntity, String> implements Upd
         return query.asList();
     }
     
+    public List<EtudiantEntity> findAllEtudiantsButSelf(String email)
+    {
+        Query<EtudiantEntity> query=createQuery().field("email").notEqual(email);
+        return query.asList();
+    }
+    
     public EtudiantEntity loginEtudiant(String email,String password)
     {
-        Query<EtudiantEntity> query = createQuery();
-        EtudiantEntity etudiant;
-        
+        Query<EtudiantEntity> query = createQuery();    
         query.and
         (
             query.criteria("email").equal(email),

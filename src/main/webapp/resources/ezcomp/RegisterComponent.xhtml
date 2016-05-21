@@ -24,66 +24,68 @@
         
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <h:form class = "pure-form pure-form-stacked" enctype="multipart/form-data">
-            
+        
+        <h:form class = "pure-form pure-form-aligned" enctype="multipart/form-data">
             <fieldset>
-                
                 <div class="pure-control-group">
-                    <h:outputText value="First Name"/>
+                    <label for="firstName">First Name</label>
                     <h:inputText id="firstName" value="#{cc.attrs.firstNameInput}"/>
                 </div>
                     
                 <div class="pure-control-group">
-                    <h:outputText value="Last Name"/>
+                    <label for="lastName">Last Name</label>
                     <h:inputText id="lastName" value="#{cc.attrs.lastNameInput}"/>
                 </div>
                     
                 <div class="pure-control-group">
-                    <h:outputText value="Email"/>
+                    <label for="email">Email</label>
                     <h:inputText id="email" value="#{cc.attrs.emailInput}"/>
                 </div>
                     
-                <div class="pure-control-group">
-                    <h:outputText value="Password"/>
+                <div class="pure-control-group">   
+                    <label for="password">Password</label>
                     <h:inputText id="password" value="#{cc.attrs.passwordInput}"/>
                 </div>
-                 
+                    
                 <h:panelGroup rendered="#{cc.getValueExpression('filiereInput') ne null}">
-                <div class="pure-control-group">
-                    <h:outputText value="Filiere"/>         
-                    <h:selectOneMenu id="accountSelect" value="#{cc.attrs.filiereInput}" >
-                        <f:selectItem itemValue="GI" itemLabel="GI"/>
-                        <f:selectItem itemValue="GE" itemLabel="GE"/> 
-                        <f:selectItem itemValue="GRT" itemLabel="GRT"/>                   
-                        <f:selectItem itemValue="CP" itemLabel="CP"/>                   
-                        <f:selectItem itemValue="GPEE" itemLabel="GPEE"/>                   
-                    </h:selectOneMenu>
-                </div>
+                    <div class="pure-control-group">
+                        <label for="accountSelect">Filiere</label>
+                        <h:selectOneMenu id="accountSelect" value="#{cc.attrs.filiereInput}" >
+                            <f:selectItem itemValue="GI" itemLabel="GI"/>
+                            <f:selectItem itemValue="GE" itemLabel="GE"/> 
+                            <f:selectItem itemValue="GRT" itemLabel="GRT"/>                   
+                            <f:selectItem itemValue="CP" itemLabel="CP"/>                   
+                            <f:selectItem itemValue="GPEE" itemLabel="GPEE"/>                   
+                        </h:selectOneMenu>
+                    </div>
                 </h:panelGroup>    
-                
+                    
                 <h:panelGroup rendered="#{cc.getValueExpression('moduleInput') ne null}">
-                <div class="pure-control-group">
-                    <h:outputText value="Modules"/>         
-                    <h:selectManyListbox value="#{cc.attrs.moduleInput}">
-                        <f:selectItem itemValue="Math" itemLabel="Math" />
-                        <f:selectItem itemValue="Informatique" itemLabel="Informatique" />
-                        <f:selectItem itemValue="chimie" itemLabel="chimie" />
-                    </h:selectManyListbox>
-                </div>
+                    <div class="pure-control-group">
+                        <label for="modules">Modules</label>
+                        <h:selectManyListbox value="#{cc.attrs.moduleInput}" id="modules">
+                            <f:selectItem itemValue="Math" itemLabel="Math" />
+                            <f:selectItem itemValue="Informatique" itemLabel="Informatique" />
+                            <f:selectItem itemValue="chimie" itemLabel="chimie" />
+                        </h:selectManyListbox>
+                    </div>
                 </h:panelGroup>    
                     
-                <div class="pure-control-group">                   
-                    <p:outputLabel for="button" value="Date de Naissance" />
-                    <p:calendar id="button" value="#{cc.attrs.dateOfBirthInput}" showOn="button" pattern="dd-MM-yyyy"/>
+                <div class="pure-control-group">                      
+                    <label for="date">Date de Naissance</label>
+                    <p:calendar id="date" value="#{cc.attrs.dateOfBirthInput}" effect="fold" pattern="dd-MM-yyyy"/>
                 </div>
                     
                 <div class="pure-control-group">
-                    <h:outputText value="Upload Avatar"/>
-                    <h:inputFile value="#{cc.attrs.urlAvatarFile}" class="btn btn-info"/>
+                    <label for="avatar">Upload Avatar</label>
+                    <h:inputFile value="#{cc.attrs.urlAvatarFile}" class="btn btn-info" id="avatar"/>
+                </div>
+                    
+                <div class="pure-controls">
                     <h:commandButton action="#{cc.attrs.registerAction}" value="Submit" class="btn btn-primary"/>
                 </div>
                     
             </fieldset>
-        </h:form>
+        </h:form>         
     </cc:implementation>
 </html>
