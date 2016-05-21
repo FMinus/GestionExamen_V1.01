@@ -17,7 +17,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class RandomStuff implements Serializable
 {
-    private static ArrayList<Etudiant> etudiantList = etudiantList =
+    private static ArrayList<Etudiant> etudiantList2 = etudiantList =
                 new ArrayList<Etudiant>(
                         Arrays.asList
                 (new Etudiant("ayoub","deqqaq",FiliereEnum.GI,"ayoub@mail",null,"Test","None"),
@@ -27,6 +27,7 @@ public class RandomStuff implements Serializable
                 ));;
 		
     
+     private static ArrayList<Etudiant> etudiantList;
 
     public RandomStuff()
     {
@@ -43,6 +44,11 @@ public class RandomStuff implements Serializable
     public static void setEtudiantList(ArrayList<Etudiant> etudiantList)
     {
         RandomStuff.etudiantList = etudiantList;
+    }
+    
+    public static boolean isListEmpty()
+    {
+        return etudiantList.isEmpty();
     }
     
     

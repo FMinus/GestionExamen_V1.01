@@ -10,6 +10,7 @@ import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 
 public class MessageDAO extends BasicDAO<MessageEntity, Object>
@@ -49,6 +50,14 @@ public class MessageDAO extends BasicDAO<MessageEntity, Object>
             query.criteria("lus").equal(false)
         );  
        return query.asList();
+    }
+    
+    public void markAllAsRead(String email)
+    {
+        Query<MessageEntity> query=createQuery().field("emailTo").equal(email);
+        UpdateOperations<MessageEntity> ops = 
+                ds.createUpdateOperations(entityClazz).set("lus", true);
+        ds.update(query, ops);   
     }
    
     

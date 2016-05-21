@@ -15,7 +15,7 @@
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <h:outputScript library="js" name="bootstrap.min.js"/>  
         <h:outputScript library="js" name="jquery-1.12.3.min.js"/>  
-             
+        
     </h:head>
     
     <h:body>
@@ -24,7 +24,13 @@
             
             <ui:define name="content">
                 
-                <ez:editProfile firstNameValue="#{home.user.firstName}"/>
+                <ez:editProfile 
+                    firstNameValue="#{home.user.firstName}"
+                    lastNameValue = "#{home.user.lastName}"
+                    emailValue = "#{home.user.email}"
+                    passwordValue = "#{home.user.password}"
+                    dateOfBirthValue = "#{home.user.dateOfBirth}"
+                    />
                 
                 
                 <!--    ######################################################       -->

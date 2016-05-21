@@ -83,12 +83,14 @@ public class loginFilter implements Filter
                 
                 if(url.contains("/Logout.xhtml"))
                 {
+                    System.out.println("Logging out");
                     session.removeAttribute("loggedAs");
                     session.removeAttribute("currentUser");
                     //temp=null;
                     user=null;
                     //session = null;
                     res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
+                    session.invalidate();
                     return;
                 }                
             }

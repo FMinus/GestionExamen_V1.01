@@ -34,6 +34,16 @@ public final class MongoConnectionManager
         }
         datastore = morphia.createDatastore(mongoClient, DB_NAME);
     }
+
+    @Override
+    protected void finalize() throws Throwable
+    {
+        super.finalize();
+        mongoClient.close();
+        
+        //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     
     public static MongoConnectionManager getInstance()

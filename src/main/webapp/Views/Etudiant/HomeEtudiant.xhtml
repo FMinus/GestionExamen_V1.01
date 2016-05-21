@@ -27,9 +27,13 @@
             <h:outputText value="#{home.user.toString()}"/><br/>
             <h:outputText value="#{login.currentLoginInfo()}"/><br/>
             
-            <!--<ez:RandomTable/>-->
+            <ez:RandomTable 
+                table="#{randomStuff.getEtudiantList()}"
+                listIsEmpty = "#{randomStuff.isListEmpty()}"
+                emptyListMessage = "List is empty m78"
+                />
             
-            <ez:ListModule/>
+            <!-- <ez:ListModule/> -->
             
             <f:verbatim>
                 <applet code="" width="200" height="200"></applet>                                                  
