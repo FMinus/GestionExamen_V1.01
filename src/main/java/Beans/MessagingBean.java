@@ -18,6 +18,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 import org.mongodb.morphia.Datastore;
 
 @ManagedBean
@@ -78,9 +79,11 @@ public class MessagingBean implements Serializable
         System.out.println("Test Action : ");
         
         user = u;
-        System.out.println(user.toString());
+        //System.out.println(user.toString());
         
-        return "/GestionExamen_V1.01/Views/Common/Message.xhtml";
+        
+        
+        return "Message.xhtml?faces-redirect=true";
     }
     
     public String sendMessage(String emailFrom)

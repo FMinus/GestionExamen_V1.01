@@ -18,8 +18,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import java.security.*;
-import java.util.Arrays;
 
 @ManagedBean
 @SessionScoped

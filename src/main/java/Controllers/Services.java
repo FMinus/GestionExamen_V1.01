@@ -11,12 +11,20 @@ import Entities.MessageEntity;
 import java.util.List;
 import org.mongodb.morphia.Datastore;
 
-/**
- *
- * @author Ayoub
- */
 public class Services
 {
+    
+    public static boolean aMessages(String email)
+    {
+       MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
+       Datastore ds = mongo.getDatastore();
+       
+       MessageDAO messageDAO = new MessageDAO(MessageEntity.class, ds);
+       
+       return !messageDAO.getUnreadMessages(email).isEmpty();   
+    }
+    
+    
     public static List<MessageEntity> getMessagesOf(String email)
     {
        MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
@@ -32,7 +40,7 @@ public class Services
         int count = 0;
         for(MessageEntity m : msgs)
         {
-            if(m.isLus())
+            if(!m.isLus())
                 count++;                
         }      
         return count;
@@ -45,8 +53,9 @@ public class Services
        
        MessageDAO msgDAO = new MessageDAO(MessageEntity.class, ds);
        return msgDAO.getAllMessagesOf(email);
- 
     }
+    
+    
     
     
 }

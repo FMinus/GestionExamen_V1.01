@@ -37,7 +37,7 @@ public class MessageDAO extends BasicDAO<MessageEntity, Object>
     
     public List<MessageEntity> getAllMessagesOf(String email)
     {
-        return createQuery().field("emailFrom").equal(email).asList();
+        return createQuery().field("emailTo").equal(email).asList();
     }
     
     public List<MessageEntity> getUnreadMessages(String email)
@@ -45,11 +45,13 @@ public class MessageDAO extends BasicDAO<MessageEntity, Object>
         Query<MessageEntity> query = createQuery();       
         query.and
         (
-            query.criteria("email").equal(email),
+            query.criteria("emailTo").equal(email),
             query.criteria("lus").equal(false)
         );  
        return query.asList();
     }
+   
+    
     
     
 }

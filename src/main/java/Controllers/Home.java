@@ -16,6 +16,7 @@ import DAO.MongoDao.ProfessorDAO;
 import Entities.AdminEntity;
 import Entities.EtudiantEntity;
 import Entities.FiliereEntity;
+import Entities.MessageEntity;
 import Entities.ModuleEntity;
 import Entities.ProfessorEntity;
 import Enums.FiliereEnum;
@@ -24,8 +25,11 @@ import Metier.Etudiant;
 import Metier.Professor;
 import Metier.User;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -181,11 +185,6 @@ public class Home implements Serializable
     
     public List<ModuleEntity> getModules()
     {
-        /*
-        List<ModuleEntity> listModules = new ArrayList<>();
-        OpEtudiant.getModules(FiliereEnum.GI);
-        return listModules;
-        */
        MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
        Datastore ds = mongo.getDatastore();
        FiliereDAO filieredao = new FiliereDAO(FiliereEntity.class, ds);
@@ -203,6 +202,26 @@ public class Home implements Serializable
        //TODO : change back to : user.getEmail()
        List<ModuleEntity> list = professorDAO.getListModuleByEmail("testProf@mail.com");
        return list;
+    }
+    
+    public boolean aNotification()
+    {
+        return Services.aMessages(user.getEmail());
+    }
+    
+    public int notifcationCounter()
+    {
+        return Services.countUnreadMessages(Services.getUnreadMessagesOf(user.getEmail()));
+    }
+    
+    public List<MessageEntity> getMessages()
+    {
+        return Services.getUnreadMessagesOf(user.getEmail());
+    }
+    
+    public String simpleDateDisplay(Date t)
+    {
+        return new SimpleDateFormat("MM-dd-yyyy").format(t);
     }
             
     
