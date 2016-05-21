@@ -57,9 +57,6 @@ public class loginFilter implements Filter
                 return;
             }
             
-            
-                
-            
             if(session == null || !user.isIsLoggedIn())
             {
                 //System.out.println("back to login "+url);                
@@ -98,7 +95,7 @@ public class loginFilter implements Filter
         }
         catch(IOException | ServletException e)
         {
-            
+            e.printStackTrace();
         }
         
         chain.doFilter(request, response);

@@ -104,12 +104,12 @@ public class Home implements Serializable
         return "";
     }
     
-    public String avatarGetter()
+    public String avatarGetter(String ava)
     {
-        if(this.user== null || !this.user.getUrlAvatar().contains("jpg") || !this.user.getUrlAvatar().contains("png") || !this.user.getUrlAvatar().contains("jpeg") || !this.user.getUrlAvatar().contains("gif"))
+        if(ava == null)
             return "/resources/images/avatars/nophoto.png";
         else
-            return "/resources/images/avatars/"+user.getUrlAvatar();
+            return "/resources/images/avatars/"+ava;
         
     }
     

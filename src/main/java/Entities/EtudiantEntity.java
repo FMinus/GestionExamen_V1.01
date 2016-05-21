@@ -4,6 +4,7 @@ import Enums.FiliereEnum;
 import java.util.Date;
 import org.mongodb.morphia.annotations.Entity;
 import Metier.Etudiant;
+import javax.persistence.Enumerated;
 
 @Entity
 public class EtudiantEntity extends UserEntity

@@ -75,6 +75,11 @@ public class NavigationBean implements Serializable
     {
         return "/GestionExamen_V1.01/Views/"+getRole()+"/editProfile.xhtml";
     }
+    
+    public String sendMail()
+    {
+        return "/GestionExamen_V1.01/Views/Common/Message.xhtml";
+    }
 
      
 

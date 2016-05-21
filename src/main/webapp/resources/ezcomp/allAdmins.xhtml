@@ -31,12 +31,12 @@
                             <td class="order-table-even-row">#{o.email}</td>
                             <td class="order-table-even-row">#{o.dateOfBirth.toLocaleString()}</td>
 
-                            <td class="order-table-even-row"><h:graphicImage value="#{home.userAvatarGetter(o.toAdmin())}" class="img-responsive img-circle" width="50" height="50" alt=""/></td>
+                            <td class="order-table-even-row"><h:graphicImage value="#{home.avatarGetter(o.urlAvatar)}" class="img-responsive img-circle" width="50" height="50" alt=""/></td>
                             <td class="order-table-even-row">
                                 <!--
                                 <h:form>
                                     <h:commandButton value="Message" class="btn btn-info" action="#{messagingBean.someAction()}">
-                                        <f:setPropertyActionListener target="#{messagingBean.etudiant}" value="#{o.toAdmin()}" />
+                                        <f:setPropertyActionListener target="#{messagingBean.user}" value="#{o.toAdmin()}" />
                                     </h:commandButton>
                                 </h:form>
                                 -->

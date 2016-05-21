@@ -8,10 +8,6 @@ package Entities;
 import java.util.Date;
 import org.mongodb.morphia.annotations.Entity;
 
-/**
- *
- * @author Ayoub
- */
 @Entity("message")
 public class MessageEntity extends BaseEntity
 {
@@ -24,6 +20,8 @@ public class MessageEntity extends BaseEntity
     private Date dateEnvoi;
     
     private boolean lus;
+    
+    private String subject;
 
     public MessageEntity()
     {
@@ -91,6 +89,18 @@ public class MessageEntity extends BaseEntity
     {
         this.message = message;
     }
+
+    public String getSubject()
+    {
+        return subject;
+    }
+
+    public void setSubject(String subject)
+    {
+        this.subject = subject;
+    }
+    
+    
 
     @Override
     public String toString()

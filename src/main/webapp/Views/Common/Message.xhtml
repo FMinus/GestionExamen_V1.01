@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ez="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <body>
+        
+        <ui:composition template="./../../resources/template/Home_Template.xhtml">
+            
+            <ui:define name="content">
+                
+                <div class="container">
+                    <div class="card card-container">
+                        <div class="panel-heading">
+                            <div class="panel-title text-center">
+                                
+                                <h:form class="form-horizontal" role="form">
+                                    
+                                    
+                                    
+                                    <div class="form-group">
+                                         <label for="me" class="col-sm-2 control-label">Email From : </label>        
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="Email" class="col-sm-2 control-label">Email To : </label>
+                                        <div class="col-sm-10">
+                                            <h:inputText id="email" value="#{messagingBean.user.email}" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="form-group">
+                                        <label for="subject" class="col-sm-2 control-label">Subject</label>
+                                        <div class="col-sm-10">
+                                            <h:inputText id="subject" value="#{messagingBean.message.subject}" class="form-control"/>   
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="form-group">
+                                        <label for="message" class="col-sm-2 control-label">Message</label>
+                                        <div class="col-sm-10">    
+                                            <h:inputTextarea class="form-control" rows="4" id="message" value="#{messagingBean.message.message}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="form-group">
+                                        <div class="col-sm-10 col-sm-offset-2">
+                                            <h:commandLink id="submit" action="#{messagingBean.sendMessage(home.user.email)}" class="btn btn-primary" value="Envoyer"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="col-sm-10 col-sm-offset-2">
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+        
+    </body>
+</html>

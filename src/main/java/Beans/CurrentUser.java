@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Beans;
 
 import Controllers.Login;
@@ -14,10 +9,6 @@ import java.util.Objects;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 
-/**
- *
- * @author Ayoub
- */
 @ManagedBean
 @SessionScoped
 public class CurrentUser implements Serializable
@@ -36,8 +27,6 @@ public class CurrentUser implements Serializable
         
         return Data;
     }
-    
-    
     
     public CurrentUser(String email, String password, boolean isLoggedIn, Role role)
     {
