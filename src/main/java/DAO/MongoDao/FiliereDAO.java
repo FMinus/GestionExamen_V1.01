@@ -8,16 +8,10 @@ package DAO.MongoDao;
 import Entities.FiliereEntity;
 import Entities.ModuleEntity;
 import Enums.FiliereEnum;
-import com.mongodb.DBCollection;
 import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
-import org.mongodb.morphia.query.Query;
 
-/**
- *
- * @author AbdelMajid
- */
 public class FiliereDAO extends BasicDAO<FiliereEntity, String>{
     
     public FiliereDAO(Class<FiliereEntity> entityClass, Datastore ds) 
@@ -41,6 +35,10 @@ public class FiliereDAO extends BasicDAO<FiliereEntity, String>{
         return createQuery().field("filiere").equal(f).get();
     }
     
+    public List<ModuleEntity> getListModulesByFiliere(FiliereEnum f)
+    {
+        return createQuery().field("filiere").equal(f).get().getListModule();
+    }
     
     
     

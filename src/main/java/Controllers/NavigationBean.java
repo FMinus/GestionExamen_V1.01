@@ -66,6 +66,22 @@ public class NavigationBean implements Serializable
             return false;
     }
     
+    public boolean isAdmin()
+    {
+        if(user.getRole() == Role.Admin)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean isProf()
+    {
+        if(user.getRole() == Role.Professeur)
+            return true;
+        else
+            return false;
+    }
+    
     public String toUsers()
     {
         return "/GestionExamen_V1.01/Views/"+getRole()+"/Users.xhtml";
