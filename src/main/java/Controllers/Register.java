@@ -6,8 +6,12 @@
 package Controllers;
 
 import Beans.UploadBean;
+import ConnectionMongo.ConnectionAdmin;
 import ConnectionMongo.ConnectionEtudiant;
+import ConnectionMongo.ConnectionProfesseur;
+import Metier.Admin;
 import Metier.Etudiant;
+import Metier.Professor;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -25,6 +29,12 @@ public class Register implements Serializable
 {
     @Inject 
     Etudiant etudiant;
+    
+    @Inject
+    Professor professor;
+    
+    @Inject 
+    Admin admin;
     
     @Inject
     UploadBean uploadBean;
@@ -48,6 +58,28 @@ public class Register implements Serializable
     {
         this.etudiant = etudiant;
     }
+
+    public Professor getProfessor()
+    {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor)
+    {
+        this.professor = professor;
+    }
+
+    public Admin getAdmin()
+    {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin)
+    {
+        this.admin = admin;
+    }
+    
+    
     
     public void registerEtudiant() throws UnsupportedEncodingException, NoSuchAlgorithmException, IOException
     {
@@ -72,6 +104,39 @@ public class Register implements Serializable
         conn.registerEtudiant(etudiant);
         
     }
+    
+    public void registerProfessor() throws UnsupportedEncodingException, NoSuchAlgorithmException, IOException
+    {
+        ConnectionProfesseur conn= new ConnectionProfesseur();
+       
+     
+        String[] str = uploadBean.getFile().getContentType().split("/");
+        String avatarExtention = str[1];
+        
+        
+        String hashedEmail = hashGenerator(professor.getEmail()).toString();
+        uploadBean.upload(hashedEmail+"."+avatarExtention); 
+        professor.setUrlAvatar(hashedEmail+"."+avatarExtention);
+        
+        conn.registerProfessor(professor.toProfessorEntity()); 
+    }
+    
+    public void registerAdmin() throws UnsupportedEncodingException, NoSuchAlgorithmException, IOException
+    {
+        ConnectionAdmin conn= new ConnectionAdmin();
+       
+     
+        String[] str = uploadBean.getFile().getContentType().split("/");
+        String avatarExtention = str[1];
+        
+        
+        String hashedEmail = hashGenerator(admin.getEmail()).toString();
+        uploadBean.upload(hashedEmail+"."+avatarExtention); 
+        admin.setUrlAvatar(hashedEmail+"."+avatarExtention);
+        
+        conn.registerAdmin(admin.toAdminEntity()); 
+    }
+    
     
     public HttpServletRequest getHttpServletRequest()
     {

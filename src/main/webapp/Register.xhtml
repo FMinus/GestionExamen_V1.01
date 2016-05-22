@@ -48,14 +48,14 @@
                 <div id="professeur" class="tab-pane fade">
                     <legend>Create a new Professeur Account</legend>
                     <ez:RegisterComponent
-                        firstNameInput="#{register.etudiant.firstName}"
-                        lastNameInput="#{register.etudiant.lastName}"
-                        emailInput="#{register.etudiant.email}"
-                        passwordInput="#{register.etudiant.password}"
-                        dateOfBirthInput="#{register.etudiant.dateOfBirth}"
+                        firstNameInput="#{register.professor.firstName}"
+                        lastNameInput="#{register.professor.lastName}"
+                        emailInput="#{register.professor.email}"
+                        passwordInput="#{register.professor.password}"
+                        dateOfBirthInput="#{register.professor.dateOfBirth}"
                         moduleInput=""
                         urlAvatarFile="#{register.uploadBean.file}"
-                        registerAction="#{register.registerEtudiant()}"
+                        registerAction="#{register.registerProfessor()}"
                         />   
                 </div>
                 
@@ -63,13 +63,13 @@
                 <div id="admin" class="tab-pane fade">
                     <legend>Create a new Admin Account</legend>
                     <ez:RegisterComponent
-                        firstNameInput="#{register.etudiant.firstName}"
-                        lastNameInput="#{register.etudiant.lastName}"
-                        emailInput="#{register.etudiant.email}"
-                        passwordInput="#{register.etudiant.password}"
-                        dateOfBirthInput="#{register.etudiant.dateOfBirth}"
+                        firstNameInput="#{register.admin.firstName}"
+                        lastNameInput="#{register.admin.lastName}"
+                        emailInput="#{register.admin.email}"
+                        passwordInput="#{register.admin.password}"
+                        dateOfBirthInput="#{register.admin.dateOfBirth}"
                         urlAvatarFile="#{register.uploadBean.file}"
-                        registerAction="#{register.registerEtudiant()}"
+                        registerAction="#{register.registerAdmin()}"
                         />
                 </div>
                 

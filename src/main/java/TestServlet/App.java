@@ -6,14 +6,15 @@
 package TestServlet;
 
 import ConnectionMongo.MongoConnectionManager;
+import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
 import DAO.MongoDao.FiliereDAO;
 import DAO.MongoDao.ModuleDAO;
 import DAO.MongoDao.ProfessorDAO;
 import Entities.*;
-import Enums.FiliereEnum;
-import java.util.ArrayList;
-import java.util.List;
+import Metier.Etudiant;
+import Metier.Professor;
+import Metier.User;
 
 import org.mongodb.morphia.Datastore;
 
@@ -98,7 +99,8 @@ public class App  {
        
        ProfessorDAO profDao = new ProfessorDAO(ProfessorEntity.class, ds);
        ModuleDAO moduledao = new ModuleDAO(ModuleEntity.class, ds);
-        EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
+       EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
+       AdminDAO adminDAO = new AdminDAO(AdminEntity.class, ds);
        
        FiliereDAO filieredao = new FiliereDAO(FiliereEntity.class, ds);
        
@@ -106,7 +108,7 @@ public class App  {
        
        //System.out.println("modules : "+list);
        
-       ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
+       //ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
        
        
        //ModuleEntity m = new ModuleEntity("Sport", p);
@@ -115,13 +117,25 @@ public class App  {
        
        //p = profDao.getByEmail("testProf@mail.com");
        
-        System.out.println("after update module : "+p.getModules());
+        //System.out.println("after update module : "+p.getModules());
            
        
        //EtudiantEntity e = etudiantDAO.findByEmail("ensa@mail.com");
        //System.out.println("etudiant : "+e);
+       
+       //AdminEntity admin = adminDAO.findByEmail("admin@mail.com");
+       
+       //System.out.println("after convert to admin metier : "+admin.toAdmin());
+       
+       /*
+       User etudiant = new Etudiant();
+       
+       if(etudiant instanceof Etudiant)
+           System.out.println("yes");
                
-                
+       if(etudiant instanceof Professor)
+           System.out.println("no");
+        */
     }
     
     

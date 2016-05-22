@@ -23,8 +23,8 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class Login implements Serializable
 {
-    private String email="ensa@mail.com";
-    private String password="ayoub";
+    private String email="admin@mail.com";
+    private String password="admin";
     private boolean isLoggedIn = false;
     private Role role;
     

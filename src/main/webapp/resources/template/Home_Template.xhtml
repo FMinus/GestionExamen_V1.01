@@ -7,7 +7,7 @@
     
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-       <link rel="icon" href="http://www.apikod.com/wp-content/uploads/2014/12/website-icon.png"></link>
+        <link rel="icon" href="http://www.apikod.com/wp-content/uploads/2014/12/website-icon.png"></link>
         
         
         
@@ -15,7 +15,7 @@
         <h:outputScript library="js" name="../js/bootstrap.min.js"/>
         <h:outputScript library="js" name="jquery-1.12.3.min.js"/>
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-       -->
+        -->
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -44,7 +44,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                           
+                            
                             <li class="active">
                                 <h:outputLink class="navbar-brand" value="#{nav.toProfile()}">Profile</h:outputLink>                               
                             </li>                            
@@ -52,7 +52,7 @@
                             <li>
                                 <h:outputLink class="navbar-brand" value="#{nav.toUsers()}">Users</h:outputLink>
                             </li>
-                               
+                            
                             <ez:ProfActions/>
                             
                             <ez:AdminActions/>
@@ -70,15 +70,20 @@
                                     <li><h:outputLink value="#{login.logout()}">Logout</h:outputLink></li>
                                 </ul>
                             </li>
-                            <li><h:graphicImage value="#{home.avatarSessionGetter()}" class="img-responsive img-circle" width="50" height="50"/></li>
+                            
+                                <li>
+                                    <h:graphicImage value="#{home.avatarSessionGetter()}" class="img-responsive img-circle" width="50" height="50"/>
+                                </li>
+                           
                         </ul>
                         
                         <!-- WIP -->
                         <ez:Notification render="#{home.aNotification()}" counter="#{home.notifcationCounter()}"/>                    
                         <!-- WIP -->
                         
-                        <ez:SearchBar/>
-                        
+                        <nav class="col-sm-2 hidden-xs">
+                            <ez:SearchBar/>
+                        </nav>
                         
                         
                     </div><!-- /.navbar-collapse -->

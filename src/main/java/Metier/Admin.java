@@ -5,6 +5,7 @@
  */
 package Metier;
 
+import Entities.AdminEntity;
 import java.util.Date;
 
 /**
@@ -29,6 +30,9 @@ public class Admin extends User
         return super.toString();
     }
     
-    
+    public AdminEntity toAdminEntity()
+    {
+        return new AdminEntity(this.getFirstName(), this.getLastName(), this.getEmail(), this.getPassword(), this.getDateOfBirth(), this.getUrlAvatar());
+    }
     
 }

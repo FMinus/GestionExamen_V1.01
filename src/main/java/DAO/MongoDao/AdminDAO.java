@@ -10,6 +10,7 @@ import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 public class AdminDAO extends BasicDAO<AdminEntity, String>
 {
@@ -50,5 +51,22 @@ public class AdminDAO extends BasicDAO<AdminEntity, String>
     public void registerAdmin(AdminEntity t)
     {
         ds.save(t);
+    }
+    
+    public void updateAdmin(AdminEntity admin) 
+    {
+        Query<AdminEntity> query=createQuery().field("email").equal(admin.getEmail());
+        
+        UpdateOperations<AdminEntity> ops = 
+                ds.createUpdateOperations(entityClazz)
+                        .set("firstName", admin.getFirstName())
+                        .set("lastName", admin.getLastame())
+                        .set("email", admin.getEmail())
+                        .set("password", admin.getPassword())
+                        .set("dateOfBirth", admin.getDateOfBirth())
+                        .set("urlAvatar", admin.getUrlAvatar())
+                ;
+        
+        ds.update(query, ops);
     }
 }

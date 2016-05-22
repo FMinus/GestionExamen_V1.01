@@ -35,7 +35,9 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-3 col-lg-3 " align="center"> <h:graphicImage value="#{home.avatarSessionGetter()}" class="img-rounded img-responsive"/></div>
+                                <div class="col-md-3 col-lg-3 " align="center"> 
+                                    <h:graphicImage value="#{home.avatarSessionGetter()}" class="img-rounded img-responsive"/>
+                                </div>
                                     
                                     
                                 <div class=" col-md-9 col-lg-9 "> 
@@ -43,7 +45,10 @@
                                         <tbody>
                                             <tr>
                                                 <td>Nom Complet</td>
-                                                <td><h:outputText value="#{cc.attrs.user.lastName}" style="padding-right: 6px"/> <h:outputText value="#{cc.attrs.user.firstName}"/></td>
+                                                <td>
+                                                    <h:outputText value="#{cc.attrs.user.lastName}" style="padding-right: 6px"/> 
+                                                    <h:outputText value="#{cc.attrs.user.firstName}"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <ui:fragment rendered="#{!nav.hasMods()}">

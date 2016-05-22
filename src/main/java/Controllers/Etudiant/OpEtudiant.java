@@ -13,8 +13,8 @@ import Entities.FiliereEntity;
 import Entities.ModuleEntity;
 import Enums.FiliereEnum;
 import Metier.Etudiant;
+import Metier.User;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
@@ -25,9 +25,19 @@ import org.mongodb.morphia.Datastore;
 public class OpEtudiant implements Serializable
 {
    
+    User user;
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
     
-    public OpEtudiant()
-    {}
+    
     
     public static void editEtudiant(Etudiant e)
     {

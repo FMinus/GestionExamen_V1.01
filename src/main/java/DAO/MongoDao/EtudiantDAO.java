@@ -88,6 +88,13 @@ public class EtudiantDAO extends BasicDAO<EtudiantEntity, String> implements Upd
         //ds.findAndModify(createQuery().field("email").equal(etudiant.getEmail()), up)
     }
     
+     public void deleteByEmail(String email) 
+     {
+         Query<EtudiantEntity> query=createQuery().field("email").equal(email);   
+         ds.findAndDelete(query);  
+     }
+    
+    
     /*
     public List<ModuleEntity> getModules(Etu)
     {
