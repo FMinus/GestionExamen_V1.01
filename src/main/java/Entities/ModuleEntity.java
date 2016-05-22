@@ -21,10 +21,10 @@ public class ModuleEntity extends BaseEntity{
    
     private String ModuleName;
     
-    @Reference
+    @Reference(lazy = true)
     public List<ExamenEntity> examens=new ArrayList<>();
     
-    @Reference
+    @Reference(lazy = true)
     public ProfessorEntity profOwner; 
      
     public ModuleEntity() 
@@ -75,7 +75,7 @@ public class ModuleEntity extends BaseEntity{
     
     public Module toModule()
     {
-        return new Module(this.ModuleName,this.profOwner.toProfessor());
+        return new Module(this.ModuleName,null);
     }
 
     @Override

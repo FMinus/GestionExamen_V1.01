@@ -5,10 +5,8 @@
  */
 package DAO.MongoDao;
 
-import Entities.ExamenEntity;
 import Entities.ModuleEntity;
 import Entities.ProfessorEntity;
-import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;

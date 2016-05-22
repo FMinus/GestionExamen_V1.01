@@ -11,6 +11,7 @@ import Enums.FiliereEnum;
 import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.Query;
 
 public class FiliereDAO extends BasicDAO<FiliereEntity, String>{
     
@@ -40,7 +41,11 @@ public class FiliereDAO extends BasicDAO<FiliereEntity, String>{
         return createQuery().field("filiere").equal(f).get().getListModule();
     }
     
-    
+    public List<FiliereEntity> findAllFilieres()
+    {
+        Query<FiliereEntity> query=createQuery();
+        return query.asList();
+    }
     
     
 }

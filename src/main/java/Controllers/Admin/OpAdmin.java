@@ -8,13 +8,16 @@ package Controllers.Admin;
 import ConnectionMongo.MongoConnectionManager;
 import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
+import DAO.MongoDao.FiliereDAO;
 import Entities.AdminEntity;
 import Entities.EtudiantEntity;
+import Entities.FiliereEntity;
 import Metier.Admin;
 import Metier.Etudiant;
 import Metier.Professor;
 import Metier.User;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import org.mongodb.morphia.Datastore;
@@ -71,6 +74,16 @@ public class OpAdmin implements Serializable
            Professor professor = (Professor) user;
        }
         
+    }
+    
+    public List<FiliereEntity> getAllFilieres()
+    {
+       MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
+       Datastore ds = mongo.getDatastore(); 
+       
+       FiliereDAO fdao = new FiliereDAO(FiliereEntity.class, ds);
+        
+       return fdao.findAllFilieres();
     }
     
 }

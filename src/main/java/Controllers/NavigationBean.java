@@ -97,6 +97,9 @@ public class NavigationBean implements Serializable
         return "/GestionExamen_V1.01/Views/Common/Message.xhtml";
     }
 
-     
+    public String toGestionFiliere()
+    {
+        return "/GestionExamen_V1.01/Views/Admin/GestionFilieres.xhtml";
+    }
 
 }

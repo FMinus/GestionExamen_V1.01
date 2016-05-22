@@ -44,7 +44,19 @@
                     
                 <div class="pure-control-group">   
                     <label for="password">Password</label>
-                    <h:inputText id="password" value="#{cc.attrs.passwordInput}"/>
+                    <h:inputText id="password" value="#{cc.attrs.passwordInput}">
+                        <f:validator validatorId="confirmPasswordValidator" />
+                        <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                        <f:ajax event="blur" execute="password confirm" render="m_password" />
+                    </h:inputText>
+                </div>
+                <div class="pure-control-group">  
+                    <label for="password">confirm Password</label>
+                    <h:inputText id="confirm" binding="#{confirmPassword}">
+                         <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
+                    </h:inputText>
+                    
+                    <h:message id="m_confirm" for="confirm" />
                 </div>
                     
                 <h:panelGroup rendered="#{cc.getValueExpression('filiereInput') ne null}">

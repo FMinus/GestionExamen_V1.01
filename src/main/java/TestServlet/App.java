@@ -6,15 +6,18 @@
 package TestServlet;
 
 import ConnectionMongo.MongoConnectionManager;
+import Controllers.Admin.OpAdmin;
 import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
 import DAO.MongoDao.FiliereDAO;
 import DAO.MongoDao.ModuleDAO;
 import DAO.MongoDao.ProfessorDAO;
 import Entities.*;
+import Enums.FiliereEnum;
 import Metier.Etudiant;
 import Metier.Professor;
 import Metier.User;
+import java.util.List;
 
 import org.mongodb.morphia.Datastore;
 
@@ -102,13 +105,24 @@ public class App  {
        EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
        AdminDAO adminDAO = new AdminDAO(AdminEntity.class, ds);
        
+       
        FiliereDAO filieredao = new FiliereDAO(FiliereEntity.class, ds);
        
        //List<ModuleEntity> list = filieredao.getList(FiliereEnum.GI);
        
        //System.out.println("modules : "+list);
+       /*
+       OpAdmin adminOp = new OpAdmin();
        
-       //ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
+       List<FiliereEntity> listfFiliereEntitys = adminOp.getAllFilieres();
+       List<ModuleEntity> listmod = listfFiliereEntitys.get(0).getListModule();
+       
+       System.out.println("modules : "+listmod);
+       */
+       ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
+       
+       System.out.println("prof : "+p);
+       System.out.println("modules : "+p.modules);
        
        
        //ModuleEntity m = new ModuleEntity("Sport", p);

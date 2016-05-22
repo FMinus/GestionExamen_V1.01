@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="resources/css/loginStyle.css"/>
         <script src="resources/js/jquery-1.12.3.min.js"/>
-         <link rel="icon" href="http://www.apikod.com/wp-content/uploads/2014/12/website-icon.png"></link>
+        <link rel="icon" href="http://www.apikod.com/wp-content/uploads/2014/12/website-icon.png"></link>
     </h:head>
     <h:body>
         
@@ -25,43 +25,77 @@
                 </div> 
                 <div class="main-login main-center">
                     <h:form class="form-signin pure-form pure-form-aligned" role="form">           
-                    
-                    <div class="form-group" style=" margin:auto;text-align:center;">
-                        <h:graphicImage library="images" name="logo.jpg" width="70" height="70"/>
-                    </div>
-                    
-                    <div class="form-group">
-                        <h:outputText value="Email" class="control-label col-sm-2" id="reauth-email"/>
-                        <h:inputText id="email" value="#{login.email}" validatorMessage="Registration" label="email">
-                            <f:validateRegex pattern="((?=.*[a-z]).{6,})"/>
-                        </h:inputText>
-                        <h:message for="email" style="color:red" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <h:outputText value="Password" class="control-label col-sm-2"/><h:inputText id="password" value="#{login.password}"/>    
-                    </div>
-                    
-                    <div class="form-group">
-                        <h:outputText value="Compte" class="control-label col-sm-2" style="padding-right: 80px;"/>
-                        <h:selectOneMenu id="accountSelect" value="#{login.role}" style="padding-left: 10px;">
-                            <f:selectItem itemValue="Etudiant" itemLabel="Etudiant" />
-                            <f:selectItem itemValue="Professeur" itemLabel="Professeur" /> 
-                            <f:selectItem itemValue="Admin" itemLabel="Admin" />                   
-                        </h:selectOneMenu>
-                    </div>
-                    
-                    <div class="form-group">
-                        <h:outputText value="" class="control-label col-sm-2"/>
-                        <h:commandButton id="loginBtn" action="#{login.login()}" value="Submit" class="btn btn-primary"  />
-                        <h:commandButton action="Register?faces-redirect=true" value="Register" class="btn btn-primary" />
-                    </div>
-                    
-                    <h:message for="loginBtn" style="color:red"/>
+                        
+                        <div class="form-group" style=" margin:auto;text-align:center;">
+                            <h:graphicImage library="images" name="logo.jpg" width="70" height="70"/>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:outputText value="Email" class="control-label col-sm-2" id="reauth-email"/>
+                            <h:inputText id="email" value="#{login.email}" validatorMessage="Registration" label="email">
+                                <f:validateRegex pattern="((?=.*[a-z]).{6,})"/>
+                            </h:inputText>
+                            <h:message for="email" style="color:red" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:outputText value="Password" class="control-label col-sm-2"/>
+                            <h:inputText id="password" value="#{login.password}"/>    
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:outputText value="Compte" class="control-label col-sm-2" style="padding-right: 80px;"/>
+                            <h:selectOneMenu id="accountSelect" value="#{login.role}" style="padding-left: 10px;" onchange="switchRole()">
+                                <f:selectItem itemValue="Admin" itemLabel="Admin" />
+                                <f:selectItem itemValue="Etudiant" itemLabel="Etudiant" />
+                                <f:selectItem itemValue="Professeur" itemLabel="Professeur" />                 
+                            </h:selectOneMenu>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:outputText value="" class="control-label col-sm-2"/>
+                            <h:commandButton id="loginBtn" action="#{login.login()}" value="Submit" class="btn btn-success"  style="margin: 10px;"/>
+                            
+                            <h:commandButton action="Register?faces-redirect=true" value="Register" class="btn btn-primary" />
+                        </div>
+                        
+                        <h:message for="loginBtn" style="color:red"/>
                     </h:form>
                 </div>
             </div>
         </div>
     </h:body>
+    
+    
+    <script>
+        function switchRole() 
+        {
+            var role = document.getElementById("j_idt6:accountSelect");
+            var selectedRole = role.options[role.selectedIndex].value;
+            
+            var email = document.getElementById("j_idt6:email");
+            var password = document.getElementById("j_idt6:password");          
+            //console.log(selectedRole);
+            
+            if(selectedRole.valueOf() === 'Etudiant')
+            {
+                email.value = "ensa@mail.com";
+                password.value = "ayoub";
+            }
+            
+            else if(selectedRole.valueOf() === 'Professeur')
+            {
+                email.value = "testProf@mail.com";
+                password.value = "prof";            
+            }
+            else
+            {
+                email.value = "admin@mail.com";
+                password.value = "admin";       
+            }
+            
+        }
+    </script>
+   
 </html>
 
