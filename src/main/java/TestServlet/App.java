@@ -17,6 +17,8 @@ import Enums.FiliereEnum;
 import Metier.Etudiant;
 import Metier.Professor;
 import Metier.User;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.mongodb.morphia.Datastore;
@@ -45,13 +47,20 @@ public class App  {
        etudiantDAO.updateEtudiant(etudiant);
        */
        
-       /*
+       
        ProfessorEntity p = new ProfessorEntity();
-       p.setEmail("testProf@mail.com");
+       
+       ProfessorDAO profDao = new ProfessorDAO(ProfessorEntity.class, ds);
+       
+       //ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
+       
+       
+       
+       p.setEmail("prof@mail.com");
        p.setFirstName("prof");
        p.setLastame("prof");
        p.setPassword("prof");
-       p.setDateOfBirth(null);
+       p.setDateOfBirth(new Date());
        p.setUrlAvatar("[B@1d33e602");
        
        ModuleEntity m1 = new ModuleEntity("Metaeuristique", p);
@@ -77,7 +86,7 @@ public class App  {
        FiliereEntity filiere = new FiliereEntity(FiliereEnum.GI, list);
        
        
-       
+       ModuleDAO moduledao = new ModuleDAO(ModuleEntity.class, ds);
        
        
        
@@ -95,23 +104,24 @@ public class App  {
        
        profDao.save(p);
        
+       FiliereDAO filieredao = new FiliereDAO(FiliereEntity.class, ds);
        filieredao.save(filiere);
         
-      */
+      
        
        
-       ProfessorDAO profDao = new ProfessorDAO(ProfessorEntity.class, ds);
-       ModuleDAO moduledao = new ModuleDAO(ModuleEntity.class, ds);
+       
+       
        EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
        AdminDAO adminDAO = new AdminDAO(AdminEntity.class, ds);
        
        
-       FiliereDAO filieredao = new FiliereDAO(FiliereEntity.class, ds);
+       
        
        //List<ModuleEntity> list = filieredao.getList(FiliereEnum.GI);
        
        //System.out.println("modules : "+list);
-       
+       /*
        OpAdmin adminOp = new OpAdmin();
        
        List<FiliereEntity> listfFiliereEntitys = adminOp.getAllFilieres();

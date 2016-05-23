@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     
     <body>
         
@@ -12,15 +13,12 @@
             <ui:define name="content">
                   
                 <h:form id="form">
-                    <ui:repeat var="f" value="#{opAdmin.getAllFilieres()}" varStatus="status">
+                    <ui:repeat var="f" value="#{opAdmin.getAllFilieres()}">
                         <p:accordionPanel>
-                            <p:tab title="">
-                                <!--
-                                <ui:repeat var="m" value="#{f.getListModule()}" varStatus="status">
-                                    <h:panelGrid columns="2" cellpadding="10">
-                                        <h:outputText value="#{m.getModuleName()}" />
-                                    </h:panelGrid>
-                                </ui:repeat> -->
+                            <p:tab title="#{f.filiere}">
+                                <ui:repeat var="m" value="#{f.getListModule()}">
+                                    <td>m.ModuleName</td><br/>
+                                </ui:repeat>
                             </p:tab>
                         </p:accordionPanel>
                     </ui:repeat>

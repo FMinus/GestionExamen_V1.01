@@ -10,6 +10,7 @@ package Entities;
 import Enums.FiliereEnum;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -23,10 +24,10 @@ import org.mongodb.morphia.annotations.Reference;
 public class FiliereEntity extends BaseEntity
 {
     
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private FiliereEnum filiere;
     
-    @Reference
+    @Reference(lazy = true)
     List<ModuleEntity> listModule=new ArrayList<>();
 
     public FiliereEntity()

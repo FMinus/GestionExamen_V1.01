@@ -12,6 +12,8 @@ import DAO.MongoDao.FiliereDAO;
 import Entities.AdminEntity;
 import Entities.EtudiantEntity;
 import Entities.FiliereEntity;
+import Entities.ModuleEntity;
+import Enums.FiliereEnum;
 import Metier.Admin;
 import Metier.Etudiant;
 import Metier.Professor;
@@ -85,5 +87,16 @@ public class OpAdmin implements Serializable
         
        return fdao.findAllFilieres();
     }
+    
+    public List<ModuleEntity> getModulesOfFilieres()
+    {
+       MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
+       Datastore ds = mongo.getDatastore(); 
+       
+       FiliereDAO fdao = new FiliereDAO(FiliereEntity.class, ds);
+        
+       return (List<ModuleEntity>) fdao.getListModulesByFiliere(FiliereEnum.GI);
+    }
+    
     
 }

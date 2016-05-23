@@ -15,7 +15,7 @@ import org.mongodb.morphia.annotations.*;
  *
  * @author AbdelMajid
  */
-@Entity(value="module",noClassnameStored = true)
+@Entity(value="module")
 public class ModuleEntity extends BaseEntity{
     
    
@@ -24,7 +24,7 @@ public class ModuleEntity extends BaseEntity{
     @Reference(lazy = true)
     public List<ExamenEntity> examens=new ArrayList<>();
     
-    @Reference(lazy = true)
+    @Reference
     public ProfessorEntity profOwner; 
      
     public ModuleEntity() 
