@@ -10,14 +10,11 @@
         <ui:composition template="./../../resources/template/Home_Template.xhtml">
             
             <ui:define name="content">
-                
-                
-                
-                
+                  
                 <h:form id="form">
                     <ui:repeat var="f" value="#{opAdmin.getAllFilieres()}" varStatus="status">
                         <p:accordionPanel>
-                            <p:tab title="#{f.id}">
+                            <p:tab title="">
                                 <!--
                                 <ui:repeat var="m" value="#{f.getListModule()}" varStatus="status">
                                     <h:panelGrid columns="2" cellpadding="10">

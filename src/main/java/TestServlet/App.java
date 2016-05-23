@@ -111,18 +111,18 @@ public class App  {
        //List<ModuleEntity> list = filieredao.getList(FiliereEnum.GI);
        
        //System.out.println("modules : "+list);
-       /*
+       
        OpAdmin adminOp = new OpAdmin();
        
        List<FiliereEntity> listfFiliereEntitys = adminOp.getAllFilieres();
        List<ModuleEntity> listmod = listfFiliereEntitys.get(0).getListModule();
        
        System.out.println("modules : "+listmod);
-       */
-       ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
+     
+       //ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
        
-       System.out.println("prof : "+p);
-       System.out.println("modules : "+p.modules);
+       //System.out.println("prof : "+p);
+       //System.out.println("modules : "+p.modules);
        
        
        //ModuleEntity m = new ModuleEntity("Sport", p);

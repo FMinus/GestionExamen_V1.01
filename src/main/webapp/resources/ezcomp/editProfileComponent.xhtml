@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -7,18 +9,19 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:composite="http://java.sun.com/jsf/composite">
-
+          
     <!-- INTERFACE -->
     <cc:interface>
-         <composite:attribute name="firstNameValue"/>
-         <composite:attribute name="lastNameValue"/>
-         <composite:attribute name="emailValue"/>
-         <composite:attribute name="passwordValue"/>
-         <composite:attribute name="filiereValue"/>
-         <composite:attribute name="dateOfBirthValue"/>
-         <composite:attribute name="editAction" method-signature="java.lang.String action()"/>
+        <composite:attribute name="firstNameValue"/>
+        <composite:attribute name="lastNameValue"/>
+        <composite:attribute name="emailValue"/>
+        <composite:attribute name="passwordValue"/>
+        <composite:attribute name="filiereValue"/>
+        <composite:attribute name="dateOfBirthValue"/>
+        <composite:attribute name="editAction" method-signature="java.lang.String action()"/>
+            
     </cc:interface>
-
+        
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <div class="container">
@@ -28,13 +31,13 @@
                         <th>
                             <A href="edit.html" style="padding-right: 10px;">Edit Profile</A>
                         </th>
-
+                            
                     </table>
-
+                        
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-
-
+                    
+                    
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">Profile de : #{cc.attrs.user.email}</h3>
@@ -44,33 +47,33 @@
                                 <div class="col-md-3 col-lg-3 " align="center">
                                     <h:graphicImage value="#{home.avatarSessionGetter()}" class="img-rounded img-responsive"/>
                                 </div>
-
-
+                                    
+                                    
                                 <div class=" col-md-9 col-lg-9 "> 
                                     <h:form enctype="multipart/form-data">
                                         <table class="table table-user-information">
                                             <tbody>
-
+                                                
                                                 <tr>
                                                     <td><h:outputText value="First Name"/></td>
                                                     <td><h:inputText id="firstName" value="#{cc.attrs.firstNameValue}"/></td>
                                                 </tr>
-
+                                                    
                                                 <tr>
                                                     <td><h:outputText value="Last Name"/></td>
                                                     <td><h:inputText id="lastName" value="#{cc.attrs.lastNameValue}"/></td>
                                                 </tr>
-
+                                                    
                                                 <tr>
                                                     <td><h:outputText value="Email"/></td>
                                                     <td><h:inputText id="email" value="#{cc.attrs.emailValue}"/></td>
                                                 </tr>
-
+                                                    
                                                 <tr>
                                                     <td><h:outputText value="Password"/></td>
                                                     <td><h:inputText id="password" value="#{cc.attrs.passwordValue}"/></td>
                                                 </tr>
-
+                                                    
                                                 <tr>
                                                     <ui:fragment rendered="#{!nav.hasMods()}">
                                                         <td><h:outputText value="Filiere"/></td>
@@ -83,22 +86,21 @@
                                                             </h:selectOneMenu></td>
                                                     </ui:fragment>
                                                 </tr>
-
-
+                                                    
                                                 <tr>
-                                                    <td><p:outputLabel for="button" value="Date de Naissance" /></td>
-                                                    <td><p:calendar id="button" value="#{cc.attrs.dateOfBirthValue}" showOn="button" pattern="dd-MM-yyyy"/></td>
+                                                    <td><label for="date">Date de Naissance</label></td>
+                                                    <td><p:calendar id="date" value="#{cc.attrs.dateOfBirthValue}" effect="fold" pattern="dd-MM-yyyy"/></td>
                                                 </tr>
-
-
-
+                                                    
+                                                    
+                                                    
                                             </tbody>
                                         </table>
-
+                                            
                                         <div class="pure-control-group">
                                             <h:outputText value="urlAvatar"/>
                                             <h:inputFile value="#{register.uploadBean.file}"/>
-                                            
+                                                
                                             <h:commandButton action="#{cc.attrs.editAction}" value="Submit" class="btn btn-primary"/>
                                         </div>
                                     </h:form>
@@ -112,7 +114,7 @@
                                 <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                             </span>
                         </div>
-
+                            
                     </div>
                 </div>
             </div>
