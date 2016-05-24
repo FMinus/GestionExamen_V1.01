@@ -27,7 +27,7 @@ public class FiliereEntity extends BaseEntity
     @Enumerated(EnumType.STRING)
     private FiliereEnum filiere;
     
-    @Reference(lazy = true)
+    @Reference
     List<ModuleEntity> listModule=new ArrayList<>();
 
     public FiliereEntity()

@@ -47,6 +47,12 @@ public class ProfessorEntity extends UserEntity
         return new Professor(this.getFirstName(),this.getLastame(),this.getDateOfBirth(),this.getEmail(),this.getUrlAvatar(),this.getPassword(),listModule);
     }
 
+    @Override
+    public String toString()
+    {
+        return getEmail();
+    }
+
     
  
     

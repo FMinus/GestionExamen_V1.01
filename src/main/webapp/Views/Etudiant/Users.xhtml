@@ -13,9 +13,17 @@
             
             <ui:define name="content">
                 
-                <ez:allEtudiants/>
+                <ez:allEtudiants
+                    list="#{home.getEtudiantList()}" 
+                    messageAction="#{messagingBean.sendMessage(home.user.email)}"
+                    />
                 
-                <!-- <ez:allProfessors/> -->
+                
+                
+                <ez:allProfessors
+                    list="#{home.getProfessorList()}"
+                    messageAction="#{messagingBean.sendMessage(home.user.email)}"
+                    /> 
                 
                 <!-- <ez:allAdmins/> -->
                 

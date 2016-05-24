@@ -4,21 +4,33 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <body>
         
         <ui:composition template="./../../resources/template/Home_Template.xhtml">
             
             <ui:define name="content">
-                  
+                
                 <h:form id="form">
                     <ui:repeat var="f" value="#{opAdmin.getAllFilieres()}">
                         <p:accordionPanel>
                             <p:tab title="#{f.filiere}">
-                                <ui:repeat var="m" value="#{f.getListModule()}">
-                                    <td>m.ModuleName</td><br/>
+                                <ui:repeat var="m" value="#{f.listModule}">
+                                    <h:outputText value="#{m.moduleName}"/><br/>
                                 </ui:repeat>
+                                
+                                <h:form>
+                                    <h:inputText value="#{opAdmin.moduleAjout}"/>
+                                    
+                                    <h:selectOneMenu value="#{opAdmin.prof}">
+                                        <f:selectItems value="#{opAdmin.listAllProfessors()}" />
+                                    </h:selectOneMenu>
+                                   
+                                    <h:commandButton value="filiere" action="#{opAdmin.ajoutFiliere(f.filiere)}"/>
+                                </h:form>
+                                
                             </p:tab>
                         </p:accordionPanel>
                     </ui:repeat>
@@ -29,6 +41,6 @@
         </ui:composition>
         
         
-       
+        
     </body>
 </html>

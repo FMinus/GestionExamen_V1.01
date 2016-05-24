@@ -39,17 +39,22 @@
                     
                 <div class="pure-control-group">
                     <label for="email">Email</label>
-                    <h:inputText id="email" value="#{cc.attrs.emailInput}"/>
+                    <h:inputText id="email" value="#{cc.attrs.emailInput}" validatorMessage="email is not valid">
+                         <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                    </h:inputText>
+                    <p:message for="email" />
                 </div>
                     
                 <div class="pure-control-group">   
                     <label for="password">Password</label>
+                    
                     <h:inputText id="password" value="#{cc.attrs.passwordInput}">
                         <f:validator validatorId="confirmPasswordValidator" />
                         <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
                         <f:ajax event="blur" execute="password confirm" render="m_password" />
                     </h:inputText>
                 </div>
+                
                 <div class="pure-control-group">  
                     <label for="password">confirm Password</label>
                     <h:inputText id="confirm" binding="#{confirmPassword}">

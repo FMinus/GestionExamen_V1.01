@@ -21,10 +21,16 @@
                             <div class="notification-item">
                                 <ui:repeat var="m" value="#{home.getMessages()}" varStatus="status">
                                     <tr>
-                                        <td class="order-table-even-row">#{m.emailFrom}</td>
+                                        <td class="order-table-even-row">#{m.emailFrom}</td><br/>
                                         <td class="order-table-even-row">#{m.subject}</td>
-                                        <td class="order-table-even-row">#{home.simpleDateDisplay(m.dateEnvoi)}</td>
+                                        
                                         <td class="order-table-even-row">#{m.message}</td>
+                                        
+                                        <td class="order-table-even-row">
+                                            <div style="font-size: 6pt;">
+                                                #{home.simpleDateDisplay(m.dateEnvoi)}
+                                            </div>
+                                        </td>
                                         <li class="divider"></li>
                                     </tr>
                                 </ui:repeat>

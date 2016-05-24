@@ -13,10 +13,13 @@ import javax.faces.validator.ValidatorException;
 public class PasswordValidator implements Validator
 {
     @Override
-    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException 
+    {
         String password = (String) value;
-        String confirm = (String) component.getAttributes().get("confirm");
-
+        String confirm = (String) component.getAttributes().get("j_idt9:j_idt10:m_confirm");
+        
+        System.out.println("Triggered : ");
+        
         if (password == null || confirm == null) {
             return; // Just ignore and let required="true" do its job.
         }

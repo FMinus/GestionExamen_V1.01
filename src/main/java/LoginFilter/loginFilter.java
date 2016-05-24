@@ -88,9 +88,11 @@ public class loginFilter implements Filter
                     session.removeAttribute("currentUser");
                     //temp=null;
                     user=null;
+                   
+                    session.invalidate();
                     //session = null;
                     res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
-                    session.invalidate();
+                   
                     return;
                 }                
             }

@@ -17,7 +17,7 @@ import javax.ejb.Stateless;
 public class TimerExamen
 {
 
-    @Schedule(dayOfWeek = "Mon-Fri", month = "*", hour = "9-17", dayOfMonth = "*", year = "*", minute = "*", second = "0", persistent = false)
+    @Schedule(dayOfWeek = "Mon-Fri", month = "*", hour = "9-17", dayOfMonth = "*", year = "*", minute = "*", second = "*/5", persistent = false)
     public void myTimer()
     {
         System.out.println("Timer event: " + new Date());
