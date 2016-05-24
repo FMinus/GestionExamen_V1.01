@@ -10,34 +10,49 @@
     <body>
         
         <ui:composition template="./../../resources/template/Home_Template.xhtml">
-            
             <ui:define name="content">
-                
                 <h:form id="form">
                     <ui:repeat var="f" value="#{opAdmin.getAllFilieres()}">
                         <p:accordionPanel>
                             <p:tab title="#{f.filiere}">
-                                <ui:repeat var="m" value="#{f.listModule}">
-                                    <h:outputText value="#{m.moduleName}"/><br/>
-                                </ui:repeat>
                                 
-                                <h:form>
-                                    <h:inputText value="#{opAdmin.moduleAjout}"/>
-                                    
-                                    <h:selectOneMenu value="#{opAdmin.prof}">
-                                        <f:selectItems value="#{opAdmin.listAllProfessors()}" />
-                                    </h:selectOneMenu>
-                                   
-                                    <h:commandButton value="filiere" action="#{opAdmin.ajoutFiliere(f.filiere)}"/>
+                                <div class="container">
+                                    <table class="table  table-hover">
+                                        <tr>
+                                            <th class="order-table-header">Module</th>
+                                            <th class="order-table-header">Professeur</th>
+                                        </tr>
+                                        <tbody>
+                                            <ui:repeat var="m" value="#{f.listModule}">
+                                                <tr>
+                                                    <td class="order-table-even-row"><h:outputText value="#{m.moduleName} :"/></td>
+                                                    <td class="order-table-even-row"><h:outputText value="#{m.profOwner.email}"/></td>
+                                                </tr>
+                                            </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                
+                                
+                                <h:form class="form-signin pure-form pure-form-aligned">
+                                    <div class="form-group">
+                                        <h:inputText value="#{opAdmin.moduleAjout}"/>
+                                        
+                                        <h:selectOneMenu value="#{opAdmin.prof}" onchange="#{opAdmin.choiceChanged()}">
+                                            <f:selectItem itemValue="---" itemLabel="---" />
+                                            <f:selectItems value="#{opAdmin.listAllProfessors()}" />
+                                        </h:selectOneMenu>
+                                        
+                                        <h:commandButton value="filiere" action="#{opAdmin.ajoutFiliere(f.filiere)}" class="btn btn-primary"/>
+                                    </div>
                                 </h:form>
                                 
                             </p:tab>
                         </p:accordionPanel>
                     </ui:repeat>
                 </h:form>
-                
             </ui:define>
-            
         </ui:composition>
         
         

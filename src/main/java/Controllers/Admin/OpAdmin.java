@@ -47,8 +47,6 @@ public class OpAdmin implements Serializable
         this.prof = prof;
     }
     
-    
-    
     public String getModuleAjout()
     {
         return moduleAjout;
@@ -58,8 +56,6 @@ public class OpAdmin implements Serializable
     {
         this.moduleAjout = moduleAjout;
     }
-    
-    
     
     public User getUser()
     {
@@ -74,7 +70,6 @@ public class OpAdmin implements Serializable
     public void infoGetter(User u)
     {
         user = u;
-        
         System.out.println("user is : "+user);
     }
     
@@ -99,7 +94,6 @@ public class OpAdmin implements Serializable
             Etudiant etudiant = (Etudiant) user;
             EtudiantDAO edao = new EtudiantDAO(EtudiantEntity.class, ds);
             
-            //edao.delete(etudiant.toEtudiantEntity());
             edao.deleteByEmail(etudiant.getEmail());
         }
         else if(user instanceof Professor)
@@ -150,6 +144,11 @@ public class OpAdmin implements Serializable
         
         return pdao.FindAllProfs();
         
+    }
+    
+    public void choiceChanged()
+    {
+        System.out.println("choice changed : "+prof);
     }
     
     
