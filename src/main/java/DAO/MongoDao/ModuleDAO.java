@@ -5,9 +5,12 @@
  */
 package DAO.MongoDao;
 
+import Entities.ExamenEntity;
 import Entities.ModuleEntity;
 import Entities.ProfessorEntity;
+import java.util.List;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -36,12 +39,13 @@ public class ModuleDAO extends BasicDAO<ModuleEntity, Object>
         return query.get();
     }
     
-    /*
-    public List<ExamenEntity> getAllExams()
+    
+    public List<ExamenEntity> getAllExams(ModuleEntity module)
     {
-        return createQuery()
+        Query<ModuleEntity> query=createQuery().field("ModuleName").equal(module.getModuleName());
+        return query.get().examens;
     }
-    */
+    
     
     public void updateProfessor(ProfessorEntity prof) 
     {
@@ -49,4 +53,36 @@ public class ModuleDAO extends BasicDAO<ModuleEntity, Object>
         UpdateOperations<ModuleEntity> ops = ds.createUpdateOperations(entityClazz).set("profOwner", prof);           
         ds.update(query, ops);       
     }
+    
+    public void updateName(String oldname,String newName) 
+    {
+        Query<ModuleEntity> query=createQuery().field("ModuleName").equal(oldname);    
+        UpdateOperations<ModuleEntity> ops = ds.createUpdateOperations(entityClazz).set("ModuleName", newName);           
+        ds.update(query, ops);       
+    }
+    
+    public void addExam(ModuleEntity module , ExamenEntity exam)
+    {
+        Query<ModuleEntity> query=createQuery().field("ModuleName").equal(module.getModuleName());
+        
+        exam.setModule(module);
+        Key<ExamenEntity> ExamKey = ds.save(exam);
+        
+        UpdateOperations<ModuleEntity> ops = 
+                ds.createUpdateOperations(entityClazz)
+                        .add("examens", ExamKey);
+                
+        ds.update(query, ops);   
+        
+    }
+    
+    //TODO : list<DBRef>
+    /*
+    public void updateExamen(ModuleEntity module,List<ExamenEntity> exams) 
+    {
+        Query<ModuleEntity> query=createQuery().field("ModuleName").equal(module.getModuleName());    
+        //UpdateOperations<ModuleEntity> ops = ds.createUpdateOperations(entityClazz).set("profOwner", );           
+        ds.update(query, ops);       
+    }
+    */
 }

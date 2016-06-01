@@ -18,7 +18,7 @@ public final class MongoConnectionManager
     
     private Morphia morphia = null;
     private Datastore datastore = null;
-    private MongoClient mongoClient = null;
+    private static MongoClient mongoClient = null;
     
     private MongoConnectionManager()
     {
@@ -26,7 +26,6 @@ public final class MongoConnectionManager
         try
         {
             mongoClient = new MongoClient();
-            
         }
         catch (Exception e)
         {

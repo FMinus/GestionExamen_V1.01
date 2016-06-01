@@ -57,10 +57,15 @@ public class ServiceMorphia
         return datastore;
     }
 
-    public void setDatastore(Datastore datastore) {
+    public void setDatastore(Datastore datastore) 
+    {
         this.datastore = datastore;
     }
     
+    public void closeConnection()
+    {   
+        client.close();       
+    }
     
     
 }

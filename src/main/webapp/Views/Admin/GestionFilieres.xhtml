@@ -39,9 +39,10 @@
                                     <div class="form-group">
                                         <h:inputText value="#{opAdmin.moduleAjout}"/>
                                         
-                                        <h:selectOneMenu value="#{opAdmin.prof}" onchange="#{opAdmin.choiceChanged()}">
-                                            <f:selectItem itemValue="---" itemLabel="---" />
-                                            <f:selectItems value="#{opAdmin.listAllProfessors()}" />
+                                        <h:selectOneMenu value="#{opAdmin.prof}" onchange="#{opAdmin.choiceChanged(null)}" immediate="true">
+                                            <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+                                            <f:selectItems value="#{opAdmin.listAllProfessors()}" itemValue="#{opAdmin.listAllProfessors()}" var="p"/>
+                                            <f:ajax listener="#{opAdmin.choiceChanged(p)}" /> 
                                         </h:selectOneMenu>
                                         
                                         <h:commandButton value="filiere" action="#{opAdmin.ajoutFiliere(f.filiere)}" class="btn btn-primary"/>

@@ -9,7 +9,6 @@ import ConnectionMongo.MongoConnectionManager;
 import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
 import DAO.MongoDao.FiliereDAO;
-import DAO.MongoDao.ModuleDAO;
 import DAO.MongoDao.ProfessorDAO;
 import Entities.AdminEntity;
 import Entities.EtudiantEntity;
@@ -25,18 +24,21 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ValueChangeEvent;
+import javax.faces.event.ValueChangeListener;
 import org.mongodb.morphia.Datastore;
 
 @ManagedBean
 @SessionScoped
-public class OpAdmin implements Serializable
+public class OpAdmin implements Serializable , ValueChangeListener
 {
     User user;
     
     private String moduleAjout;
     
     private ProfessorEntity prof;
-
+    
     public ProfessorEntity getProf()
     {
         return prof;
@@ -125,7 +127,7 @@ public class OpAdmin implements Serializable
     
     public void ajoutFiliere(FiliereEnum f)
     {
-        System.out.println("ajouter : "+moduleAjout+" a filiere : "+f+" - prof : "+prof);
+        System.out.println("ajouter : "+moduleAjout+" a filiere : "+f+" - prof : ");
         
         //MongoConnectionManager mongo = MongoConnectionManager.getInstance();
         //Datastore ds = mongo.getDatastore();
@@ -146,10 +148,28 @@ public class OpAdmin implements Serializable
         
     }
     
-    public void choiceChanged()
+    public void choiceChanged(ProfessorEntity p)
     {
-        System.out.println("choice changed : "+prof);
+        if(p!=null)
+            System.out.println("choice changed : "+p);
+        else
+            System.out.println("no option");
     }
+    
+    public void change()
+    {
+        System.out.println("change");
+                
+    }
+
+    @Override
+    public void processValueChange(ValueChangeEvent event) throws AbortProcessingException
+    {
+        System.out.println("change 2 ");
+    }
+    
+    
+    
     
     
 }

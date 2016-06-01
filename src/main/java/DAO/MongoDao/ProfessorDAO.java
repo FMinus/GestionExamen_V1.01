@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -55,14 +56,37 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
     }
 
     @Override
-    public void deleteBy(String champ, String name) 
+    public void deleteBy(String champ, String value) 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            ds.delete(createQuery().field(champ).equal(value).getClass());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public void deleteByEmail(String email) 
     {
         ds.delete(createQuery().field("email").equal(email).getClass());
+    }
+    
+    public void addModule(ProfessorEntity prof,ModuleEntity module)
+    {
+        Query<ProfessorEntity> query=createQuery().field("email").equal(prof.getEmail());
+        
+        module.setProfOwner(prof);
+        Key<ModuleEntity> moduleKey = ds.save(module);
+        
+        UpdateOperations<ProfessorEntity> ops = 
+                ds.createUpdateOperations(entityClazz)
+                        .add("modules", moduleKey)
+                ;
+        
+        ds.update(query, ops);   
+        
     }
 
     @Override
@@ -106,6 +130,7 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
                         .set("firstName", prof.getFirstName())
                         .set("lastName", prof.getLastame())
                         .set("email", prof.getEmail())
+                        .set("modules", prof.getModules())
                         .set("password", prof.getPassword())                
                         .set("dateOfBirth", prof.getDateOfBirth())
                 ;
@@ -113,28 +138,11 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         ds.update(query, ops);   
     }
     
-    public void updateListModule(List<ModuleEntity> modules) 
-    {
-        Query<ProfessorEntity> query=createQuery().field("modules").equal(modules);    
-        UpdateOperations<ProfessorEntity> ops = ds.createUpdateOperations(entityClazz).set("modules", modules);           
-        ds.update(query, ops);       
-    }
-    
     public List<ModuleEntity> getListModuleByEmail(String email) 
     {
         return createQuery().field("email").equal(email).get().getModules();
     }
     
-    public void addModuleTo(ProfessorEntity p,ModuleEntity m)
-    {
-        Query<ProfessorEntity> query=createQuery().field("email").equal(p.getEmail());       
-        List<ModuleEntity> temp = query.get().getModules();
-        temp.add(m);
-         
-        UpdateOperations<ProfessorEntity> ops = ds.createUpdateOperations(entityClazz).set("modules", temp);
-        ds.update(query, ops);        
-    }
-
     public boolean emailExist(String email)
     {
         Query<ProfessorEntity> query=createQuery().field("email").equal(email);    

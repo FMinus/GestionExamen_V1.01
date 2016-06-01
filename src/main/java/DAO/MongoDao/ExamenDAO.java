@@ -10,6 +10,7 @@ import Entities.ModuleEntity;
 import com.mongodb.MongoClient;
 import java.util.Date;
 import java.util.List;
+import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
@@ -18,15 +19,14 @@ import org.mongodb.morphia.query.Query;
 public class ExamenDAO extends BasicDAO<ExamenEntity, String>
 {
     
-    public ExamenDAO(Class<ExamenEntity> entityClass, MongoClient mongoClient, Morphia morphia, String dbName)
+    public ExamenDAO(Class<ExamenEntity> entityClass, Datastore ds)
     {
-        super(entityClass, mongoClient, morphia, dbName);
+        super(entityClass, ds);
     }
     
     public ExamenEntity findByModule(ModuleEntity module)
     {
-        return createQuery().field("module").equal(module).get();
-        
+        return createQuery().field("module").equal(module).get();       
     }
     
     public List<ExamenEntity> findAllExams()

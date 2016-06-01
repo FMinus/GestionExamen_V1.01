@@ -40,7 +40,7 @@ public class EtudiantDAO extends BasicDAO<EtudiantEntity, String> implements Upd
         return query.asList();
     }
     
-    public List<EtudiantEntity> findAllEtudiantsButSelf(String email)
+    public List<EtudiantEntity> findOtherEtudiants(String email)
     {
         Query<EtudiantEntity> query=createQuery().field("email").notEqual(email);
         return query.asList();
@@ -93,6 +93,8 @@ public class EtudiantDAO extends BasicDAO<EtudiantEntity, String> implements Upd
          Query<EtudiantEntity> query=createQuery().field("email").equal(email);   
          ds.findAndDelete(query);  
      }
+     
+     
     
     
     /*

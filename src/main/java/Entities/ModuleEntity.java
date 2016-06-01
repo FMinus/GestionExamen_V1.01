@@ -81,7 +81,7 @@ public class ModuleEntity extends BaseEntity{
     @Override
     public String toString()
     {
-        return "Module{" + "ModuleName=" + ModuleName;
+        return "Module{" + "ModuleName=" + ModuleName + " Proffesseur Responsable : "+profOwner;
     }
     
     

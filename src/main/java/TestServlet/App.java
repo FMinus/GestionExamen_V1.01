@@ -9,6 +9,7 @@ import ConnectionMongo.MongoConnectionManager;
 import Controllers.Admin.OpAdmin;
 import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
+import DAO.MongoDao.ExamenDAO;
 import DAO.MongoDao.FiliereDAO;
 import DAO.MongoDao.ModuleDAO;
 import DAO.MongoDao.ProfessorDAO;
@@ -32,13 +33,19 @@ public class App  {
        MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
        Datastore ds = mongo.getDatastore();
        
-       /*
        AdminDAO admindao = new AdminDAO(AdminEntity.class, ds);
+       EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
+       ProfessorDAO profDao = new ProfessorDAO(ProfessorEntity.class, ds);
+       ModuleDAO moduledao = new ModuleDAO(ModuleEntity.class, ds);
+       ExamenDAO examenDAO = new ExamenDAO(ExamenEntity.class,ds);
+       
+       /*
+       
        AdminEntity admin = new AdminEntity("jalil", "messaf", "admin@mail.com", "admin", null, "[B@71844c48.png");
        
        //admindao.save(admin);
        
-       EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
+       
        
        EtudiantEntity etudiant = new EtudiantEntity();
        etudiant.setEmail("ensa@mail.com");
@@ -48,14 +55,66 @@ public class App  {
        */
        
        
-       ProfessorEntity p = new ProfessorEntity();
+        
+       //ProfessorEntity p = profDao.getByEmail("prof@mail.com");
        
-       ProfessorDAO profDao = new ProfessorDAO(ProfessorEntity.class, ds);
+       ModuleEntity m = new ModuleEntity();
+       
+      
+       m = moduledao.findByName("Objective C");
+       
+       List<ExamenEntity> listExam = moduledao.getAllExams(m);
+       
+        System.out.println("exams : "+listExam);
+       //ExamenEntity ex = new ExamenEntity(new Date(), new Date(), m);
+       
+       //moduledao.addExam(m, ex);
+       
+       
+       //m = moduledao.findByName("Metaeuristique");
+       
+       //moduledao.updateName("Metaeuristique", "Metaeuristique 2");
+      
+       
+       //System.out.println("module modifié : "+m);
+               
+       
+       //p.modules.set(0, m);
+       
+       
+       //profDao.updateProfessor(p);
+       
+       //p = profDao.getByEmail("prof@mail.com");
+       
+       //profDao.addModule(p, m);
+       
+       //System.out.println("prof"+p);
+       //System.out.println("ses modules"+p.modules);
+               
+       
+       /**
+        
+        
+        ModuleEntity m = moduledao.findByName("GPI");
+        
+        System.out.println("module "+m);
+        
+        ExamenEntity ex1 = new ExamenEntity(new Date(), m);
+        ExamenEntity ex2 = new ExamenEntity(new Date(), m);
+        
+        List<ExamenEntity> examens = new ArrayList<>();
+        examens.add(ex1);
+        examens.add(ex2);
+        
+        m.setExamens(examens);
+        **/
+        
+        
        
        //ProfessorEntity p = profDao.getByEmail("testProf@mail.com");
        
        
-       
+       /*
        p.setEmail("prof@mail.com");
        p.setFirstName("prof");
        p.setLastame("prof");
@@ -160,6 +219,9 @@ public class App  {
        if(etudiant instanceof Professor)
            System.out.println("no");
         */
+       
+       
+       
     }
     
     
