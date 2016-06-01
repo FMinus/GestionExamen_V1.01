@@ -24,7 +24,7 @@ import org.mongodb.morphia.Datastore;
 @SessionScoped
 public class OpEtudiant implements Serializable
 {
-   
+   //TODO : is null
     User user;
 
     public User getUser()
@@ -66,23 +66,27 @@ public class OpEtudiant implements Serializable
         MongoConnectionManager mongo = MongoConnectionManager.getInstance();
         Datastore ds = mongo.getDatastore();
         
-        EtudiantDAO etudiantDAO = new EtudiantDAO(EtudiantEntity.class, ds);
-        ExamenDAO examenDAO = new ExamenDAO(ExamenEntity.class, ds);
         ModuleDAO moduleDAO = new ModuleDAO(ModuleEntity.class, ds);
         
         List<ExamenEntity> listExams = new ArrayList<>();
         
-        EtudiantEntity etudiantEntity = etudiantDAO.findByEmail(user.getEmail());
+        //Etudiant etudiant = (Etudiant) user;
         
-        Etudiant etudiant = (Etudiant) user;
+        //System.out.println("user : "+user);
+        //System.out.println("sa filiere : "+etudiant.getFiliere());
         
-        List<ModuleEntity> listModules = getModules(etudiant.getFiliere());
+        
+        List<ModuleEntity> listModules = getModules(FiliereEnum.GI);
         
         for(ModuleEntity mod : listModules)
         {
             listExams.addAll(moduleDAO.getAllExams(mod));
+            System.out.println("module : "+mod);
+            System.out.println("exams : "+mod.examens);
+            
         }
         
+        //System.out.println("examens : "+listExams);
         
         return listExams;
     }

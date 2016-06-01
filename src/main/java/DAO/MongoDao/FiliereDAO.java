@@ -10,8 +10,10 @@ import Entities.ModuleEntity;
 import Enums.FiliereEnum;
 import java.util.List;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 public class FiliereDAO extends BasicDAO<FiliereEntity, String>{
     
@@ -20,9 +22,18 @@ public class FiliereDAO extends BasicDAO<FiliereEntity, String>{
         super(entityClass, ds);
     }
     
-    public void addModule(ModuleEntity module)
+    public void addModule(FiliereEntity filiere,ModuleEntity module)
     {
-        createQuery().disableValidation().get().getListModule().add(module);
+        Query<FiliereEntity> query=createQuery().field("filiere").equal(filiere.getFiliere());
+        
+        
+        Key<ModuleEntity> moduleKey = ds.save(module);
+        
+        UpdateOperations<FiliereEntity> ops = 
+                ds.createUpdateOperations(entityClazz)
+                        .add("listModule", moduleKey);
+                
+        ds.update(query, ops);  
     }
     
     public List<ModuleEntity> getList(FiliereEnum f)
@@ -46,6 +57,8 @@ public class FiliereDAO extends BasicDAO<FiliereEntity, String>{
         Query<FiliereEntity> query=createQuery();
         return query.asList();
     }
+    
+    
     
     
 }

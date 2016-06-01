@@ -101,5 +101,10 @@ public class NavigationBean implements Serializable
     {
         return "/GestionExamen_V1.01/Views/Admin/GestionFilieres.xhtml";
     }
+    
+    public String toExamsEtudiant()
+    {
+        return "/GestionExamen_V1.01/Views/"+getRole()+"/ListExams.xhtml";
+    }
 
 }

@@ -7,6 +7,7 @@ package TestServlet;
 
 import ConnectionMongo.MongoConnectionManager;
 import Controllers.Admin.OpAdmin;
+import Controllers.Etudiant.OpEtudiant;
 import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
 import DAO.MongoDao.ExamenDAO;
@@ -38,7 +39,7 @@ public class App  {
        ProfessorDAO profDao = new ProfessorDAO(ProfessorEntity.class, ds);
        ModuleDAO moduledao = new ModuleDAO(ModuleEntity.class, ds);
        ExamenDAO examenDAO = new ExamenDAO(ExamenEntity.class,ds);
-       
+       FiliereDAO filiereDAO = new FiliereDAO(FiliereEntity.class, ds);
        /*
        
        AdminEntity admin = new AdminEntity("jalil", "messaf", "admin@mail.com", "admin", null, "[B@71844c48.png");
@@ -63,9 +64,17 @@ public class App  {
       
        m = moduledao.findByName("Objective C");
        
-       List<ExamenEntity> listExam = moduledao.getAllExams(m);
        
-        System.out.println("exams : "+listExam);
+       FiliereEntity filiereEntity = filiereDAO.getFiliereByname(FiliereEnum.GI);
+       System.out.println("filiere"+filiereEntity.getListModule());
+       
+       //filiereDAO.addModule(filiereEntity, m);
+        
+       //OpEtudiant op = new OpEtudiant();
+       
+       //List<ExamenEntity> listExam = op.getExams();
+       
+       //System.out.println("exams : "+listExam);
        //ExamenEntity ex = new ExamenEntity(new Date(), new Date(), m);
        
        //moduledao.addExam(m, ex);

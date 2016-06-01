@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ez="http://xmlns.jcp.org/jsf/composite/ezcomp">
+    <h:head>
+        <title>List Exams</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./../../resources/template/Home_Template.xhtml">
+            
+            <ui:define name="content">
+                
+                <div class="container">
+                    <table class="table  table-hover">
+                        
+                        <tr>
+                            <th class="order-table-header">Module</th>
+                            <th class="order-table-header">Date Debut</th>
+                            <th class="order-table-header">Date fin</th>
+                        </tr>
+                        
+                        <tbody>
+                            <ui:repeat var="exam" value="#{editEtudiant.getExams()}" varStatus="status">
+                                <tr>
+                                    <td class="order-table-even-row">#{exam.module.moduleName}</td>
+                                    <td class="order-table-even-row">#{exam.dateDebut}</td>
+                                    <td class="order-table-even-row">#{exam.dateFin}</td>
+                                    
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                        
+                    </table>
+                </div>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
