@@ -23,7 +23,7 @@
                         </tr>
                         
                         <tbody>
-                            <ui:repeat var="exam" value="#{editEtudiant.getExams()}" varStatus="status">
+                            <ui:repeat var="exam" value="#{editEtudiant.getExams(home.user)}" varStatus="status">
                                 <tr>
                                     <td class="order-table-even-row">#{exam.module.moduleName}</td>
                                     <td class="order-table-even-row">#{exam.dateDebut}</td>

@@ -114,4 +114,15 @@ public class MessagingBean implements Serializable
                 
        return "";
     }
+    
+    public void markAllAsRead(String email)
+    {
+       MongoConnectionManager mongo = MongoConnectionManager.getInstance();     
+       Datastore ds = mongo.getDatastore();
+       
+       MessageDAO messageDAO = new MessageDAO(MessageEntity.class, ds);
+       
+       messageDAO.markAllAsRead(email);
+        
+    }
 }

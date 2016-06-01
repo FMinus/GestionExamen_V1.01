@@ -39,4 +39,36 @@ public class ExamenDAO extends BasicDAO<ExamenEntity, String>
     {
         return createQuery().field("date").equal(t).get();
     }
+    
+    public List<ExamenEntity> findByModule(String module)
+    {
+        return createQuery().field("module").equal(module).asList();
+    }
+    
+    public ExamenEntity examAfter(Date t)
+    {
+        return createQuery().field("dateDebut").greaterThan(t).get();
+    }
+    
+    public List<ExamenEntity> examenAPasser(Date t)
+    {
+        return createQuery().field("dateFin").lessThan(t).asList();
+    }
+    
+    public ExamenEntity examEnCours()
+    {
+        Query<ExamenEntity> query = createQuery();
+        Date t = new Date();
+        
+        query.and
+        (
+            query.criteria("dateDebut").greaterThan(t),
+            query.criteria("dateFin").lessThan(t)
+            
+        );
+        
+       return query.get();
+    }
+    
+    
 }

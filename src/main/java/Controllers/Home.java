@@ -199,7 +199,7 @@ public class Home implements Serializable
        
        ProfessorDAO professorDAO = new ProfessorDAO(ProfessorEntity.class, ds);
        
-       //TODO : change back to : user.getEmail()
+       
        List<ModuleEntity> list = professorDAO.getListModuleByEmail(user.getEmail());
        return list;
     }

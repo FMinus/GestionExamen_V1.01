@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
       xmlns:composite="http://java.sun.com/jsf/composite"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-          
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
     <!-- INTERFACE -->
     <cc:interface>
         <composite:attribute name="render"/>
         <composite:attribute name="counter"/>     
     </cc:interface>
-        
+    
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <ul class="nav navbar-nav navbar-right">
@@ -18,23 +19,27 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <div class="notifications-wrapper">                                           
-                            <div class="notification-item">
-                                <ui:repeat var="m" value="#{home.getMessages()}" varStatus="status">
-                                    <tr>
-                                        <td class="order-table-even-row">#{m.emailFrom}</td><br/>
-                                        <td class="order-table-even-row">#{m.subject}</td>
-                                        
-                                        <td class="order-table-even-row">#{m.message}</td>
-                                        
-                                        <td class="order-table-even-row">
-                                            <div style="font-size: 6pt;">
-                                                #{home.simpleDateDisplay(m.dateEnvoi)}
-                                            </div>
-                                        </td>
-                                        <li class="divider"></li>
-                                    </tr>
-                                </ui:repeat>
-                            </div>                             
+                        <div class="notification-item">
+                            <h:form>
+                                <h:commandLink action="#{messagingBean.markAllAsRead(home.user.email)}">Mark All As Read</h:commandLink>
+                            </h:form>
+                            <li class="divider"></li>
+                            <ui:repeat var="m" value="#{home.getMessages()}" varStatus="status">
+                                <tr>
+                                    <td class="order-table-even-row">#{m.emailFrom}</td><br/>
+                                    <td class="order-table-even-row">#{m.subject}</td>
+                                            
+                                    <td class="order-table-even-row">#{m.message}</td>
+                                            
+                                    <td class="order-table-even-row">
+                                        <div style="font-size: 6pt;">
+                                            #{home.simpleDateDisplay(m.dateEnvoi)}
+                                        </div>
+                                    </td>
+                                    <li class="divider"></li>
+                                </tr>
+                            </ui:repeat>
+                        </div>                             
                     </div>
                 </ul>
             </li>

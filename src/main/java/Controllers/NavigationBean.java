@@ -106,5 +106,9 @@ public class NavigationBean implements Serializable
     {
         return "/GestionExamen_V1.01/Views/"+getRole()+"/ListExams.xhtml";
     }
-
+    
+    public String toAjoutExam()
+    {
+        return "/GestionExamen_V1.01/Views/"+getRole()+"/AjoutExamen.xhtml";
+    }
 }

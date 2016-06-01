@@ -48,20 +48,18 @@ public class OpEtudiant implements Serializable
        etudiantDAO.updateEtudiant(e.toEtudiantEntity());
     }
     
+    @SuppressWarnings("empty-statement")
     public static List<ModuleEntity> getModules(FiliereEnum filiere)
     {
-        List<ModuleEntity> listModules;
-        
         MongoConnectionManager mongo = MongoConnectionManager.getInstance();
         Datastore ds = mongo.getDatastore();
         
         FiliereDAO filiereDAO = new FiliereDAO(FiliereEntity.class, ds);
         
-        listModules = filiereDAO.getList(filiere);         
-        return listModules;
+        return filiereDAO.getList(filiere);
     }
     
-    public List<ExamenEntity> getExams()
+    public List<ExamenEntity> getExams(User e)
     {
         MongoConnectionManager mongo = MongoConnectionManager.getInstance();
         Datastore ds = mongo.getDatastore();
@@ -70,23 +68,12 @@ public class OpEtudiant implements Serializable
         
         List<ExamenEntity> listExams = new ArrayList<>();
         
-        //Etudiant etudiant = (Etudiant) user;
-        
-        //System.out.println("user : "+user);
-        //System.out.println("sa filiere : "+etudiant.getFiliere());
-        
-        
-        List<ModuleEntity> listModules = getModules(FiliereEnum.GI);
+        List<ModuleEntity> listModules = getModules(((Etudiant) e).getFiliere());
         
         for(ModuleEntity mod : listModules)
         {
-            listExams.addAll(moduleDAO.getAllExams(mod));
-            System.out.println("module : "+mod);
-            System.out.println("exams : "+mod.examens);
-            
+            listExams.addAll(moduleDAO.getAllExams(mod));                     
         }
-        
-        //System.out.println("examens : "+listExams);
         
         return listExams;
     }
