@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ez="http://xmlns.jcp.org/jsf/composite/ezcomp">
     <h:head>
-        <title>List Exams</title>
+        <title>Page Examen</title>
     </h:head>
     <h:body>
         <ui:composition template="./../../resources/template/Home_Template.xhtml">
@@ -14,15 +14,7 @@
             <ui:define name="content">
                 
                 
-                Exams en cours :
-                <ez:ListExams 
-                    listExams="#{editEtudiant.getExamEnCours(home.user)}"
-                    examPage="#{nav.toExamPage()}"
-                    peutPasser="#{true}"
-                    />
-                
-                Tous les Exams :
-                <ez:ListExams listExams="#{editEtudiant.getExams(home.user)}"/>
+               
                    
                 
             </ui:define>

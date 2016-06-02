@@ -6,7 +6,6 @@
 package TestServlet;
 
 import ConnectionMongo.MongoConnectionManager;
-import Controllers.Admin.OpAdmin;
 import Controllers.Etudiant.OpEtudiant;
 import DAO.MongoDao.AdminDAO;
 import DAO.MongoDao.EtudiantDAO;
@@ -15,13 +14,9 @@ import DAO.MongoDao.FiliereDAO;
 import DAO.MongoDao.ModuleDAO;
 import DAO.MongoDao.ProfessorDAO;
 import Entities.*;
-import Enums.FiliereEnum;
-import Metier.Etudiant;
-import Metier.Professor;
-import Metier.User;
-import java.util.ArrayList;
+import static java.time.OffsetTime.now;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.mongodb.morphia.Datastore;
 
@@ -59,15 +54,41 @@ public class App  {
         
        //ProfessorEntity p = profDao.getByEmail("prof@mail.com");
        
-       ModuleEntity m = new ModuleEntity();
+       ModuleEntity m1 = new ModuleEntity();
+       ModuleEntity m2 = new ModuleEntity();
+       ModuleEntity m3 = new ModuleEntity();
        
       
-       m = moduledao.findByName("Objective C");
+       m1 = moduledao.findByName("Objective C");
+       m2 = moduledao.findByName("GPI");
+       m3 = moduledao.findByName("Oracle");
        
        
+       long minute=60000;
+       long hour = minute * 60;
+       
+       
+       Calendar date = Calendar.getInstance();
+       long now = date.getTimeInMillis();
+       
+       Date twoHoursAgo = new Date(now - 2*hour);
+       Date twoHoursLater = new Date(now + 2*hour);
+       
+       
+       //ExamenEntity ex1 = new ExamenEntity(twoHoursAgo, twoHoursLater, m2);
+       //moduledao.addExam(m2, ex1);
+       
+        //System.out.println("date debut : "+twoHoursAgo);
+        //System.out.println("date fin : "+twoHoursLater);
+        
+        OpEtudiant oe = new OpEtudiant();
+        
+        //List<ExamenEntity> list = oe.getExamEnCours(e);
+        
+       /*
        FiliereEntity filiereEntity = filiereDAO.getFiliereByname(FiliereEnum.GI);
        System.out.println("filiere"+filiereEntity.getListModule());
-       
+       */
        //filiereDAO.addModule(filiereEntity, m);
         
        //OpEtudiant op = new OpEtudiant();
@@ -75,7 +96,7 @@ public class App  {
        //List<ExamenEntity> listExam = op.getExams();
        
        //System.out.println("exams : "+listExam);
-       //ExamenEntity ex = new ExamenEntity(new Date(), new Date(), m);
+       
        
        //moduledao.addExam(m, ex);
        

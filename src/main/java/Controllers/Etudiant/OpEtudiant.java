@@ -3,7 +3,6 @@ package Controllers.Etudiant;
 
 import ConnectionMongo.MongoConnectionManager;
 import DAO.MongoDao.EtudiantDAO;
-import DAO.MongoDao.ExamenDAO;
 import DAO.MongoDao.FiliereDAO;
 import DAO.MongoDao.ModuleDAO;
 import Entities.EtudiantEntity;
@@ -15,6 +14,7 @@ import Metier.Etudiant;
 import Metier.User;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
@@ -76,6 +76,23 @@ public class OpEtudiant implements Serializable
         }
         
         return listExams;
+    }
+    
+    public List<ExamenEntity> getExamEnCours(User e)
+    {
+        
+        List<ExamenEntity> list = getExams(e);
+        List<ExamenEntity> listExamsCurrent = new ArrayList<>();
+        
+        Date now = new Date();
+        
+        for(ExamenEntity exam : list)
+        {
+            if(exam.getDateDebut().before(now) && exam.getDateFin().after(now))
+                listExamsCurrent.add(exam);
+        }
+        
+        return listExamsCurrent;
     }
     
     

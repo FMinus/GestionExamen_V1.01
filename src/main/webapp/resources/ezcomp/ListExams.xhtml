@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="listExams"/>
+        <cc:attribute name="peutPasser"/>
+        <cc:attribute name="examPage" method-signature="java.lang.String action()" />
+        <cc:attribute name="examGetter" method-signature="java.lang.String action()"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <div class="container">
+            <table class="table  table-hover">
+
+                <tr>
+                    <th class="order-table-header">Module</th>
+                    <th class="order-table-header">Date Debut</th>
+                    <th class="order-table-header">Date fin</th>
+                </tr>
+
+                <tbody>
+                    <ui:repeat var="exam" value="#{cc.attrs.listExams}" varStatus="status">
+                        <tr>
+                            <td class="order-table-even-row">#{exam.module.moduleName}</td>
+                            <td class="order-table-even-row">#{exam.dateDebut}</td>
+                            <td class="order-table-even-row">#{exam.dateFin}</td>
+                            
+                            <h:panelGroup rendered="#{cc.attrs.peutPasser}">
+                                <td class="order-table-even-row">
+                                    <h:form>
+                                        <h:commandButton value="Commancer" class="btn btn-toolbar" action="#{cc.attrs.examPage}">
+                                            <f:setPropertyActionListener target="#{cc.attrs.examGetter}" value="" />
+                                        </h:commandButton>                                     
+                                    </h:form>
+                                </td>
+                            </h:panelGroup> 
+
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+
+            </table>
+        </div>
+    </cc:implementation>
+</html>
