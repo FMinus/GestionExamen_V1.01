@@ -6,6 +6,7 @@
 package LoginFilter;
 import Beans.CurrentUser;
 import java.io.IOException;
+import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -29,7 +30,6 @@ public class loginFilter implements Filter
     @Override
     public void init(FilterConfig filterConfig) throws ServletException
     {
-        
         
     }
     
@@ -60,7 +60,7 @@ public class loginFilter implements Filter
             if(session == null || !user.isIsLoggedIn())
             {
                 //System.out.println("back to login "+url);                
-                if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin") || url.contains("/Common"))
+                if(url.contains("/Etudiant") || url.contains("/Professeur") || url.contains("/Admin") || url.contains("/Common") || url.contains("Logout"))
                 {
                     res.sendRedirect(req.getServletContext().getContextPath()+"/Login.xhtml");
                     return;
@@ -81,12 +81,14 @@ public class loginFilter implements Filter
                     return;
                 }
                 
-                if(url.contains("/Logout.xhtml"))
+                if(url.contains("Logout.xhtml"))
                 {
                     System.out.println("Logging out");
                     session.removeAttribute("loggedAs");
                     session.removeAttribute("currentUser");
                     //temp=null;
+                    //HttpSession s = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+                    //s.invalidate();
                     user=null;
                    
                     session.invalidate();

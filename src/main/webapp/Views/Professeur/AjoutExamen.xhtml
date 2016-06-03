@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      >
+      
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <body>
         
@@ -13,52 +13,91 @@
             <ui:define name="content">
                 
                 
-                <h:form class="form-signin pure-form pure-form-aligned" role="form">           
-                    
-                    <div class="form-group">
-                        <div class="pure-control-group">                      
-                            <label for="dateDebut">Date Examen</label>
-                            <p:calendar id="dateDebut" value="#{ajoutExamen.exam.dateDebut}" effect="fold" pattern="dd-MM-yyyy-HH-mm" >
-                                <!--<p:ajax event="dateSelect" update="datefin" /> -->
-                            </p:calendar>
+                <ui:fragment rendered="#{ajoutExamen.phase == 0}">
+                    <h:form class="form-signin pure-form pure-form-aligned" role="form">           
+                        
+                        <div class="form-group">
+                            <div class="pure-control-group">                      
+                                <label for="dateDebut">Date Examen</label>
+                                <p:calendar id="dateDebut" value="#{ajoutExamen.dateDebut}" effect="fold" pattern="dd-MM-yyyy HH:mm" >
+                                    <p:ajax process="dateDebut" partialSubmit="true" event="dateSelect"/>
+                                </p:calendar>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="pure-control-group">                      
-                            <label for="datefin">Fin Examen : </label>
-                            <p:calendar id="datefin" value="#{ajoutExamen.exam.dateFin}" 
-                                        pattern="HH:mm" timeOnly="true"
-                                        mindate="#{ajoutExamen.exam.dateDebut}" >
-                                <!--
-                                <f:attribute name="dateDebut" value="#{ajoutExamen.exam.dateDebut}" />
-                                <f:validator validatorId="dateRangeValidator"/>
-                                -->
-                            </p:calendar>
-                            
+                        
+                        <div class="form-group">
+                            <div class="pure-control-group">                      
+                                <label for="datefin">duree Exam</label>
+                                <h:selectOneMenu id="datefin" value="#{ajoutExamen.duree}" >
+                                    <f:selectItem itemValue="1" itemLabel="1 Heur" />
+                                    <f:selectItem itemValue="2" itemLabel="2 Heur" />
+                                    <f:selectItem itemValue="3" itemLabel="3 Heur" />                 
+                                    <f:selectItem itemValue="4" itemLabel="4 Heur" />                 
+                                </h:selectOneMenu>
+                            </div>
                         </div>
-                    </div>
+                        
+                        <div class="form-group">
+                            <label for="moduleselect"> Module</label>
+                            <h:selectOneMenu id="moduleselect" value="#{ajoutExamen.module}" >
+                                <f:selectItems value="#{ajoutExamen.getModules(home.user.email)}" var="m" itemLabel="#{m.moduleName}" itemValue="#{m.moduleName}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:commandButton id="loginBtn" action="#{ajoutExamen.dateset()}" value="Valider" class="btn btn-success"  />
+                        </div>
+                    </h:form>
                     
-                    <!--
-                    
-                    <div class="form-group">
-                        <h:outputText value="Module" class="control-label col-sm-2" />
-                        <h:selectOneMenu id="accountSelect" value="#{ajoutExamen.exam.module}" >
-                            <f:selectItems value="#{ajoutExamen.getModules(home.user.email)}" var="m" itemLabel="#{m.moduleName}" />
-                            
-                        </h:selectOneMenu>
-                    </div>
-                    -->
-                    
-                    <div class="form-group">
-                        <h:commandButton id="loginBtn" action="#{ajoutExamen.ajouterExam()}" value="Submit" class="btn btn-success"  />
-                    </div>
-                    
-                </h:form>
+                </ui:fragment>
+                
+                <ui:fragment rendered="#{ajoutExamen.phase == 1}">
+                    <h:outputText value="Config Questions" />
+                    <h:form>
+                        <div class="form-group">
+                            <div class="pure-control-group">
+                                <label for="nbQuestions">Nombre de Questions</label>
+                                <h:inputText value="#{ajoutExamen.nombreQuestions}" id="nbQuestions" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="pure-control-group">
+                                <label for="typeExam">Type Exam</label>
+                                <h:selectOneMenu id="datefin" value="#{ajoutExamen.typeExamen}" >
+                                    <f:selectItem itemValue="QCM" itemLabel="QCM" />
+                                    <f:selectItem itemValue="Questions" itemLabel="Questions/Reponses" />
+                                    <f:selectItem itemValue="QCMQuestions" itemLabel="QCM + Questions/Reponses" />                 
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:commandButton id="confExam" action="#{ajoutExamen.confExam()}" value="Valider" class="btn btn-success"  />
+                        </div>
+                    </h:form>
+                </ui:fragment>
                 
                 
-                
-                
+                <ui:fragment rendered="#{ajoutExamen.phase == 2}">
+                    <h:form>
+                        <div class="form-group">
+                            <div class="pure-control-group">
+                                <h:outputText value="Saisie Questions" /><br/>
+                                
+                                <ui:repeat value="#{ajoutExamen.questions}" var="q">
+                                    <h:outputText value="#{q} : " />
+                                    <h:inputText value="#{q}"/><br/>
+                                </ui:repeat>
+                                
+                                
+                                <div class="form-group">
+                                    <h:commandButton id="saisieQuestions" action="#{ajoutExamen.saisieQuestions()}" value="Valider" class="btn btn-success"  />
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </ui:fragment>
                 
                 
                 

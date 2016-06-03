@@ -1,4 +1,3 @@
-
 package Controllers.Etudiant;
 
 import ConnectionMongo.MongoConnectionManager;
@@ -24,9 +23,9 @@ import org.mongodb.morphia.Datastore;
 @SessionScoped
 public class OpEtudiant implements Serializable
 {
-   //TODO : is null
+    /*
     User user;
-
+    
     public User getUser()
     {
         return user;
@@ -36,6 +35,7 @@ public class OpEtudiant implements Serializable
     {
         this.user = user;
     }
+    */
     
     
     
@@ -78,10 +78,13 @@ public class OpEtudiant implements Serializable
         return listExams;
     }
     
-    public List<ExamenEntity> getExamEnCours(User e)
+    public List<ExamenEntity> getExamEnCours(User user)
     {
+        if(user == null)
+            System.out.println("user is null");
+                
         
-        List<ExamenEntity> list = getExams(e);
+        List<ExamenEntity> list = getExams(user);
         List<ExamenEntity> listExamsCurrent = new ArrayList<>();
         
         Date now = new Date();
@@ -95,6 +98,18 @@ public class OpEtudiant implements Serializable
         return listExamsCurrent;
     }
     
+    public boolean hasExamsEncour(User e)
+    {
+        return !getExamEnCours(e).isEmpty();
+    }
+    
+    public boolean isEtudiant(User e)
+    {
+        if (e instanceof Etudiant)
+            return true;
+        else
+            return false;
+    }
     
     
     

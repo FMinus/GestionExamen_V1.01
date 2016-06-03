@@ -40,7 +40,6 @@
                                         <h:inputText value="#{opAdmin.moduleAjout}"/>
                                         
                                         <h:selectOneMenu value="#{opAdmin.prof}" onchange="#{opAdmin.choiceChanged(null)}" immediate="true">
-                                            <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
                                             <f:selectItems value="#{opAdmin.listAllProfessors()}" itemValue="#{opAdmin.listAllProfessors()}" var="p"/>
                                             <f:ajax listener="#{opAdmin.choiceChanged(p)}" /> 
                                         </h:selectOneMenu>

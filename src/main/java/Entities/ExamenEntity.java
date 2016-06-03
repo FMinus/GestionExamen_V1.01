@@ -27,6 +27,19 @@ public class ExamenEntity extends BaseEntity
     
     @Reference
     private ModuleEntity module;
+    
+    private String nomFichierXML;
+
+    public String getNomFichierXML()
+    {
+        return nomFichierXML;
+    }
+
+    public void setNomFichierXML(String nomFichierXML)
+    {
+        this.nomFichierXML = nomFichierXML;
+    }
+    
 
     public Date getDateDebut()
     {
@@ -62,11 +75,12 @@ public class ExamenEntity extends BaseEntity
     {
     }
 
-    public ExamenEntity(Date dateDebut, Date dateFin, ModuleEntity module)
+    public ExamenEntity(Date dateDebut, Date dateFin, ModuleEntity module,String nomfichier)
     {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.module = module;
+        this.nomFichierXML = nomfichier;
     }
 
     @Override
@@ -113,8 +127,9 @@ public class ExamenEntity extends BaseEntity
     @Override
     public String toString()
     {
-        return "Examen{" + "dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", module=" + module + '}';
+        return "ExamenEntity{" + "dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", module=" + module + ", nomFichierXML=" + nomFichierXML + '}';
     }
+
     
     
     

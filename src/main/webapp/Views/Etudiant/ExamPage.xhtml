@@ -13,6 +13,12 @@
             
             <ui:define name="content">
                 
+                <ez:ListExams 
+                    listExams="#{opEtudiant.getExamEnCours(home.user)}"
+                    examPage="#{nav.toExamPage()}"
+                    peutPasser="#{true}"
+                    />
+                
                 
                
                    

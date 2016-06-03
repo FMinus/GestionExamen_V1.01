@@ -14,16 +14,23 @@
             <ui:define name="content">
                 
                 
-                Exams en cours :
+                
+                <div class="alert alert-danger">
+                    <strong> Exams en cours :</strong>Cliquez pour commancer
+                </div>
                 <ez:ListExams 
-                    listExams="#{editEtudiant.getExamEnCours(home.user)}"
+                    listExams="#{opEtudiant.getExamEnCours(home.user)}"
                     examPage="#{nav.toExamPage()}"
                     peutPasser="#{true}"
                     />
                 
-                Tous les Exams :
-                <ez:ListExams listExams="#{editEtudiant.getExams(home.user)}"/>
-                   
+                
+                <div class="alert alert-info">
+                    <strong>Tous les Exams :</strong> a passer plus tard
+                </div>
+                
+                <ez:ListExams listExams="#{opEtudiant.getExams(home.user)}"/>
+                
                 
             </ui:define>
         </ui:composition>

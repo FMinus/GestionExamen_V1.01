@@ -59,6 +59,14 @@ public class MessageDAO extends BasicDAO<MessageEntity, Object>
                 ds.createUpdateOperations(entityClazz).set("lus", true);
         ds.update(query, ops);   
     }
+    
+    public void markAllAsUnRead()
+    {
+        Query<MessageEntity> query=createQuery();
+        UpdateOperations<MessageEntity> ops = ds.createUpdateOperations(entityClazz).set("lus", false);
+        ds.update(query, ops);   
+    }
+   
    
     
     

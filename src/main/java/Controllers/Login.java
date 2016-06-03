@@ -247,10 +247,14 @@ public class Login implements Serializable
         isLoggedIn = false;
         
         HttpServletRequest request = getHttpServletRequest();
-        request.getSession().removeAttribute("currentUser");
+        //HttpSession session = request.getSession();
+        //session.invalidate();
+       request.getSession().removeAttribute("currentUser");
         request.getSession().removeAttribute("loggedAs");
         
-        return "Logout.xhtml?faces-redirect=true";
+        //HttpSession s = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        //s.invalidate();
+        return "Logout.xhtml";
     }
     
     

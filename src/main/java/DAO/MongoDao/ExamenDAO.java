@@ -14,6 +14,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 
 public class ExamenDAO extends BasicDAO<ExamenEntity, String>
@@ -25,6 +26,11 @@ public class ExamenDAO extends BasicDAO<ExamenEntity, String>
     }
     
     public ExamenEntity findByModule(ModuleEntity module)
+    {
+        return createQuery().field("module").equal(module).get();       
+    }
+    
+    public ExamenEntity findByModuleName(String module)
     {
         return createQuery().field("module").equal(module).get();       
     }
@@ -68,6 +74,32 @@ public class ExamenDAO extends BasicDAO<ExamenEntity, String>
         );
         
        return query.get();
+    }
+    
+    public void updateDateExamenByModuleName(Date dateDebut,Date dateFin,String module)
+    {
+         Query<ExamenEntity> query=createQuery().field("module").equal(module);
+        
+        UpdateOperations<ExamenEntity> ops = 
+                ds.createUpdateOperations(entityClazz)
+                        .set("dateDebut", dateDebut)
+                        .set("dateFin", dateFin)
+                ;
+        
+        ds.update(query, ops);
+    }
+    
+    public void updateDateExamen(Date dateDebut,Date dateFin,ModuleEntity module)
+    {
+         Query<ExamenEntity> query=createQuery().field("module").equal(module);
+        
+        UpdateOperations<ExamenEntity> ops = 
+                ds.createUpdateOperations(entityClazz)
+                        .set("dateDebut", dateDebut)
+                        .set("dateFin", dateFin)
+                ;
+        
+        ds.update(query, ops);
     }
     
     

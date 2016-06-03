@@ -53,7 +53,7 @@ public class App  {
        
         
        //ProfessorEntity p = profDao.getByEmail("prof@mail.com");
-       
+       /*
        ModuleEntity m1 = new ModuleEntity();
        ModuleEntity m2 = new ModuleEntity();
        ModuleEntity m3 = new ModuleEntity();
@@ -73,7 +73,7 @@ public class App  {
        
        Date twoHoursAgo = new Date(now - 2*hour);
        Date twoHoursLater = new Date(now + 2*hour);
-       
+       */
        
        //ExamenEntity ex1 = new ExamenEntity(twoHoursAgo, twoHoursLater, m2);
        //moduledao.addExam(m2, ex1);
@@ -81,7 +81,7 @@ public class App  {
         //System.out.println("date debut : "+twoHoursAgo);
         //System.out.println("date fin : "+twoHoursLater);
         
-        OpEtudiant oe = new OpEtudiant();
+        //OpEtudiant oe = new OpEtudiant();
         
         //List<ExamenEntity> list = oe.getExamEnCours(e);
         
@@ -250,6 +250,9 @@ public class App  {
            System.out.println("no");
         */
        
+       Date t = new Date();
+       System.out.println(t);
+               
        
        
     }
