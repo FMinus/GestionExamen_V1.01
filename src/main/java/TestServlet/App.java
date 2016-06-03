@@ -5,6 +5,12 @@
  */
 package TestServlet;
 
+import Entities.ExamenEntity;
+import Entities.ProfessorEntity;
+import Entities.AdminEntity;
+import Entities.FiliereEntity;
+import Entities.EtudiantEntity;
+import Entities.ModuleEntity;
 import ConnectionMongo.MongoConnectionManager;
 import Controllers.Etudiant.OpEtudiant;
 import DAO.MongoDao.AdminDAO;
@@ -53,6 +59,7 @@ public class App  {
        
         
        //ProfessorEntity p = profDao.getByEmail("prof@mail.com");
+       //profDao.updateFieldByEmail("urlAvatar","[B@1d33e602.jpeg","prof@mail.com");
        /*
        ModuleEntity m1 = new ModuleEntity();
        ModuleEntity m2 = new ModuleEntity();

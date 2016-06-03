@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities;
+package Entities;;
 
 import Metier.Module;
 import java.util.ArrayList;

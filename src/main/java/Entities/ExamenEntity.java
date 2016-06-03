@@ -5,10 +5,16 @@
  */
 package Entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.mongodb.morphia.annotations.*;
 
 
@@ -16,8 +22,10 @@ import org.mongodb.morphia.annotations.*;
  *
  * @author AbdelMajid
  */
+
+@XmlRootElement(name="Examen")
 @Entity(value = "examen" ,noClassnameStored = true)
-public class ExamenEntity extends BaseEntity
+public class ExamenEntity extends BaseEntity implements Serializable
 {
     @Temporal(value = TemporalType.DATE)
     private Date dateDebut;
@@ -25,22 +33,15 @@ public class ExamenEntity extends BaseEntity
     @Temporal(value = TemporalType.DATE)
     private Date dateFin;
     
+    private String nomFichierXML;
+    
+    private  List<QuestionEntity> questions=new ArrayList<>();
+    
     @Reference
     private ModuleEntity module;
     
-    private String nomFichierXML;
-
-    public String getNomFichierXML()
-    {
-        return nomFichierXML;
-    }
-
-    public void setNomFichierXML(String nomFichierXML)
-    {
-        this.nomFichierXML = nomFichierXML;
-    }
     
-
+    
     public Date getDateDebut()
     {
         return dateDebut;
@@ -61,6 +62,16 @@ public class ExamenEntity extends BaseEntity
         this.dateFin = dateFin;
     }
 
+    public String getNomFichierXML()
+    {
+        return nomFichierXML;
+    }
+
+    public void setNomFichierXML(String nomFichierXML)
+    {
+        this.nomFichierXML = nomFichierXML;
+    }
+
     public ModuleEntity getModule()
     {
         return module;
@@ -71,25 +82,48 @@ public class ExamenEntity extends BaseEntity
         this.module = module;
     }
 
-    public ExamenEntity()
+    
+    
+    
+    public List<QuestionEntity> getQuestions() 
     {
+        return questions;
+    }
+    
+    @XmlElement
+    public void setQuestions(List<QuestionEntity> questions) 
+    {
+        this.questions = questions;
+    }
+   
+    
+    public ExamenEntity() 
+    {        
     }
 
-    public ExamenEntity(Date dateDebut, Date dateFin, ModuleEntity module,String nomfichier)
+    public ExamenEntity(Date dateDebut, Date dateFin, ModuleEntity module , String nomFichierXML)
     {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.nomFichierXML = nomFichierXML;
         this.module = module;
-        this.nomFichierXML = nomfichier;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "ExamenEntity{" + "dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", nomFichierXML=" + nomFichierXML + ", questions=" + questions + ", module=" + module + '}';
     }
 
     @Override
     public int hashCode()
     {
-        int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.dateDebut);
-        hash = 13 * hash + Objects.hashCode(this.dateFin);
-        hash = 13 * hash + Objects.hashCode(this.module);
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.dateDebut);
+        hash = 61 * hash + Objects.hashCode(this.dateFin);
+        hash = 61 * hash + Objects.hashCode(this.nomFichierXML);
+        hash = 61 * hash + Objects.hashCode(this.questions);
+        hash = 61 * hash + Objects.hashCode(this.module);
         return hash;
     }
 
@@ -109,11 +143,19 @@ public class ExamenEntity extends BaseEntity
             return false;
         }
         final ExamenEntity other = (ExamenEntity) obj;
+        if ( ! Objects.equals(this.nomFichierXML, other.nomFichierXML))
+        {
+            return false;
+        }
         if ( ! Objects.equals(this.dateDebut, other.dateDebut))
         {
             return false;
         }
         if ( ! Objects.equals(this.dateFin, other.dateFin))
+        {
+            return false;
+        }
+        if ( ! Objects.equals(this.questions, other.questions))
         {
             return false;
         }
@@ -123,18 +165,10 @@ public class ExamenEntity extends BaseEntity
         }
         return true;
     }
-
-    @Override
-    public String toString()
-    {
-        return "ExamenEntity{" + "dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", module=" + module + ", nomFichierXML=" + nomFichierXML + '}';
-    }
-
+   
     
     
-    
-    
-    
+   
     
      
      

@@ -138,6 +138,19 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         ds.update(query, ops);   
     }
     
+    public void updateFieldByEmail(String field,String newValue,String email) 
+    {
+        Query<ProfessorEntity> query=createQuery().field("email").equal(email);
+        
+        UpdateOperations<ProfessorEntity> ops = 
+                ds.createUpdateOperations(entityClazz)
+                        .set(field, newValue)
+                        
+                ;
+        
+        ds.update(query, ops);   
+    }
+    
     public List<ModuleEntity> getListModuleByEmail(String email) 
     {
         return createQuery().field("email").equal(email).get().getModules();

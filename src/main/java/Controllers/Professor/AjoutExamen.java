@@ -31,7 +31,20 @@ public class AjoutExamen implements Serializable
     private TypeExamen typeExamen;
     
     private List<String> Questions = new ArrayList<>();
+    private List<String> Ennoce = new ArrayList<>();
+    private List<Boolean> reponses = new ArrayList<>();
+            
 
+    public List<String> getEnnoce()
+    {
+        return Ennoce;
+    }
+
+    public void setEnnoce(List<String> Ennoce)
+    {
+        this.Ennoce = Ennoce;
+    }
+    
     public List<String> getQuestions()
     {
         return Questions;
@@ -175,6 +188,7 @@ public class AjoutExamen implements Serializable
         for(int i = 0; i < nombreQuestions; i++)
         {
             Questions.add("Question N°"+i);
+            Ennoce.add("");
         }
         phase++;
         
@@ -183,7 +197,7 @@ public class AjoutExamen implements Serializable
     
     public void saisieQuestions()
     {
-        System.out.println("questions saisies : "+Questions);
+        System.out.println("questions saisies : "+Ennoce);
         
         phase = 0;
     }
