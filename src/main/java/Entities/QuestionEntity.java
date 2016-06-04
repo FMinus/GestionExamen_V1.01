@@ -15,7 +15,9 @@ import javax.xml.bind.annotation.*;
  *
  * @author AbdelMajid
  */
-public class QuestionEntity {
+public class QuestionEntity 
+{
+    
     private int Id;
     private String question;
     private  List<ResponseEntity> responses;
@@ -30,24 +32,44 @@ public class QuestionEntity {
         this.responses = responses;
     }
 
-    public QuestionEntity() {
+    public QuestionEntity(int Id, String question, List<ResponseEntity> responses)
+    {
+        this.Id = Id;
+        this.question = question;
+        this.responses = responses;
+    }
+    
+    
+    public QuestionEntity() 
+    {
         responses=new ArrayList<>();
     }
 
-    public int getId() {
+    public int getId() 
+    {
         return Id;
     }
+    
     @XmlAttribute
-    public void setId(int Id) {
+    public void setId(int Id) 
+    {
         this.Id = Id;
     }
     
-    public String getQuestion() {
+    public String getQuestion() 
+    {
         return question;
     }
    
-    public void setQuestion(String laReponse) {
-        this.question = laReponse;
+    public void setQuestion(String énoncé) 
+    {
+        this.question = énoncé;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Question{" + "Id=" + Id + ", question=" + question + ", responses=" + responses + '}';
     }
     
     

@@ -6,6 +6,8 @@ import DAO.MongoDao.ProfessorDAO;
 import Entities.ExamenEntity;
 import Entities.ModuleEntity;
 import Entities.ProfessorEntity;
+import Entities.QuestionEntity;
+import Entities.ResponseEntity;
 import Enums.TypeExamen;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.inject.Inject;
 import org.mongodb.morphia.Datastore;
 
 @ManagedBean
@@ -33,7 +36,21 @@ public class AjoutExamen implements Serializable
     private List<String> Questions = new ArrayList<>();
     private List<String> Ennoce = new ArrayList<>();
     private List<Boolean> reponses = new ArrayList<>();
+    
+    @Inject 
+    ExamenEntity examen;
+
+    public ExamenEntity getExamen()
+    {
+        return examen;
+    }
+
+    public void setExamen(ExamenEntity examen)
+    {
+        this.examen = examen;
+    }
             
+    
 
     public List<String> getEnnoce()
     {
@@ -175,7 +192,11 @@ public class AjoutExamen implements Serializable
         
         dateFin = new Date(temp + 2*hour);
         
+        examen.setDateDebut(dateDebut);
+        examen.setDateFin(dateFin);
+        
         System.out.println("yes : "+dateDebut+" - "+dateFin + " - Module : "+module);
+        System.out.println("exam entity : "+examen.getDateDebut()+" - "+examen.getDateFin() + " - Module : "+module);
         
         phase++;
         System.out.println("phase : "+phase);
@@ -185,20 +206,53 @@ public class AjoutExamen implements Serializable
     {
         System.out.println(" nombre de questions : "+nombreQuestions+" - type : "+typeExamen.name());
         
-        for(int i = 0; i < nombreQuestions; i++)
-        {
-            Questions.add("Question N°"+i);
-            Ennoce.add("");
-        }
+        examen.setQuestions(initQuestions(nombreQuestions,3));
         phase++;
         
         System.out.println("phase : "+phase);
     }
     
+    public List<ResponseEntity> init3Rep(int numR)
+    {
+        List<ResponseEntity> listRep = new ArrayList<>();
+        for(int i=1;i<numR+1;i++)
+        {
+            listRep.add(new ResponseEntity(i, "", false));
+        }
+        return listRep;
+    }
+    
+    public List<QuestionEntity> initQuestions(int numQ,int numR)
+    {
+        List<QuestionEntity> listQuestions = new ArrayList<>();
+        for(int i=1;i<numQ+1;i++)
+        {
+            listQuestions.add(new QuestionEntity(i,"", init3Rep(numR)));
+        }
+        
+        return listQuestions;
+    }
+    
+    public ResponseEntity getExactReponse(int numQ,int numR)
+    {
+        return examen.getQuestions().get(numQ).getResponses().get(numR);
+    }
+    
     public void saisieQuestions()
     {
-        System.out.println("questions saisies : "+Ennoce);
-        
+        //System.out.println("questions saisies : "+Ennoce);
+        printExam();
         phase = 0;
+    }
+    
+    public void printExam()
+    {
+        int i = 1;
+        
+        for(QuestionEntity q : examen.getQuestions())
+        {
+            System.out.print("Question "+i+" - "+q.getQuestion());
+            System.out.println("\t : "+q.getResponses());
+        }
     }
 }

@@ -80,52 +80,53 @@
                 
                 
                 <ui:fragment rendered="#{ajoutExamen.phase == 2}">
-                    <h:form>
-                        <div class="form-group">
-                            <div class="pure-control-group">
-                                <h:outputText value="Saisie Questions" /><br/>
-                                
-                                <ui:repeat value="#{ajoutExamen.questions}" var="q" varStatus="loop">
-                                    <table class="table">
-                                        <thead>
+                    
+                    <div class="container">
+                        <h2>Questions</h2>
+                        <table class="table table-striped">
+                            
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Enoncé</th>
+                                    <th>Reponse 1</th>
+                                    <th>Reponse 2</th>
+                                    <th>Reponse 3</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr>
+                                    <h:form>
+                                        <ui:repeat value="#{ajoutExamen.examen.questions}" var="q" varStatus="loop">
                                             
                                             <tr>
-                                            <h:outputText value="#{q} : " />
-                                            <div class="pure-g">
-                                                <div class="pure-u-1-4">
-                                                    <h:inputText value="#{ajoutExamen.ennoce[loop.index]}" class="form-control"/><br/>
-                                                </div>
-                                                <div class="pure-u-3-4">
-                                                    <div class="pure-g">
-                                                        <div class="pure-u-1-3">
-                                                            <label for="rep1">Reponse 1 : </label>
-                                                            <h:inputText value="" id="rep1" class="form-control"/>
-                                                        </div>
-                                                        
-                                                        <div class="pure-u-1-3">
-                                                            <label for="rep2">Reponse 2 : </label>
-                                                            <h:inputText value="" id="rep2" class="form-control"/>
-                                                        </div>
-                                                        
-                                                        <div class="pure-u-1-3">
-                                                            <label for="rep3">Reponse 3 : </label>
-                                                            <h:inputText value="" id="rep3" class="form-control"/>
-                                                        </div>    
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <td><h:outputText value="#{loop.index} )" /></td>
+                                                
+                                                <td><h:inputText value="#{ajoutExamen.examen.questions[loop.index].question}"  class="form-control"/></td>
+                                                
+                                                <ui:repeat value="#{q.responses}" var="r" varStatus="loopr">
+                                                    <td>    
+                                                        <h:selectOneRadio value="#{r.bool}">
+                                                            <h:inputText value="#{r.reponse}"  class="form-control"/>
+                                                            <f:selectItem itemValue="true" itemLabel="Reponse Vraie" />
+                                                        </h:selectOneRadio>  
+                                                    </td>   
+                                                </ui:repeat>
+                                                
                                             </tr>
-                                        </thead>
-                                    </table>
-                                </ui:repeat>
-                                
-                                
-                                <div class="form-group">
-                                    <h:commandButton id="saisieQuestions" action="#{ajoutExamen.saisieQuestions()}" value="Valider" class="btn btn-success"  />
-                                </div>
-                            </div>
-                        </div>
-                    </h:form>
+                                        </ui:repeat>
+                                        <div class="pure-control-group">
+                                            <h:commandButton action="#{ajoutExamen.saisieQuestions()}" value="Valider" class="form-control btn-success"/>
+                                        </div>
+                                    </h:form>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        
+                    </div>
                 </ui:fragment>
                 
                 

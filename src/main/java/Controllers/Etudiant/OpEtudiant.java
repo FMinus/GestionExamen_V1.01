@@ -23,21 +23,6 @@ import org.mongodb.morphia.Datastore;
 @SessionScoped
 public class OpEtudiant implements Serializable
 {
-    /*
-    User user;
-    
-    public User getUser()
-    {
-        return user;
-    }
-
-    public void setUser(User user)
-    {
-        this.user = user;
-    }
-    */
-    
-    
     
     public static void editEtudiant(Etudiant e)
     {
@@ -97,6 +82,17 @@ public class OpEtudiant implements Serializable
         
         return listExamsCurrent;
     }
+    
+    public ExamenEntity getExamenOne(User user)
+    {
+        List<ExamenEntity> list = getExamEnCours(user);
+        
+        if(list.isEmpty())
+            return null;
+        else
+            return list.get(0);
+    }
+    
     
     public boolean hasExamsEncour(User e)
     {

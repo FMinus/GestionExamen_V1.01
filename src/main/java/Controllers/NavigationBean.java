@@ -126,6 +126,4 @@ public class NavigationBean implements Serializable
     {
         return "/GestionExamen_V1.01/Views/Common/SearchResults.xhtml";
     }
-    
-    
 }

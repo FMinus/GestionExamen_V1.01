@@ -23,6 +23,9 @@
                     <th class="order-table-header">Module</th>
                     <th class="order-table-header">Date Debut</th>
                     <th class="order-table-header">Date fin</th>
+                    <h:panelGroup rendered="#{cc.attrs.peutPasser}">
+                        <th class="order-table-header">Action</th>
+                    </h:panelGroup>
                 </tr>
 
                 <tbody>
@@ -35,8 +38,7 @@
                             <h:panelGroup rendered="#{cc.attrs.peutPasser}">
                                 <td class="order-table-even-row">
                                     <h:form>
-                                        <h:commandButton value="Commancer" class="btn btn-toolbar" action="#{cc.attrs.examPage}">
-                                            <f:setPropertyActionListener target="#{cc.attrs.examGetter}" value="" />
+                                        <h:commandButton value="Start" class="btn btn-toolbar" action="#{cc.attrs.examPage}">
                                         </h:commandButton>                                     
                                     </h:form>
                                 </td>

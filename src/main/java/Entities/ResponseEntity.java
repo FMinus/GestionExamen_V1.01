@@ -15,37 +15,64 @@ import javax.xml.bind.annotation.*;
  * @author AbdelMajid
  */
 
-public class ResponseEntity implements Serializable{
+public class ResponseEntity implements Serializable
+{
+    
     private int Id;
     private String reponse;
     private boolean bool;
 
-    public boolean isBool() {
+    public ResponseEntity(int Id, String reponse, boolean bool)
+    {
+        this.Id = Id;
+        this.reponse = reponse;
+        this.bool = bool;
+    }
+    
+    
+    public boolean isBool() 
+    {
         return bool;
     }
+    
     @XmlAttribute(name = "isTrue",required = true)
-    public void setBool(boolean bool) {
+    public void setBool(boolean bool) 
+    {
         this.bool = bool;
     }
 
-    public ResponseEntity() {
+    public ResponseEntity() 
+    {
     }
+    
    @XmlAttribute(name = "id",required = false)
-    public int getId() {
+    public int getId() 
+    {
         return Id;
     }
     
-    public void setId(int Id) {
+    public void setId(int Id) 
+    {
         this.Id = Id;
     }
     
-    public String getReponse() {
+    public String getReponse() 
+    {
         return reponse;
     }
     
-    public void setReponse(String laReponse) {
+    public void setReponse(String laReponse) 
+    {
         this.reponse = laReponse;
     }
+
+    @Override
+    public String toString()
+    {
+        return "R{" + "Id=" + Id + ", reponse=" + reponse + ", Marked=" + bool + '}';
+    }
+    
+    
     
     
 }

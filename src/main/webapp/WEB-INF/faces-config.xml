@@ -69,4 +69,10 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
    
+   <managed-bean>    
+        <managed-bean-name>passerExamen</managed-bean-name>
+        <managed-bean-class>Controllers.Etudiant.PasserExamen</managed-bean-class>   
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
 </faces-config>

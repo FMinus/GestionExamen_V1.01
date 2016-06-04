@@ -20,8 +20,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import org.mongodb.morphia.Datastore;
 
 /**
@@ -54,6 +54,9 @@ public class SearchBean implements Serializable
         testRecherche();
         //System.out.println("path to page : "+nav.toSearchResults());
         //TODO : fix search navigation
+        String contextPath = FacesContext.getCurrentInstance().getExternalContext().getContextName();
+        System.out.println("context : "+contextPath);
+        
         return "/GestionExamen_V1.01/Views/Common/SearchResults.xhtml";
     }
     

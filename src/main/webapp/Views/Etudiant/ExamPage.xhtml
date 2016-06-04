@@ -4,7 +4,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ez="http://xmlns.jcp.org/jsf/composite/ezcomp">
+      xmlns:ez="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:p="http://primefaces.org/ui">
+    
     <h:head>
         <title>Page Examen</title>
     </h:head>
@@ -13,15 +15,96 @@
             
             <ui:define name="content">
                 
+                <!--
                 <ez:ListExams 
                     listExams="#{opEtudiant.getExamEnCours(home.user)}"
                     examPage="#{nav.toExamPage()}"
                     peutPasser="#{true}"
                     />
+                -->
                 
                 
-               
-                   
+                
+                <ui:fragment rendered="#{opEtudiant.getExamenOne(home.user) == null}">
+                    <div class="alert alert-info"><h:outputText value="Aucun Examen a Passer Pour L'instant"/></div>
+                </ui:fragment>
+                
+                <ui:fragment rendered="#{opEtudiant.getExamenOne(home.user) != null}">
+                    <div class="alert alert-info">
+                        <!-- <h:outputText value="Exam : #{opEtudiant.getExamenOne(home.user)}"/> -->
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="container">
+                        <h2>Questions</h2>
+                        <table class="table table-striped">
+                            
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Enoncé</th>
+                                    <th>Reponse 1</th>
+                                    <th>Reponse 2</th>
+                                    <th>Reponse 3</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr>
+                                    <h:form>
+                                        <ui:repeat value="#{passerExamen.getTestExamen().questions}" var="q" varStatus="loop">
+                                            
+                                            <tr>
+                                                <td><h:outputText value="#{loop.index} )" /></td>
+                                                
+                                                <td><h:outputText value="#{q.question}"  class="form-control"/></td>
+                                                
+                                                <ui:repeat value="#{q.responses}" var="r" varStatus="loopr">
+                                                    <td>    
+                                                        <h:selectOneRadio value="#{r.bool}">
+                                                            <h:outputText value="#{r.reponse}"  class="form-control"/>
+                                                            <f:selectItem itemValue="true" itemLabel="Reponse Vraie" />
+                                                        </h:selectOneRadio>  
+                                                    </td>   
+                                                </ui:repeat>
+                                                
+                                            </tr>
+                                        </ui:repeat>
+                                        
+                                        <div class="pure-control-group">
+                                            <h:commandButton action="#{passerExamen.printExam()}" value="Valider" class="form-control btn-success"/>
+                                        </div>
+                                    
+                                    </h:form>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ui:fragment>
                 
             </ui:define>
         </ui:composition>
