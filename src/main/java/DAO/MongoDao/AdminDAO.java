@@ -42,6 +42,18 @@ public class AdminDAO extends BasicDAO<AdminEntity, String>
         return (AdminEntity) query.get();
     }
     
+    public List<AdminEntity> lookFor(String term)
+    {
+        Query<AdminEntity> query = createQuery();    
+        query.or
+        (
+            query.criteria("email").equal(term),
+            query.criteria("firstName").equal(term),
+            query.criteria("lastName").equal(term)
+        );
+        
+       return query.asList();
+    }
     public boolean emailExist(String email)
     {
         Query<AdminEntity> query=createQuery().field("email").equal(email);       

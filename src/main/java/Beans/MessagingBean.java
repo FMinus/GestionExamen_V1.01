@@ -14,15 +14,14 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.TimeZone;
 import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.servlet.http.HttpServletRequest;
 import org.mongodb.morphia.Datastore;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class MessagingBean implements Serializable
 {
     //use that we'll send a message to : 

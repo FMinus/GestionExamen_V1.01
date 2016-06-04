@@ -5,6 +5,7 @@
  */
 package TestServlet;
 
+import Beans.RandomStuff;
 import Entities.ExamenEntity;
 import Entities.ProfessorEntity;
 import Entities.AdminEntity;
@@ -258,7 +259,9 @@ public class App  {
         */
        
        Date t = new Date();
-       System.out.println(t);
+       
+       
+       //System.out.println(RandomStuff.displayBirthDay(t));
                
        
        

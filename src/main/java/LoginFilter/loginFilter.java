@@ -75,6 +75,14 @@ public class loginFilter implements Filter
             }
             else
             {
+                if(url.contains("Common"))
+                {
+                    chain.doFilter(request, response);
+                    return;
+                }
+                    
+                
+                
                 if(!url.contains(user.getRole().toString()) || url.contains("/Login.xhtml") || url.contains("/Register.xhtml"))
                 {
                     res.sendRedirect(req.getServletContext().getContextPath()+"\\Views\\"+user.getRole().toString()+"\\Home"+user.getRole().toString()+".xhtml");

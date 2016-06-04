@@ -6,6 +6,7 @@
 
     <!-- INTERFACE -->
     <cc:interface>
+        <cc:attribute name="list"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
@@ -17,7 +18,7 @@
                     <th class="order-table-header">Professeur</th>   
                 </tr>
                 <tbody>
-                    <ui:repeat var="m" value="#{home.getModules()}" varStatus="status">                            
+                    <ui:repeat var="m" value="#{cc.attrs.list}" varStatus="status">                            
                         <tr>
                             <td class="order-table-even-row">#{m.getModuleName()}</td>                               
                             <td class="order-table-even-row">#{m.profOwner.lastame}</td>                               

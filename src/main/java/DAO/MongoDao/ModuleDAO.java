@@ -5,6 +5,7 @@
  */
 package DAO.MongoDao;
 
+import Entities.EtudiantEntity;
 import Entities.ExamenEntity;
 import Entities.ModuleEntity;
 import Entities.ProfessorEntity;
@@ -46,6 +47,11 @@ public class ModuleDAO extends BasicDAO<ModuleEntity, Object>
         return query.get().examens;
     }
     
+    public List<ModuleEntity> lookFor(String term)
+    {
+        return createQuery().field("ModuleName").equal(term).asList();    
+        
+    }
     
     public void updateProfessor(ProfessorEntity prof) 
     {

@@ -28,12 +28,18 @@
             <h:outputText value="#{login.currentLoginInfo()}"/><br/>
             
             <li><h:outputLink value="#{nav.toExamsEtudiant()}">Mes Examens</h:outputLink></li>
+            <li><h:outputLink value="#{nav.toCommonTestPage()}">Common</h:outputLink></li>
+            
+            
+            
+            
+            <!--
             <ez:RandomTable 
                 table="#{randomStuff.getEtudiantList()}"
                 listIsEmpty = "#{randomStuff.isListEmpty()}"
                 emptyListMessage = "List is empty m78"
                 />
-            
+            -->
             <!-- <ez:ListModule/> -->
             
             <f:verbatim>

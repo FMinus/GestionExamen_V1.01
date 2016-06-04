@@ -58,6 +58,19 @@ public class EtudiantDAO extends BasicDAO<EtudiantEntity, String> implements Upd
        return (EtudiantEntity) query.get();
     }
     
+    public List<EtudiantEntity> lookFor(String term)
+    {
+        Query<EtudiantEntity> query = createQuery();    
+        query.or
+        (
+            query.criteria("email").equal(term),
+            query.criteria("firstName").equal(term),
+            query.criteria("lastName").equal(term)
+        );
+        
+       return query.asList();
+    }
+    
     public boolean emailExist(String email)
     {
         Query<EtudiantEntity> query=createQuery().field("email").equal(email);    

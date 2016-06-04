@@ -116,4 +116,16 @@ public class NavigationBean implements Serializable
     {
         return "/GestionExamen_V1.01/Views/"+getRole()+"/ExamPage.xhtml";
     }
+    
+    public String toCommonTestPage()
+    {
+        return "/GestionExamen_V1.01/Views/Common/TestCommonPage.xhtml";
+    }
+    
+    public String toSearchResults()
+    {
+        return "/GestionExamen_V1.01/Views/Common/SearchResults.xhtml";
+    }
+    
+    
 }

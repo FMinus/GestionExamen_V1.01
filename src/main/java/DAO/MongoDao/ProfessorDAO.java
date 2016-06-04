@@ -48,7 +48,19 @@ public class ProfessorDAO extends BasicDAO<ProfessorEntity, ObjectId> implements
         Query<ProfessorEntity> query=createQuery();
        return query.asList();
     }
-
+    
+    public List<ProfessorEntity> lookFor(String term)
+    {
+        Query<ProfessorEntity> query = createQuery();    
+        query.or
+        (
+            query.criteria("email").equal(term),
+            query.criteria("firstName").equal(term),
+            query.criteria("lastName").equal(term)
+        );
+        
+       return query.asList();
+    }
     @Override
     public List<ProfessorEntity> getXSupA(float note) 
     {       
